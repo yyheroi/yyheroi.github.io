@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>02-rust基本类型 | yyheroi</title>
+  <meta name="keywords" content=" rust , rust基本类型 ">
+  <meta name="description" content="02-rust基本类型 | yyheroi">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="当前环境：win11+wsl+vscode 1.安装rustup1234curl --proto &amp;#x27;&#x3D;https&amp;#x27; --tlsv1.2 https:&#x2F;&#x2F;sh.rustup.rs -sSf | shsudo apt install build-essentialrustc -V cargo -V  2.安装vsocode插件12345rust-analyzer ，Rust 语言插">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01-rust环境搭建">
+<meta property="og:url" content="http://example.com/2023/08/26/01-rust%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="yyheroi">
+<meta property="og:description" content="当前环境：win11+wsl+vscode 1.安装rustup1234curl --proto &amp;#x27;&#x3D;https&amp;#x27; --tlsv1.2 https:&#x2F;&#x2F;sh.rustup.rs -sSf | shsudo apt install build-essentialrustc -V cargo -V  2.安装vsocode插件12345rust-analyzer ，Rust 语言插">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-26T09:03:59.000Z">
+<meta property="article:modified_time" content="2023-08-27T03:40:54.390Z">
+<meta property="article:author" content="yyh">
+<meta property="article:tag" content="rust环境搭建">
+<meta property="article:tag" content="rust">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>yyh</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/yyheroi"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="facebook"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-facebook"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+            <a title="instagram"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-instagram"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="reddit"
+               href="https://www.reddit.com/user/yyheroi/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-reddit"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            <a title="csdn"
+               href="https://blog.csdn.net/qq_45698138"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-csdn"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="oschina"
+               href="https://my.oschina.net/yyheroi"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-oschina"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:yengii@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=2252102866&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="kugou"
+               href="https://www.kugou.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-kugou"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/#/user/home?id=88151013"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(6)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="rust">
+            
+            rust
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="test">
+            
+            test
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="6">
+<input type="hidden" id="yelog_site_word_count" value="3.5k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>学习网站</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust复合类型</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust环境搭建</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust基本类型</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>test</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/28/03-rust%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/"
+           data-tag="rust,rust复合类型"
+           data-author="" >
+            <span class="post-title" title="03-rust复合类型">03-rust复合类型</span>
+            <span class="post-date" title="2023-08-28 21:58:27">2023/08/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/02-rust%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/"
+           data-tag="rust,rust基本类型"
+           data-author="" >
+            <span class="post-title" title="02-rust基本类型">02-rust基本类型</span>
+            <span class="post-date" title="2023-08-26 21:17:00">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/01-rust%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="rust环境搭建,rust"
+           data-author="" >
+            <span class="post-title" title="01-rust环境搭建">01-rust环境搭建</span>
+            <span class="post-date" title="2023-08-26 17:03:59">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/00-rust%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99/"
+           data-tag="学习网站,rust"
+           data-author="" >
+            <span class="post-title" title="00-rust学习网站">00-rust学习网站</span>
+            <span class="post-date" title="2023-08-26 16:08:57">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/08/25/github+hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="github+hexo 博客搭建">github+hexo 博客搭建</span>
+            <span class="post-date" title="2023-08-25 19:32:35">2023/08/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/08/25/hello-world/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Hello World">Hello World</span>
+            <span class="post-date" title="2023-08-25 00:00:00">2023/08/25</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-02-rust基本类型" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">02-rust基本类型</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="rust">rust</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">rust</a>
+            
+            <a class="color4">rust基本类型</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-08-27 17:50:19'>2023-08-26 21:17</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.9k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Rust%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">Rust基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-text">1.数值类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B5%AE%E7%82%B9%E7%B1%BB%E5%9E%8B"><span class="toc-text">2.浮点类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%BA%8F%E5%88%97-Range"><span class="toc-text">3.序列(Range)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9C%89%E7%90%86%E6%95%B0%E5%92%8C%E5%A4%8D%E6%95%B0"><span class="toc-text">4.有理数和复数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%87%BD%E6%95%B0%E8%A6%81%E7%82%B9"><span class="toc-text">5.函数要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%9A"><span class="toc-text">返回值：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%BB%83%E4%B9%A0"><span class="toc-text">6.练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97Range"><span class="toc-text">序列Range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">语句与表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">7.总结：</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Rust%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">Rust基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-text">1.数值类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B5%AE%E7%82%B9%E7%B1%BB%E5%9E%8B"><span class="toc-text">2.浮点类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%BA%8F%E5%88%97-Range"><span class="toc-text">3.序列(Range)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9C%89%E7%90%86%E6%95%B0%E5%92%8C%E5%A4%8D%E6%95%B0"><span class="toc-text">4.有理数和复数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%87%BD%E6%95%B0%E8%A6%81%E7%82%B9"><span class="toc-text">5.函数要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%9A"><span class="toc-text">返回值：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%BB%83%E4%B9%A0"><span class="toc-text">6.练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97Range"><span class="toc-text">序列Range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">语句与表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">7.总结：</span></a></li></ol></li></ol></div></p>
+<h1 id="Rust基本数据类型"><a href="#Rust基本数据类型" class="headerlink" title="Rust基本数据类型"></a>Rust基本数据类型</h1><p>Rust 每个值都有其确切的数据类型，总的来说可以分为两类：基本类型和复合类型。 基本类型意味着它们往往是一个最小化原子类型，无法解构为其它类型(一般意义上来说)，由以下组成：</p>
+<ul>
+<li>数值类型: 有符号整数 (<code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>isize</code>)、 无符号整数 (<code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>usize</code>) 、浮点数 (<code>f32</code>, <code>f64</code>)、以及有理数、复数</li>
+<li>字符串：字符串字面量和字符串切片 <code>&amp;str</code></li>
+<li>布尔类型： <code>true</code>和<code>false</code></li>
+<li>字符类型: 表示单个 Unicode 字符，存储为 4 个字节</li>
+<li>单元类型: 即 <code>()</code> ，其唯一的值也是 <code>()</code></li>
+</ul>
+<h2 id="1-数值类型"><a href="#1-数值类型" class="headerlink" title="1.数值类型"></a>1.数值类型</h2><table>
+<thead>
+<tr>
+<th>长度</th>
+<th>有符号类型</th>
+<th>无符号类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>8 位</td>
+<td><code>i8</code></td>
+<td><code>u8</code></td>
+</tr>
+<tr>
+<td>16 位</td>
+<td><code>i16</code></td>
+<td><code>u16</code></td>
+</tr>
+<tr>
+<td>32 位</td>
+<td><code>i32</code></td>
+<td><code>u32</code></td>
+</tr>
+<tr>
+<td>64 位</td>
+<td><code>i64</code></td>
+<td><code>u64</code></td>
+</tr>
+<tr>
+<td>128 位</td>
+<td><code>i128</code></td>
+<td><code>u128</code></td>
+</tr>
+<tr>
+<td>视架构而定</td>
+<td><code>isize</code></td>
+<td><code>usize</code></td>
+</tr>
+</tbody></table>
+<p>整形字面量可以用下表的形式书写：</p>
+<table>
+<thead>
+<tr>
+<th>数字字面量</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>十进制</td>
+<td><code>98_222</code></td>
+</tr>
+<tr>
+<td>十六进制</td>
+<td><code>0xff</code></td>
+</tr>
+<tr>
+<td>八进制</td>
+<td><code>0o77</code></td>
+</tr>
+<tr>
+<td>二进制</td>
+<td><code>0b1111_0000</code></td>
+</tr>
+<tr>
+<td>字节 (仅限于 <code>u8</code>)</td>
+<td><code>b&#39;A&#39;</code></td>
+</tr>
+</tbody></table>
+<h2 id="2-浮点类型"><a href="#2-浮点类型" class="headerlink" title="2.浮点类型"></a>2.<a target="_blank" rel="noopener" href="https://course.rs/basic/base-type/numbers.html#%E6%B5%AE%E7%82%B9%E7%B1%BB%E5%9E%8B">浮点类型</a></h2><p><strong>浮点类型数字</strong> 是带有小数点的数字，在 Rust 中浮点类型数字也有两种基本类型： <code>f32</code> 和 <code>f64</code>，分别为 32 位和 64 位大小。默认浮点类型是 <code>f64</code>，在现代的 CPU 中它的速度与 <code>f32</code> 几乎相同，但精度更高。</p>
+<p>下面是一个演示浮点数的示例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">x</span> = <span class="number">2.0</span>; <span class="comment">// f64</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> <span class="variable">y</span>: <span class="type">f32</span> = <span class="number">3.0</span>; <span class="comment">// f32</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-序列-Range"><a href="#3-序列-Range" class="headerlink" title="3.序列(Range)"></a>3.<a target="_blank" rel="noopener" href="https://course.rs/basic/base-type/numbers.html#%E5%BA%8F%E5%88%97range">序列(Range)</a></h2><p>Rust 提供了一个非常简洁的方式，用来生成连续的数值，例如 <strong><code>1..5</code>，生成从 1 到 4 的连续数字，不包含 5</strong> ；<code>1..=5</code>，生成从 1 到 5 的连续数字，包含 5，它的用途很简单，常常用于循环中：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="number">1</span>..=<span class="number">5</span> &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>,i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最终程序输出:</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+
+<p><strong>序列只允许用于数字或字符类型</strong>，原因是：它们可以连续，同时编译器在编译期可以检查该序列是否为空，字符和数字值是 Rust 中仅有的可以用于判断是否为空的类型。如下是一个使用字符类型序列的例子：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="string">&#x27;a&#x27;</span>..=<span class="string">&#x27;z&#x27;</span> &#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>,i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-有理数和复数"><a href="#4-有理数和复数" class="headerlink" title="4.有理数和复数"></a>4.<a target="_blank" rel="noopener" href="https://course.rs/basic/base-type/numbers.html#%E6%9C%89%E7%90%86%E6%95%B0%E5%92%8C%E5%A4%8D%E6%95%B0">有理数和复数</a></h2><p>Rust 的标准库相比其它语言，准入门槛较高，因此有理数和复数并未包含在标准库中：</p>
+<ul>
+<li>有理数和复数</li>
+<li>任意大小的整数和任意精度的浮点数</li>
+<li>固定精度的十进制小数，常用于货币相关的场景</li>
+</ul>
+<p>好在社区已经开发出高质量的 Rust 数值库：<a target="_blank" rel="noopener" href="https://crates.io/crates/num">num</a>。</p>
+<p>按照以下步骤来引入 <code>num</code> 库：</p>
+<ol>
+<li>创建新工程 <code>cargo new complex-num &amp;&amp; cd complex-num</code></li>
+<li>在 <code>Cargo.toml</code> 中的 <code>[dependencies]</code> 下添加一行 <code>num = &quot;0.4.0&quot;</code></li>
+<li>将 <code>src/main.rs</code> 文件中的 <code>main</code> 函数替换为下面的代码</li>
+<li>运行 <code>cargo run</code></li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> num::complex::Complex;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">fn</span> <span class="title function_">main</span>() &#123;</span><br><span class="line">   <span class="keyword">let</span> <span class="variable">a</span> = Complex &#123; re: <span class="number">2.1</span>, im: -<span class="number">1.2</span> &#125;;</span><br><span class="line">   <span class="keyword">let</span> <span class="variable">b</span> = Complex::<span class="title function_ invoke__">new</span>(<span class="number">11.1</span>, <span class="number">22.2</span>);</span><br><span class="line">   <span class="keyword">let</span> <span class="variable">result</span> = a + b;</span><br><span class="line"></span><br><span class="line">   <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125; + &#123;&#125;i&quot;</span>, result.re, result.im)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a><a target="_blank" rel="noopener" href="https://course.rs/basic/base-type/numbers.html#%E6%80%BB%E7%BB%93">总结</a></h4><p>之前提到了过 Rust 的数值类型和运算跟其他语言较为相似，但是实际上，除了语法上的不同之外，还是存在一些差异点：</p>
+<ul>
+<li><strong>Rust 拥有相当多的数值类型</strong>. 因此你需要熟悉这些类型所占用的字节数，这样就知道该类型允许的大小范围以及你选择的类型是否能表达负数</li>
+<li><strong>类型转换必须是显式的</strong>. Rust 永远也不会偷偷把你的 16bit 整数转换成 32bit 整数</li>
+<li><strong>Rust 的数值上可以使用方法</strong>. 例如你可以用以下方法来将 <code>13.14</code> 取整：<code>13.14_f32.round()</code>，在这里我们使用了类型后缀，因为编译器需要知道 <code>13.14</code> 的具体类型</li>
+</ul>
+<h2 id="5-函数要点"><a href="#5-函数要点" class="headerlink" title="5.函数要点"></a>5.<a target="_blank" rel="noopener" href="https://course.rs/basic/base-type/function.html#%E5%87%BD%E6%95%B0%E8%A6%81%E7%82%B9">函数要点</a></h2><ul>
+<li>函数名和变量名使用<a target="_blank" rel="noopener" href="https://course.rs/practice/naming.html">蛇形命名法(snake case)</a>，例如 <code>fn add_two() -&gt; &#123;&#125;</code></li>
+<li>函数的位置可以随便放，Rust 不关心我们在哪里定义了函数，只要有定义即可</li>
+<li>每个函数参数都需要标注类型</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fn add(i: i32, j: i32) -&gt; i32 &#123;</span><br><span class="line">   i + j</span><br><span class="line"> &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic2.zhimg.com/80/v2-54b3a6d435d2482243edc4be9ab98153_1440w.png" alt="img"></p>
+<h3 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h3><p>​	<a target="_blank" rel="noopener" href="https://course.rs/basic/base-type/function.html#%E6%97%A0%E8%BF%94%E5%9B%9E%E5%80%BC">无返回值<code>()</code></a></p>
+<ul>
+<li>函数没有返回值，那么返回一个 <code>()</code></li>
+<li>通过 <code>;</code> 结尾的表达式返回一个 <code>()</code></li>
+</ul>
+<p>​    <a target="_blank" rel="noopener" href="https://course.rs/basic/base-type/function.html#%E6%B0%B8%E4%B8%8D%E8%BF%94%E5%9B%9E%E7%9A%84%E5%8F%91%E6%95%A3%E5%87%BD%E6%95%B0-">永不返回的发散函数 <code>!</code></a></p>
+<p>​		当用 <code>!</code> 作函数返回类型的时候，表示该函数永不返回( diverge function )，特别的，这种语法往往用做会导致程序崩溃的函数：</p>
+<h2 id="6-练习"><a href="#6-练习" class="headerlink" title="6.练习"></a>6.练习</h2><p><a target="_blank" rel="noopener" href="https://zh.practice.rs/basic-types/numbers.html">数值类型 - Rust By Practice( Rust 练习实践 )</a></p>
+<figure class="highlight plaintext"><figcaption><span>填空</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fn main() &#123;</span><br><span class="line">    let v: u16 = 38_u8 as u16; //从8位无符号整数（u8）到16位无符号整数（u16）的类型转换</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 修改 `assert_eq!` 让代码工作</span><br><span class="line">fn main() &#123;</span><br><span class="line">    let x = 5;		//i32</span><br><span class="line">    assert_eq!(&quot;i32&quot;.to_string(), type_of(&amp;x)); //</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 以下函数可以获取传入参数的类型，并返回类型的字符串形式，例如  &quot;i8&quot;, &quot;u8&quot;, &quot;i32&quot;, &quot;u32&quot;</span><br><span class="line">fn type_of&lt;T&gt;(_: &amp;T) -&gt; String &#123;</span><br><span class="line">    format!(&quot;&#123;&#125;&quot;, std::any::type_name::&lt;T&gt;())</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fn main() &#123;</span><br><span class="line">    assert_eq!(i8::MAX, 127); </span><br><span class="line">    assert_eq!(u8::MAX, 255); </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 解决代码中的错误和 `panic`</span><br><span class="line">fn main() &#123;</span><br><span class="line">   let v1 = 251_u8.wrapping_add(8);</span><br><span class="line">   let v2 = match u8::checked_add(251, 8) &#123;</span><br><span class="line">        Some(value) =&gt; value,</span><br><span class="line">        None =&gt; &#123;</span><br><span class="line">            println!(&quot;Overflow occurred.&quot;);</span><br><span class="line">            0</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">   println!(&quot;&#123;&#125;,&#123;&#125;&quot;,v1,v2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fn main() &#123;</span><br><span class="line">    let x = 1_000.000_1; // f64</span><br><span class="line">    let y: f32 = 0.12; // f32</span><br><span class="line">    let z = 0.01_f64; // f64</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#使用两种方法来让下面代码工作</span><br><span class="line">fn <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    assert!(<span class="number">0.1</span>+<span class="number">0.2</span>==<span class="number">0.3</span>);</span><br><span class="line">&#125;</span><br><span class="line"> fn <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">     assert!(<span class="number">0.1</span>_f32+<span class="number">0.2</span>_f32==<span class="number">0.3</span>_f32);</span><br><span class="line"> &#125;</span><br><span class="line"><span class="comment">//降低精度</span></span><br><span class="line">fn <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    let eps=<span class="number">0.001</span>;</span><br><span class="line">    assert!((<span class="number">0.1</span>_f64+ <span class="number">0.2</span> - <span class="number">0.3</span>).<span class="built_in">abs</span>() &lt; eps);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//设置允许误差</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="序列Range"><a href="#序列Range" class="headerlink" title="序列Range"></a><a target="_blank" rel="noopener" href="https://zh.practice.rs/basic-types/numbers.html#%E5%BA%8F%E5%88%97range">序列Range</a></h3><ol>
+<li>🌟🌟 两个目标: 1. 修改 <code>assert!</code> 让它工作 2. 让 <code>println!</code> 输出: 97 - 122</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fn main() &#123;</span><br><span class="line">    let mut sum = 0;</span><br><span class="line">    for i in -3..2 &#123;</span><br><span class="line">        sum += i</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    assert!(sum == -5);</span><br><span class="line"></span><br><span class="line">    for c in &#x27;a&#x27;..=&#x27;z&#x27; &#123;</span><br><span class="line">        println!(&quot;&#123;&#125;&quot;,c as u8);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><figcaption><span>填空</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">use std::ops::&#123;Range, RangeInclusive&#125;;</span><br><span class="line">fn main() &#123;</span><br><span class="line">    assert_eq!((1..5), Range&#123; start: 1, end: 5 &#125;);</span><br><span class="line">    assert_eq!((1..=5), RangeInclusive::new(1, 5));</span><br><span class="line">&#125;</span><br><span class="line">///RangeInclusive::new(1, 5) 创建的是一个闭区间，表示从 1 到 5（包括 5）的范围。若 (1..5) 创建的是一个半开区间，表示从 1 到 5（不包括 5）的范围。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">use std::mem::size_of_val;</span><br><span class="line">fn main() &#123;</span><br><span class="line">    let unit: () = ();</span><br><span class="line">    assert!(size_of_val(&amp;unit) == 0);		//单元类型占用的内存大小 0</span><br><span class="line"></span><br><span class="line">    println!(&quot;Success!&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="语句与表达式"><a href="#语句与表达式" class="headerlink" title="语句与表达式"></a><a target="_blank" rel="noopener" href="https://zh.practice.rs/basic-types/statements-expressions.html#%E8%AF%AD%E5%8F%A5%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F">语句与表达式</a></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">fn main() &#123;</span><br><span class="line">   let v = &#123;</span><br><span class="line">       let mut x = 1;</span><br><span class="line">       x += 2		// 没有返回值  </span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   assert_eq!(v, 3);</span><br><span class="line">&#125;</span><br><span class="line">正确的做法</span><br><span class="line">fn main() &#123;</span><br><span class="line">   let v = &#123;</span><br><span class="line">       let mut x = 1;</span><br><span class="line">       x += 2;</span><br><span class="line">       x</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   assert_eq!(v, 3);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let z = &#123;</span><br><span class="line">	// 分号让表达式变成了语句，因此返回的不再是表达式 `2 * x` 的值，而是语句的值 `()`</span><br><span class="line">	2 * x;</span><br><span class="line">&#125;;</span><br><span class="line">fn main() &#123;</span><br><span class="line">   let v = &#123; let x = 3; x&#125;;</span><br><span class="line"></span><br><span class="line">   assert!(v == 3);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a><a target="_blank" rel="noopener" href="https://zh.practice.rs/basic-types/functions.html#%E5%87%BD%E6%95%B0">函数</a></h3><h2 id="7-总结："><a href="#7-总结：" class="headerlink" title="7.总结："></a>7.总结：</h2><p>1.<code>let x = 2.0; // f64</code></p>
+<p>2.比较浮点数<code>(0.1_f64 + 0.2 - 0.3).abs() &lt; 0.00001</code></p>
+<p>3.<code>编译器会进行自动推导，给予twenty i32的类型  let twenty = 20;</code></p>
+<p>4.按照补码循环溢出规则处理<code>et b = 255_u8.wrapping_add(20);  // 19</code>  <code>在 u8 的情况下，256 变成 0，257 变成 1，</code></p>
+<p>5.<code>(1..5)  表示从 1 到 5（不包括 5）半开区间的范围</code></p>
+<p>6.<code>(1..=5)  表示从 1 到 5（包括 5）半闭区间的范围</code></p>
+<p>6.<strong>表达式不能包含分号</strong>。<code>表达式总要返回值</code></p>
+<p>7.返回值为！的表达式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">loop &#123;&#125;  </span><br><span class="line">panic!(&quot;Never return&quot;);  </span><br><span class="line">todo!();  </span><br><span class="line">unimplemented!();  //未实现的占位符函数</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 yengii@qq.com </span>
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2023-2099 yyh
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
