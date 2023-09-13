@@ -94,7 +94,7 @@ git branch    #查看分支，显示 * hexo
 npm install hexo
 npm install
 npm install hexo-deployer-git        #不需要hexo init这条指令
-
+npm i hexo-renderer-marked
 
 
 #更新博客 添加新文章 hello-world
@@ -155,6 +155,12 @@ npm i hexo-renderer-marked
 
 ![image-20230913161638961](../imgs/image-20230913161638961.png)
 
+```
+marked:
+  prependRoot: true
+  postAsset: true
+
+```
 ## 修改图片路径
 
 ![image-20230913161842174](../imgs/image-20230913161842174.png)
