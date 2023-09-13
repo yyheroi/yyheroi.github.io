@@ -6,19 +6,23 @@
   <meta name="keywords" content=" rust , rust复合类型 ">
   <meta name="description" content="03-rust复合类型 | yyheroi">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="1.字符串和切片什么是字符串?Rust 中的字符是 Unicode 类型，因此每个字符占据 4 个字节内存空间，但是在字符串中不一样，字符串是 UTF-8 编码，也就是字符串中的字符所占的字节数是变化的(1 - 4) str 类型是硬编码进可执行文件，也无法被修改，但是 String 则是一个可增长、可改变且具有所有权的 UTF-8 编码字符串，当 Rust 用户提到字符串时，往往指的就是 Str">
+<meta name="description" content="[toc] 1.博客搭建https:&#x2F;&#x2F;yyheroi.github.io&#x2F;2023&#x2F;08&#x2F;25&#x2F;github+hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA&#x2F; 2.创建一个新文件夹new，用于上传hexo博客目录将以下目录（除了红色方框的目录）拷贝到新目录中  参考：https:&#x2F;&#x2F;blog.csdn.net&#x2F;K1052176873&#x2F;article&#x2F;detail">
 <meta property="og:type" content="article">
-<meta property="og:title" content="03-rust复合类型">
-<meta property="og:url" content="http://example.com/2023/08/28/03-rust%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:title" content="Hexo在多台电脑上提交和更新">
+<meta property="og:url" content="http://example.com/2023/09/13/Hexo%E5%9C%A8%E5%A4%9A%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E6%8F%90%E4%BA%A4%E5%92%8C%E6%9B%B4%E6%96%B0/index.html">
 <meta property="og:site_name" content="yyheroi">
-<meta property="og:description" content="1.字符串和切片什么是字符串?Rust 中的字符是 Unicode 类型，因此每个字符占据 4 个字节内存空间，但是在字符串中不一样，字符串是 UTF-8 编码，也就是字符串中的字符所占的字节数是变化的(1 - 4) str 类型是硬编码进可执行文件，也无法被修改，但是 String 则是一个可增长、可改变且具有所有权的 UTF-8 编码字符串，当 Rust 用户提到字符串时，往往指的就是 Str">
+<meta property="og:description" content="[toc] 1.博客搭建https:&#x2F;&#x2F;yyheroi.github.io&#x2F;2023&#x2F;08&#x2F;25&#x2F;github+hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA&#x2F; 2.创建一个新文件夹new，用于上传hexo博客目录将以下目录（除了红色方框的目录）拷贝到新目录中  参考：https:&#x2F;&#x2F;blog.csdn.net&#x2F;K1052176873&#x2F;article&#x2F;detail">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-28T13:58:27.000Z">
-<meta property="article:modified_time" content="2023-09-13T07:15:31.922Z">
+<meta property="og:image" content="https://github.com/yyheroi/yyheroi.github.io/blob/hexo/source/imgs/image-20230913154437526.png">
+<meta property="og:image" content="https://github.com/yyheroi/yyheroi.github.io/blob/hexo/source/imgs/image-20230913154510439.png">
+<meta property="og:image" content="https://github.com/yyheroi/yyheroi.github.io/blob/hexo/source/imgs/image-20230913154524492.png">
+<meta property="og:image" content="https://github.com/yyheroi/yyheroi.github.io/blob/hexo/source/imgs/image-20230913154559571.png">
+<meta property="article:published_time" content="2023-09-13T07:35:30.000Z">
+<meta property="article:modified_time" content="2023-09-13T07:53:07.251Z">
 <meta property="article:author" content="yyh">
-<meta property="article:tag" content="rust">
-<meta property="article:tag" content="rust复合类型">
+<meta property="article:tag" content="test">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/yyheroi/yyheroi.github.io/blob/hexo/source/imgs/image-20230913154437526.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -225,7 +229,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(6)</small>
+                <small>(7)</small>
             
         </div>
     </li>
@@ -252,7 +256,7 @@
         <div data-rel="test">
             
             test
-            <small>(2)</small>
+            <small>(3)</small>
         </div>
         
     </li>
@@ -280,8 +284,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="6">
-<input type="hidden" id="yelog_site_word_count" value="3.6k">
+<input type="hidden" id="yelog_site_posts_number" value="7">
+<input type="hidden" id="yelog_site_word_count" value="4.8k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -360,6 +364,15 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/09/13/Hexo%E5%9C%A8%E5%A4%9A%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E6%8F%90%E4%BA%A4%E5%92%8C%E6%9B%B4%E6%96%B0/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Hexo在多台电脑上提交和更新">Hexo在多台电脑上提交和更新</span>
+            <span class="post-date" title="2023-09-13 15:35:30">2023/09/13</span>
+        </a>
         
         
         <a  class="全部文章 rust "
