@@ -19,7 +19,7 @@ https://yyheroi.github.io/2023/08/25/github+hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%B
 
 将以下目录（除了红色方框的目录）拷贝到新目录中
 
-![image-20230913154437526](./imgs/image-20230913154437526.png)
+![image-20230913154437526](https://github.com/yyheroi/yyheroi.github.io/blob/hexo/source/imgs/image-20230913154437526.png)
 
 参考：https://blog.csdn.net/K1052176873/article/details/122879462?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169457461216800192234994%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=169457461216800192234994&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-122879462-null-null.142
 
@@ -27,11 +27,11 @@ https://yyheroi.github.io/2023/08/25/github+hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%B
 
 ## 创建hexo分支
 
-![image-20230913154510439](./imgs/image-20230913154510439.png)
+![image-20230913154510439](https://github.com/yyheroi/yyheroi.github.io/blob/hexo/source/imgs/image-20230913154510439.png)
 
 ## 将hexo分支设置为默认分支
 
-![image-20230913154524492](./imgs/image-20230913154524492.png)
+![image-20230913154524492](https://github.com/yyheroi/yyheroi.github.io/blob/hexo/source/imgs/image-20230913154524492.png)
 
 # 4.进入新建的文件夹中git clone，再上传相关文件至hexo分支
 
@@ -60,7 +60,7 @@ public/
 
 ## 2.如果已经clone过主题文件，那么需要把theme主题文件夹里的 .git 也删除，我这里已经删除了theme主题的.git目录
 
-![image-20230913154559571](./imgs/image-20230913154559571.png)
+![image-20230913154559571](https://github.com/yyheroi/yyheroi.github.io/blob/hexo/source/imgs/image-20230913154559571.png)
 
 ## 3.送new目录中的相关文件到远程仓库 hexo分支
 
