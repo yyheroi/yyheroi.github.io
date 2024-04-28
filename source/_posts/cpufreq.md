@@ -1,3 +1,15 @@
+---
+title: cpufreq
+date: 2024-04-28 17:04:13
+categories:
+- kernel
+tags:
+- power
+- cpufreq
+---
+
+[toc]
+
 # cpufreq
 
 
