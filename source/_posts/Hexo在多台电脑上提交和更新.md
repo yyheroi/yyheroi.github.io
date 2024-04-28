@@ -21,7 +21,7 @@ https://yyheroi.github.io/2023/08/25/github+hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%B
 
 ![image-20230913154437526](../imgs/image-20230913154437526.png)
 
-参考：https://blog.csdn.net/K1052176873/article/details/122879462?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169457461216800192234994%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=169457461216800192234994&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-122879462-null-null.142
+参考：https://blog.csdn.net/K1052176873/article/details/122879462 
 
 # 3.github上创建hexo分支并设置为默认分支
 
@@ -73,13 +73,15 @@ git push
 
 
 
-# 5.新环境中快速搭建博客环境
+# 5.！新环境中快速搭建博客环境！
 
 ## 1.设置ssh
 
+参考：https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
 ```
-ssh-keygen -t rsa -C 'xxx@xxx.com'  #自己的邮箱
-cat ~/.ssh/id_rsa.pub  #将里面的内容复制到 github ->settings ->SSH and GPC keys ->SSH keys ->New SSH key中
+ssh-keygen -t ed25519 -C "your_email@gmail.com"
+cat ~/.ssh/id_ed25519.pub  #将里面的内容复制到 github ->settings ->SSH and GPC keys ->SSH keys ->New SSH key中
 ssh -T git@github.com  #输入yes之后，行末尾会显示你的用户名（绑定成功邮箱会收到邮件提醒）
 #接着在本地绑定与Github的用户名和邮箱（git）
 git config --global user.name "<username>"    #自己的用户名
@@ -108,9 +110,9 @@ hexo s        #启动本地服务器 预览
 hexo d        #将生成的博客文件部署到 github main分支，Hexo博客项目配置文件中_config.yml已设置好
 ```
 
+# 6.遇到的问题
 
-
-# 问题1.nodejs版本过低
+## 问题1.nodejs版本过低
 
 npm WARN notsup Unsupported engine for hexo@6.3.0: wanted: {"node":">=12.13.0"} (current: {"node":"10.19.0","npm":"6.14.4"})
 npm WARN notsup Not compatible with your version of node/npm: hexo@6.3.0
@@ -142,9 +144,9 @@ node -v                     #验证 Node.js 版本
 
 
 
-# 问题2.hexo博客图片不显示
+## 问题2.hexo博客图片不显示
 
-https://blog.csdn.net/QRLYLETITBE/article/details/127737904?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169459233116800184124470%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=169459233116800184124470&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-127737904-null-null.142
+https://blog.csdn.net/QRLYLETITBE/article/details/127737904 
 
 ```
 npm i hexo-renderer-marked
