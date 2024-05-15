@@ -50,8 +50,9 @@ category:
     - 数据库
     - rust
     - test
+    - uboot
     - kernel
-    - linux
+    - dirver
     - OSTEP
   width:
     lg: 120 # 1468px<屏幕宽度 左侧分类宽度

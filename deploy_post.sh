@@ -9,3 +9,4 @@ if [ $# -eq 1 ]; then
     	git commit -m "$1"
     	git push
 fi
+cp source/_posts/* source/back_posts -rf

@@ -4,7 +4,7 @@ date: 2024-05-15 14:40:25
 categories:
 - OSTEP
 tags:
-- block
+- vsfs
 ---
 
 https://pages.cs.wisc.edu/~remzi/OSTEP/Chinese/40.pdf

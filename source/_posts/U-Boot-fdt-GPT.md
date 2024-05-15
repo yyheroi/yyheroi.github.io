@@ -2,15 +2,14 @@
 title: U-Boot-fdt-GPT
 date: 2024-05-15 14:37:05
 categories:
-- linux
-tags:
 - uboot
+tags:
 - fdt
 - GPT
 - rk3588
 ---
 
-U-Boot官网:`https://docs.u-boot.org/en/latest/`
+U-Boot官网:https://docs.u-boot.org/en/latest/
 
 u-boot启动流程
 
