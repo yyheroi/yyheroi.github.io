@@ -1,4 +1,13 @@
-> 
+> title: uboot-fdt-gpt
+> date: 2024-05-15 14:13
+> categories:
+>
+> - linux
+> tags:
+> - uboot
+> - fdt
+> - GPT
+> - rk3588
 
 U-Boot官网:`https://docs.u-boot.org/en/latest/`
 
