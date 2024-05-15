@@ -26,7 +26,9 @@ uboot是一种通用的bootloader，支持多种架构
 
 
 
-uboot
+# uboot常见命令
+
+
 
 
 
