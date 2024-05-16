@@ -120,6 +120,8 @@ Idle：空闲状态，此时MDIO无源驱动，处高阻状态，但一般用上
 
 
 
+转：
+
 [PHY芯片快速深度理解（持续更新中……）-CSDN博客](https://blog.csdn.net/qq_40715266/article/details/124095801)
 
 
