@@ -9,7 +9,11 @@ date: 2024-05-16 15:30:33
 
 [toc]
 
-cgroup是linux内核实现、用于控制linux系统资源的组件。因此要了解cgroup，首先从引入这个组件的kernel文档中寻找。去到举世闻名的www.kernel.org网站寻找，嘿，找到介绍文档：Documentation/cgroup-v1/cgroups.txt
+cgroup是linux内核实现、用于控制linux系统资源的组件。因此要了解cgroup，首先从引入这个组件的kernel文档中寻找。
+
+去到举世闻名的www.kernel.org
+
+找到介绍文档：Documentation/cgroup-v1/cgroups.txt
 
 ## 1 什么是cgroup?
 
@@ -137,6 +141,6 @@ cgroup是linux内核实现、用于控制linux系统资源的组件。因此要�
 >
 >cat /proc/self/cgroup
 
-参考：
+转：
 
  https://blog.csdn.net/huang987246510/article/details/80765628
