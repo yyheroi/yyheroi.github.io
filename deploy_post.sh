@@ -7,6 +7,6 @@ if [ $# -eq 1 ]; then
 	echo "commit"
 	git add . 
     	git commit -m "$1"
-    	git push
+    	git push origin hexo -f
 fi
 cp source/_posts/* source/back_posts -rf
