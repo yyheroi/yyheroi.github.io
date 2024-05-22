@@ -234,7 +234,7 @@ friends:
 
 ##########评论设置#############
 comment:
-  on: false
+  on: true
   type: gitalk  # 评论系统：gitalk、disqus、gitment、utteranc、livere,注意：使用时，在下方对应位置进行配置
   comment_count: true  # 文章标题下方显示评论数 目前仅支持 gitalk 和 disqus
   ## 使用说明 https://yyheroi.org//2020/05/23/3-hexo-comment/
@@ -249,8 +249,8 @@ disqus:
 gitalk:
   githubID: yyheroi
   repo: yyheroi.github.io
-  ClientID:
-  ClientSecret:
+  ClientID: Ov23liZlYn7hrPL3Ouja
+  ClientSecret: e064a320f48ac03c7c6d4c59ec155391dba07921
   adminUser: yyheroi
   distractionFreeMode: true
   language: zh-CN
