@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>U-Boot-fdt-GPT | yyheroi</title>
+  <meta name="keywords" content=" fdt , GPT , rk3588 ">
+  <meta name="description" content="U-Boot-fdt-GPT | yyheroi">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="[toc] Rust基本数据类型Rust 每个值都有其确切的数据类型，总的来说可以分为两类：基本类型和复合类型。 基本类型意味着它们往往是一个最小化原子类型，无法解构为其它类型(一般意义上来说)，由以下组成：  数值类型: 有符号整数 (i8, i16, i32, i64, isize)、 无符号整数 (u8, u16, u32, u64, usize) 、浮点数 (f32, f64)、以及有理数">
+<meta property="og:type" content="website">
+<meta property="og:title" content="02-rust基本类型">
+<meta property="og:url" content="http://example.com/back_posts/02-rust%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B.html">
+<meta property="og:site_name" content="yyheroi">
+<meta property="og:description" content="[toc] Rust基本数据类型Rust 每个值都有其确切的数据类型，总的来说可以分为两类：基本类型和复合类型。 基本类型意味着它们往往是一个最小化原子类型，无法解构为其它类型(一般意义上来说)，由以下组成：  数值类型: 有符号整数 (i8, i16, i32, i64, isize)、 无符号整数 (u8, u16, u32, u64, usize) 、浮点数 (f32, f64)、以及有理数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-54b3a6d435d2482243edc4be9ab98153_1440w.png">
+<meta property="article:published_time" content="2023-08-26T13:17:00.000Z">
+<meta property="article:modified_time" content="2024-05-15T06:11:08.980Z">
+<meta property="article:author" content="yyh">
+<meta property="article:tag" content="rust基本类型">
+<meta property="article:tag" content="rust">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic2.zhimg.com/80/v2-54b3a6d435d2482243edc4be9ab98153_1440w.png">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>yyh</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/yyheroi"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="facebook"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-facebook"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+            <a title="instagram"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-instagram"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="reddit"
+               href="https://www.reddit.com/user/yyheroi/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-reddit"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            <a title="csdn"
+               href="https://blog.csdn.net/qq_45698138"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-csdn"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="oschina"
+               href="https://my.oschina.net/yyheroi"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-oschina"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:yengii@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=2252102866&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="kugou"
+               href="https://www.kugou.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-kugou"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/#/user/home?id=88151013"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(21)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="rust">
+            
+            rust
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="test">
+            
+            test
+            <small>(9)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="uboot">
+            
+            uboot
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="kernel">
+            
+            kernel
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="OSTEP">
+            
+            OSTEP
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="driver">
+            
+            driver
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="21">
+<input type="hidden" id="yelog_site_word_count" value="15.3k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>学习网站</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>block</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>cgroup</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Clion</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>cpufreq</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ethrnet</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>fdt</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GPT</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>PHY芯片</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>pinctrl</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>power</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rk3588</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust复合类型</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust环境搭建</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust基本类型</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>test</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>uboot概念</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vscode</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vsfs</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/25/Windows%E4%B8%8B%E9%80%9A%E8%BF%87ssh%E6%8C%82%E8%BD%BD%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%AE%E5%BD%95/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Windows下通过ssh挂载远程服务器目录">Windows下通过ssh挂载远程服务器目录</span>
+            <span class="post-date" title="2024-05-25 11:27:05">2024/05/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 driver "
+           href="/2024/05/23/01%E4%BB%A5%E5%A4%AA%E7%BD%91ethernet-%E6%A6%82%E5%BF%B5/"
+           data-tag="ethrnet"
+           data-author="" >
+            <span class="post-title" title="01以太网ethernet-概念">01以太网ethernet-概念</span>
+            <span class="post-date" title="2024-05-23 15:30:58">2024/05/23</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/vscode-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E5%A4%B1%E8%B4%A5/"
+           data-tag="vscode"
+           data-author="" >
+            <span class="post-title" title="vscode-远程连接失败">vscode-远程连接失败</span>
+            <span class="post-date" title="2024-05-17 17:14:04">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/vscode-%E5%AE%89%E8%A3%85-%E5%8D%B8%E8%BD%BD/"
+           data-tag="vscode"
+           data-author="" >
+            <span class="post-title" title="vscode-安装-卸载">vscode-安装-卸载</span>
+            <span class="post-date" title="2024-05-17 15:17:18">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/ARMv8%E6%9E%B6%E6%9E%84-%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F%E5%8C%96/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="ARMv8架构-内存虚拟化">ARMv8架构-内存虚拟化</span>
+            <span class="post-date" title="2024-05-17 14:45:28">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/Clion202204-%E7%A0%B4%E8%A7%A3/"
+           data-tag="Clion"
+           data-author="" >
+            <span class="post-title" title="Clion202204-破解">Clion202204-破解</span>
+            <span class="post-date" title="2024-05-17 10:10:50">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/16/PHY%E8%8A%AF%E7%89%87/"
+           data-tag="PHY芯片"
+           data-author="" >
+            <span class="post-title" title="PHY芯片">PHY芯片</span>
+            <span class="post-date" title="2024-05-16 18:58:06">2024/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/05/16/cgroup/"
+           data-tag="cgroup"
+           data-author="" >
+            <span class="post-title" title="cgroup">cgroup</span>
+            <span class="post-date" title="2024-05-16 15:30:33">2024/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/05/16/pinctrl/"
+           data-tag="pinctrl"
+           data-author="" >
+            <span class="post-title" title="pinctrl">pinctrl</span>
+            <span class="post-date" title="2024-05-16 13:33:03">2024/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 uboot "
+           href="/2024/05/15/uboot-01-%E6%A6%82%E5%BF%B5/"
+           data-tag="uboot概念"
+           data-author="" >
+            <span class="post-title" title="uboot-01-概念">uboot-01-概念</span>
+            <span class="post-date" title="2024-05-15 21:59:01">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 OSTEP "
+           href="/2024/05/15/OSTEP-40-VSFS/"
+           data-tag="vsfs"
+           data-author="" >
+            <span class="post-title" title="OSTEP-40-VSFS">OSTEP-40-VSFS</span>
+            <span class="post-date" title="2024-05-15 14:40:25">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 uboot "
+           href="/2024/05/15/U-Boot-fdt-GPT/"
+           data-tag="fdt,GPT,rk3588"
+           data-author="" >
+            <span class="post-title" title="U-Boot-fdt-GPT">U-Boot-fdt-GPT</span>
+            <span class="post-date" title="2024-05-15 14:37:05">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 driver "
+           href="/2024/05/15/linux-block/"
+           data-tag="block"
+           data-author="" >
+            <span class="post-title" title="linux-block">linux-block</span>
+            <span class="post-date" title="2024-05-15 14:36:36">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/04/28/cpufreq/"
+           data-tag="power,cpufreq"
+           data-author="" >
+            <span class="post-title" title="cpufreq">cpufreq</span>
+            <span class="post-date" title="2024-04-28 17:04:13">2024/04/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/09/13/Hexo%E5%9C%A8%E5%A4%9A%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E6%8F%90%E4%BA%A4%E5%92%8C%E6%9B%B4%E6%96%B0/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Hexo在多台电脑上提交和更新">Hexo在多台电脑上提交和更新</span>
+            <span class="post-date" title="2023-09-13 15:35:30">2023/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/28/03-rust%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/"
+           data-tag="rust,rust复合类型"
+           data-author="" >
+            <span class="post-title" title="03-rust复合类型">03-rust复合类型</span>
+            <span class="post-date" title="2023-08-28 21:58:27">2023/08/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/02-rust%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/"
+           data-tag="rust,rust基本类型"
+           data-author="" >
+            <span class="post-title" title="02-rust基本类型">02-rust基本类型</span>
+            <span class="post-date" title="2023-08-26 21:17:00">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/01-rust%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="rust,rust环境搭建"
+           data-author="" >
+            <span class="post-title" title="01-rust环境搭建">01-rust环境搭建</span>
+            <span class="post-date" title="2023-08-26 17:03:59">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/00-rust%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99/"
+           data-tag="学习网站,rust"
+           data-author="" >
+            <span class="post-title" title="00-rust学习网站">00-rust学习网站</span>
+            <span class="post-date" title="2023-08-26 16:08:57">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/08/25/github+hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="github+hexo 博客搭建">github+hexo 博客搭建</span>
+            <span class="post-date" title="2023-08-25 19:32:35">2023/08/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/08/25/hello-world/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Hello World">Hello World</span>
+            <span class="post-date" title="2023-08-25 00:00:00">2023/08/25</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-U-Boot-fdt-GPT" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">U-Boot-fdt-GPT</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="uboot">uboot</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">fdt</a>
+            
+            <a class="color4">GPT</a>
+            
+            <a class="color2">rk3588</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2024-05-15 14:50:22'>2024-05-15 14:37</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.8k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%8B%E7%BB%8D"><span class="toc-text">一、介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dtb%E5%9C%A8U-boot%E4%B8%AD%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="toc-text">dtb在U-boot中的位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dtb%E8%A7%A3%E6%9E%90%E6%8E%A5%E5%8F%A3"><span class="toc-text">dtb解析接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fdt-%E5%91%BD%E4%BB%A4"><span class="toc-text">fdt 命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81u-boot-%E8%8E%B7%E5%8F%96GPT%E5%88%86%E5%8C%BA%E8%A1%A8"><span class="toc-text">二、u-boot 获取GPT分区表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3588-android-uboot"><span class="toc-text">3588-android-uboot</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>U-Boot官网:<a target="_blank" rel="noopener" href="https://docs.u-boot.org/en/latest/">https://docs.u-boot.org/en/latest/</a></p>
+<p>u-boot启动流程</p>
+<ul>
+<li>板子上电以后，首先执行的是ROM中的一段启动代码。启动代码<strong>根据寄存器&#x2F;外部管脚配置</strong>，确定是进入下载模式，还是从某介质(Flash&#x2F;EMMC&#x2F;SD卡等存储设备)启动u-boot</li>
+</ul>
+<blockquote>
+<p>ROM中的代码是固化的，无法修改</p>
+</blockquote>
+<h1 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h1><blockquote>
+<p>FDT，flatted device tree，扁平设备树，简单来说，就是将部分设备信息结构存放到device tree文件中。</p>
+<p>uboot最终将其编译成dtb文件，使用过程中通过解析该dtb来获取板级设备信息。  </p>
+</blockquote>
+<blockquote>
+<p>U-boot的dtb和kernel中的dtb是一致的，有关fdt的详细介绍，参考doc&#x2F;README.fdt-control</p>
+</blockquote>
+<h3 id="dtb在U-boot中的位置"><a href="#dtb在U-boot中的位置" class="headerlink" title="dtb在U-boot中的位置"></a>dtb在U-boot中的位置</h3><ul>
+<li>dtb能够以两种形式编译到U-boot的镜像中</li>
+</ul>
+<ol>
+<li>dtb和u-boot的bin文件分离(imx6q中使用的这种方式，在.config文件中可以查看到)</li>
+</ol>
+<blockquote>
+<p>通过CONFIG_OF_SEPARATE宏定义使能，dtb最后会追加到u-boot的bin文件的最后面，通过u-boot的结束地址符号_end符号来获取dtb的地址</p>
+</blockquote>
+<ol>
+<li>dtb集成到u-boot的bin文件内部</li>
+</ol>
+<blockquote>
+<p>通过CONFIG_OF_EMBED宏定义使能，dtb会位于u-boot的.dtb.init.rodata段中，通过__dtb_dt_begin符号来获取dtb</p>
+</blockquote>
+<ol>
+<li>获取dts文件的地址gd-&gt;fdt_blob</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 宏用来表示是否把dtb文件放在uboot.bin的文件中</span><br><span class="line">CONFIG_OF_EMBED</span><br><span class="line"></span><br><span class="line">// 单独编译dtb文件</span><br><span class="line">CONFIG_OF_SEPARATE，编译出来的dtb放在uboot.bin的最后面，就是dtb追加到uboot的bin文件后面时，通过_end符号来获取dtb地址</span><br><span class="line"></span><br><span class="line">gd-&gt;fdt_blob = (ulong *)&amp;_end;</span><br><span class="line"></span><br><span class="line">// 可以通过fdtcontroladdr环境变量来指定fdt的地址</span><br><span class="line">gd-&gt;fdt_blob = (void *)getenv_ulong(&quot;fdtcontroladdr&quot;, 16,</span><br><span class="line">						(uintptr_t)gd-&gt;fdt_blob); </span><br></pre></td></tr></table></figure>
+
+<h3 id="dtb解析接口"><a href="#dtb解析接口" class="headerlink" title="dtb解析接口"></a>dtb解析接口</h3><ul>
+<li>定义在lib&#x2F;fdtdec.c文件中，节点变量node中存放的是偏移地址</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// 获得dtb下某个节点的路径path的偏移，偏移就代表这个节点</span><br><span class="line">int fdt_path_offset(const void *fdt, const char *path)</span><br><span class="line">eg：node = fdt_path_offset(gd-&gt;fdt_blob, “/aliases”);</span><br><span class="line"></span><br><span class="line">// 获得节点node的某个字符串属性值</span><br><span class="line">const void *fdt_getprop(const void *fdt, int nodeoffset, const char *name, int *lenp)</span><br><span class="line">eg： mac = fdt_getprop(gd-&gt;fdt_blob, node, “mac-address”, &amp;len);</span><br><span class="line"></span><br><span class="line">// 获得节点node的某个整形数组属性值</span><br><span class="line">int fdtdec_get_int_array(const void *blob, int node, const char *prop_name, u32 *array, int count)</span><br><span class="line">eg： ret = fdtdec_get_int_array(blob, node, “interrupts”, cell, ARRAY_SIZE(cell));</span><br><span class="line"></span><br><span class="line">// 获得节点node的地址属性值</span><br><span class="line">fdt_addr_t fdtdec_get_addr(const void *blob, int node, const char *prop_name)</span><br><span class="line">eg：fdtdec_get_addr(blob, node, “reg”);</span><br><span class="line"></span><br><span class="line">// 获得config节点下的整形属性、bool属性、字符串等等</span><br><span class="line">fdtdec_get_config_int、fdtdec_get_config_bool、fdtdec_get_config_string</span><br><span class="line"></span><br><span class="line">// 获得chosen下的name节点的偏移</span><br><span class="line">int fdtdec_get_chosen_node(const void *blob, const char *name)</span><br><span class="line"></span><br><span class="line">// 获得chosen下name属性的值</span><br><span class="line">const char *fdtdec_get_chosen_prop(const void *blob, const char *name)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定义在lib&#x2F;fdtdec_common.c文件中</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 获得节点node的某个整形属性值</span><br><span class="line">int fdtdec_get_int(const void *blob, int node, const char *prop_name, int default_val)</span><br><span class="line">eg： bus-&gt;udelay = fdtdec_get_int(blob, node, “i2c-gpio,delay-us”, DEFAULT_UDELAY);</span><br><span class="line"></span><br><span class="line">// 获得节点node的某个无符号整形属性值</span><br><span class="line">fdtdec_get_uint</span><br></pre></td></tr></table></figure>
+
+<h2 id="fdt-命令"><a href="#fdt-命令" class="headerlink" title="fdt 命令"></a>fdt 命令</h2><p>对于u-boot提供了fdt的相关命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">fdt - flattened device tree utility commands</span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line">fdt addr [-c]  &lt;addr&gt; [&lt;length&gt;]   - Set the [control] fdt location to &lt;addr&gt;</span><br><span class="line">fdt apply &lt;addr&gt;                    - Apply overlay to the DT</span><br><span class="line">fdt move   &lt;fdt&gt; &lt;newaddr&gt; &lt;length&gt; - Copy the fdt to &lt;addr&gt; and make it active</span><br><span class="line">fdt resize [&lt;extrasize&gt;]            - Resize fdt to size + padding to 4k addr + some optional &lt;extrasize&gt; if needed</span><br><span class="line">fdt print  &lt;path&gt; [&lt;prop&gt;]          - Recursive print starting at &lt;path&gt;</span><br><span class="line">fdt list   &lt;path&gt; [&lt;prop&gt;]          - Print one level starting at &lt;path&gt;</span><br><span class="line">fdt get value &lt;var&gt; &lt;path&gt; &lt;prop&gt;   - Get &lt;property&gt; and store in &lt;var&gt;</span><br><span class="line">fdt get name &lt;var&gt; &lt;path&gt; &lt;index&gt;   - Get name of node &lt;index&gt; and store in &lt;var&gt;</span><br><span class="line">fdt get addr &lt;var&gt; &lt;path&gt; &lt;prop&gt;    - Get start address of &lt;property&gt; and store in &lt;var&gt;</span><br><span class="line">fdt get size &lt;var&gt; &lt;path&gt; [&lt;prop&gt;]  - Get size of [&lt;property&gt;] or num nodes and store in &lt;var&gt;</span><br><span class="line">fdt set    &lt;path&gt; &lt;prop&gt; [&lt;val&gt;]    - Set &lt;property&gt; [to &lt;val&gt;]</span><br><span class="line">fdt mknode &lt;path&gt; &lt;node&gt;            - Create a new node after &lt;path&gt;</span><br><span class="line">fdt rm     &lt;path&gt; [&lt;prop&gt;]          - Delete the node or &lt;property&gt;</span><br><span class="line">fdt header                          - Display header info</span><br><span class="line">fdt bootcpu &lt;id&gt;                    - Set boot cpuid</span><br><span class="line">fdt memory &lt;addr&gt; &lt;size&gt;            - Add/Update memory node</span><br><span class="line">fdt rsvmem print                    - Show current mem reserves</span><br><span class="line">fdt rsvmem add &lt;addr&gt; &lt;size&gt;        - Add a mem reserve</span><br><span class="line">fdt rsvmem delete &lt;index&gt;           - Delete a mem reserves</span><br><span class="line">fdt chosen [&lt;start&gt; &lt;end&gt;]          - Add/update the /chosen branch in the tree</span><br><span class="line">                                        &lt;start&gt;/&lt;end&gt; - initrd start/end addr</span><br><span class="line">NOTE: Dereference aliases by omitting the leading &#x27;/&#x27;, e.g. fdt print ethernet0.</span><br></pre></td></tr></table></figure>
+
+<p>fdt print加path参数，则打path内容，如下(其中&#x2F;memory是path)：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">U-Boot&gt; fdt print /memory</span><br><span class="line">memory &#123;</span><br><span class="line">device_type = <span class="string">&quot;memory&quot;</span>;</span><br><span class="line">reg = &lt;<span class="number">0x70000000</span> <span class="number">0x4000000</span>&gt;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">U-Boot&gt; fdt print #不加参数时，打印出整颗树</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="二、u-boot-获取GPT分区表"><a href="#二、u-boot-获取GPT分区表" class="headerlink" title="二、u-boot 获取GPT分区表"></a>二、u-boot 获取GPT分区表</h1><p>在uboot中通过命令打印分区表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">part list mmc 0</span><br></pre></td></tr></table></figure>
+
+<h2 id="3588-android-uboot"><a href="#3588-android-uboot" class="headerlink" title="3588-android-uboot"></a>3588-android-uboot</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;common.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;command.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;android_image.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mmc.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memalign.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fdtdec.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PART_MAX_COUNT  128</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	LAB_SIZE		512</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	HEADER_OFFSET	LAB_SIZE</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	ENTRY_OFFSET	(2 * LAB_SIZE)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	VAL1_OFFSET		sizeof(u64)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span>	VAL2_OFFSET		(2 * sizeof(u64))</span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> u64 <span class="title function_">get_gpt_blk_cnt_and_print</span><span class="params">(<span class="keyword">struct</span> blk_desc *dev_desc,</span></span><br><span class="line"><span class="params">			  gpt_header *gpt_head, gpt_entry **gpt_pte)</span> &#123;</span><br><span class="line">	<span class="type">char</span> efi_str[PARTNAME_SZ + <span class="number">1</span>];</span><br><span class="line">	u64 gpt_part_size, gpt_blk_cnt = <span class="number">0</span>;</span><br><span class="line">	gpt_entry *gpt_e;</span><br><span class="line">	<span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">	gpt_e = *gpt_pte;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; gpt_head-&gt;num_partition_entries; i++) &#123;</span><br><span class="line"></span><br><span class="line">		raite_gpt_convert_efi_name_to_char(efi_str, gpt_e[i].partition_name,</span><br><span class="line">					     PARTNAME_SZ + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%s: part: %2d name - GPT: %16s &quot;</span>,</span><br><span class="line">		      __func__, i, efi_str);</span><br><span class="line">		gpt_part_size = le64_to_cpu(gpt_e[i].ending_lba) -</span><br><span class="line">			le64_to_cpu(gpt_e[i].starting_lba) + <span class="number">1</span>;</span><br><span class="line">		gpt_blk_cnt += gpt_part_size;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(gpt_part_size == <span class="number">1</span>) </span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;size(LBA) - GPT: %8llu &quot;</span>,</span><br><span class="line">		      (<span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span>)gpt_part_size);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;start LBA - GPT: %8llu \n&quot;</span>,</span><br><span class="line">		      le64_to_cpu(gpt_e[i].starting_lba));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> gpt_blk_cnt + gpt_e[<span class="number">0</span>].starting_lba - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">get_gpt_meta_data</span><span class="params">(u64 *data_size, <span class="type">void</span> **data)</span></span><br><span class="line">&#123;</span><br><span class="line">    gpt_header *pgpt_head;</span><br><span class="line">	gpt_entry *entries;</span><br><span class="line">	<span class="type">void</span> *meta_data;</span><br><span class="line">	u64 meta_data_size, gpt_entries_size;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">blk_desc</span> *<span class="title">dev_desc</span> =</span> <span class="literal">NULL</span>;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">mmc</span> *<span class="title">mmc</span> =</span> <span class="literal">NULL</span>;</span><br><span class="line">	u64 blk_size = <span class="number">0</span>;</span><br><span class="line">	u64 blk_cnt = <span class="number">0</span>;</span><br><span class="line">	u64 tag = <span class="number">0x55AA</span>;</span><br><span class="line">	<span class="type">lbaint_t</span> lba;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">if</span> (!data_size || !data) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%s *** ERROR: Invalid Argument(s) ***\n&quot;</span>, __func__);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    mmc = do_returnmmc();</span><br><span class="line">	<span class="keyword">if</span> (!mmc)</span><br><span class="line">		<span class="keyword">return</span> CMD_RET_FAILURE;</span><br><span class="line">    </span><br><span class="line">    dev_desc = mmc_get_blk_desc(mmc);</span><br><span class="line">	<span class="keyword">if</span> (!dev_desc) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%s *** ERROR: mmc_get_blk_desc err ***\n&quot;</span>, __func__);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	gpt_entries_size = <span class="keyword">sizeof</span>(gpt_entry) * PART_MAX_COUNT;</span><br><span class="line">	meta_data_size = LAB_SIZE + <span class="keyword">sizeof</span>(gpt_header) + gpt_entries_size;</span><br><span class="line">	meta_data = <span class="built_in">malloc</span>(meta_data_size);</span><br><span class="line">	<span class="keyword">if</span>(!meta_data) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%s *** ERROR: malloc memory (gpt meta data) ***\n&quot;</span>, __func__);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">memset</span>(meta_data, <span class="number">0</span>, meta_data_size);</span><br><span class="line">	pgpt_head = (gpt_header *)((<span class="type">char</span> *)meta_data + HEADER_OFFSET);</span><br><span class="line">	entries = (gpt_entry *)((<span class="type">char</span> *)meta_data + ENTRY_OFFSET);</span><br><span class="line">	ALLOC_CACHE_ALIGN_BUFFER(legacy_mbr, mbr, dev_desc-&gt;blksz);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Read MBR Header from device */</span></span><br><span class="line">	lba = <span class="number">0</span>; <span class="comment">/* MBR is always at 0 */</span></span><br><span class="line">	blk_cnt = <span class="number">1</span>; <span class="comment">/* MBR (1 block) */</span></span><br><span class="line">	<span class="keyword">if</span> (blk_dread(dev_desc, lba, blk_cnt, (ulong *)mbr) != <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;*** ERROR: Can&#x27;t read MBR header ***\n&quot;</span>);</span><br><span class="line">		<span class="keyword">goto</span> ERROR_OUT;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Read GPT Header from device */</span></span><br><span class="line">	lba = GPT_PRIMARY_PARTITION_TABLE_LBA;</span><br><span class="line">	blk_cnt = <span class="number">1</span>; <span class="comment">/* GPT Header (1 block) */</span></span><br><span class="line">	<span class="keyword">if</span> (blk_dread(dev_desc, lba, blk_cnt, pgpt_head) != <span class="number">1</span>) &#123;</span><br><span class="line">    	<span class="built_in">printf</span>(<span class="string">&quot;%s *** ERROR: Can&#x27;t read GPT header ***\n&quot;</span>, __func__);</span><br><span class="line">		<span class="keyword">goto</span> ERROR_OUT;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	lba = GPT_PRIMARY_PARTITION_TABLE_LBA;</span><br><span class="line">	<span class="keyword">if</span> (validate_gpt_header(pgpt_head, lba, dev_desc-&gt;lba)) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%s *** ERROR: validate_gpt_header GPT header ***\n&quot;</span>, __func__);</span><br><span class="line">		<span class="keyword">goto</span> ERROR_OUT;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (dev_desc-&gt;sig_type == SIG_TYPE_NONE) &#123;</span><br><span class="line">		<span class="type">efi_guid_t</span> empty = &#123;&#125;;</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">memcmp</span>(&amp;pgpt_head-&gt;disk_guid, &amp;empty, <span class="keyword">sizeof</span>(empty))) &#123;</span><br><span class="line">			dev_desc-&gt;sig_type = SIG_TYPE_GUID;</span><br><span class="line">			<span class="built_in">memcpy</span>(&amp;dev_desc-&gt;guid_sig, &amp;pgpt_head-&gt;disk_guid,</span><br><span class="line">			      <span class="keyword">sizeof</span>(empty));</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (mbr-&gt;unique_mbr_signature != <span class="number">0</span>) &#123;</span><br><span class="line">			dev_desc-&gt;sig_type = SIG_TYPE_MBR;</span><br><span class="line">			dev_desc-&gt;mbr_sig = mbr-&gt;unique_mbr_signature;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* Read GPT Entries from device */</span></span><br><span class="line">	lba = le64_to_cpu(pgpt_head-&gt;partition_entry_lba);</span><br><span class="line">	blk_cnt = BLOCK_CNT((le32_to_cpu(pgpt_head-&gt;num_partition_entries) *</span><br><span class="line">				   	le32_to_cpu(pgpt_head-&gt;sizeof_partition_entry)),</span><br><span class="line">				  	dev_desc);</span><br><span class="line">	<span class="keyword">if</span> (blk_dread(dev_desc, lba, blk_cnt, entries) != blk_cnt) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%s *** ERROR:read entries (lba=%llu) ***\n&quot;</span>,</span><br><span class="line">				__func__, pgpt_head-&gt;partition_entry_lba);</span><br><span class="line">		<span class="keyword">goto</span> ERROR_OUT;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	blk_size = dev_desc-&gt;blksz;</span><br><span class="line">	validate_gpt_entries(pgpt_head, entries);</span><br><span class="line">	</span><br><span class="line">	debug(<span class="string">&quot;%s read entries lba %llu (blk_cnt %llu blk_size=%llu)\n&quot;</span>,</span><br><span class="line">				__func__, (<span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span>)(ulong)lba, blk_cnt, blk_size);</span><br><span class="line">	</span><br><span class="line">	blk_cnt = get_gpt_blk_cnt(dev_desc, pgpt_head, &amp;entries);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* </span></span><br><span class="line"><span class="comment">	 * build info, layout of meta_data:</span></span><br><span class="line"><span class="comment">	 * u64 tag | u64 blk_size | u64 blk_cnt | 488 bytes | gpt header | gpt entries</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	blk_cnt = get_gpt_blk_cnt(dev_desc, pgpt_head, &amp;entries);</span><br><span class="line">	<span class="comment">/*this value makes we known the reserved memory is available*/</span></span><br><span class="line">	<span class="built_in">memcpy</span>(meta_data, (<span class="type">void</span> *)&amp;tag, <span class="keyword">sizeof</span>(u64));</span><br><span class="line">	<span class="built_in">memcpy</span>(meta_data + VAL1_OFFSET, (<span class="type">void</span> *)&amp;blk_size, <span class="keyword">sizeof</span>(u64));</span><br><span class="line">	<span class="built_in">memcpy</span>(meta_data + VAL2_OFFSET, (<span class="type">void</span> *)&amp;blk_cnt, <span class="keyword">sizeof</span>(u64));</span><br><span class="line"></span><br><span class="line">	*data_size = meta_data_size;</span><br><span class="line">	*data = meta_data;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">ERROR_OUT:</span><br><span class="line">	<span class="built_in">free</span>(meta_data);</span><br><span class="line">	meta_data = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="http://www.wowotech.net/device_model/dt-code-file-struct-parse.html">Device Tree（四）：文件结构解析 (wowotech.net)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/376295326">Linux设备树语法分析详解教程(三)u-boot设备树的传递 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/376296222">Linux设备树语法分析详解教程(四)kernel的解析 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/solo666/p/16518154.html">https://www.cnblogs.com/solo666/p/16518154.html</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 yengii@qq.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23liZlYn7hrPL3Ouja',
+            clientSecret: 'e064a320f48ac03c7c6d4c59ec155391dba07921',
+            repo: 'yyheroi.github.io',
+            owner: 'yyheroi',
+            admin: ['yyheroi'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2023-2099 yyh
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
