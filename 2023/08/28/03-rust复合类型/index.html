@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>03-rust复合类型 | yyheroi</title>
+  <meta name="keywords" content=" rust , rust复合类型 ">
+  <meta name="description" content="03-rust复合类型 | yyheroi">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="[toc] Rust基本数据类型Rust 每个值都有其确切的数据类型，总的来说可以分为两类：基本类型和复合类型。 基本类型意味着它们往往是一个最小化原子类型，无法解构为其它类型(一般意义上来说)，由以下组成：  数值类型: 有符号整数 (i8, i16, i32, i64, isize)、 无符号整数 (u8, u16, u32, u64, usize) 、浮点数 (f32, f64)、以及有理数">
+<meta property="og:type" content="website">
+<meta property="og:title" content="02-rust基本类型">
+<meta property="og:url" content="http://example.com/back_posts/02-rust%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B.html">
+<meta property="og:site_name" content="yyheroi">
+<meta property="og:description" content="[toc] Rust基本数据类型Rust 每个值都有其确切的数据类型，总的来说可以分为两类：基本类型和复合类型。 基本类型意味着它们往往是一个最小化原子类型，无法解构为其它类型(一般意义上来说)，由以下组成：  数值类型: 有符号整数 (i8, i16, i32, i64, isize)、 无符号整数 (u8, u16, u32, u64, usize) 、浮点数 (f32, f64)、以及有理数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-54b3a6d435d2482243edc4be9ab98153_1440w.png">
+<meta property="article:published_time" content="2023-08-26T13:17:00.000Z">
+<meta property="article:modified_time" content="2024-05-15T06:11:08.980Z">
+<meta property="article:author" content="yyh">
+<meta property="article:tag" content="rust基本类型">
+<meta property="article:tag" content="rust">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic2.zhimg.com/80/v2-54b3a6d435d2482243edc4be9ab98153_1440w.png">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>yyh</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/yyheroi"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="facebook"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-facebook"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+            <a title="instagram"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-instagram"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="reddit"
+               href="https://www.reddit.com/user/yyheroi/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-reddit"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            <a title="csdn"
+               href="https://blog.csdn.net/qq_45698138"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-csdn"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="oschina"
+               href="https://my.oschina.net/yyheroi"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-oschina"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:yengii@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=2252102866&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="kugou"
+               href="https://www.kugou.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-kugou"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/#/user/home?id=88151013"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(21)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="rust">
+            
+            rust
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="test">
+            
+            test
+            <small>(9)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="uboot">
+            
+            uboot
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="kernel">
+            
+            kernel
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="OSTEP">
+            
+            OSTEP
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="driver">
+            
+            driver
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="21">
+<input type="hidden" id="yelog_site_word_count" value="15.3k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>学习网站</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>block</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>cgroup</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Clion</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>cpufreq</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ethrnet</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>fdt</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GPT</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>PHY芯片</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>pinctrl</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>power</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rk3588</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust复合类型</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust环境搭建</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust基本类型</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>test</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>uboot概念</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vscode</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vsfs</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/25/Windows%E4%B8%8B%E9%80%9A%E8%BF%87ssh%E6%8C%82%E8%BD%BD%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%AE%E5%BD%95/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Windows下通过ssh挂载远程服务器目录">Windows下通过ssh挂载远程服务器目录</span>
+            <span class="post-date" title="2024-05-25 11:27:05">2024/05/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 driver "
+           href="/2024/05/23/01%E4%BB%A5%E5%A4%AA%E7%BD%91ethernet-%E6%A6%82%E5%BF%B5/"
+           data-tag="ethrnet"
+           data-author="" >
+            <span class="post-title" title="01以太网ethernet-概念">01以太网ethernet-概念</span>
+            <span class="post-date" title="2024-05-23 15:30:58">2024/05/23</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/vscode-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E5%A4%B1%E8%B4%A5/"
+           data-tag="vscode"
+           data-author="" >
+            <span class="post-title" title="vscode-远程连接失败">vscode-远程连接失败</span>
+            <span class="post-date" title="2024-05-17 17:14:04">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/vscode-%E5%AE%89%E8%A3%85-%E5%8D%B8%E8%BD%BD/"
+           data-tag="vscode"
+           data-author="" >
+            <span class="post-title" title="vscode-安装-卸载">vscode-安装-卸载</span>
+            <span class="post-date" title="2024-05-17 15:17:18">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/ARMv8%E6%9E%B6%E6%9E%84-%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F%E5%8C%96/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="ARMv8架构-内存虚拟化">ARMv8架构-内存虚拟化</span>
+            <span class="post-date" title="2024-05-17 14:45:28">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/Clion202204-%E7%A0%B4%E8%A7%A3/"
+           data-tag="Clion"
+           data-author="" >
+            <span class="post-title" title="Clion202204-破解">Clion202204-破解</span>
+            <span class="post-date" title="2024-05-17 10:10:50">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/16/PHY%E8%8A%AF%E7%89%87/"
+           data-tag="PHY芯片"
+           data-author="" >
+            <span class="post-title" title="PHY芯片">PHY芯片</span>
+            <span class="post-date" title="2024-05-16 18:58:06">2024/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/05/16/cgroup/"
+           data-tag="cgroup"
+           data-author="" >
+            <span class="post-title" title="cgroup">cgroup</span>
+            <span class="post-date" title="2024-05-16 15:30:33">2024/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/05/16/pinctrl/"
+           data-tag="pinctrl"
+           data-author="" >
+            <span class="post-title" title="pinctrl">pinctrl</span>
+            <span class="post-date" title="2024-05-16 13:33:03">2024/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 uboot "
+           href="/2024/05/15/uboot-01-%E6%A6%82%E5%BF%B5/"
+           data-tag="uboot概念"
+           data-author="" >
+            <span class="post-title" title="uboot-01-概念">uboot-01-概念</span>
+            <span class="post-date" title="2024-05-15 21:59:01">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 OSTEP "
+           href="/2024/05/15/OSTEP-40-VSFS/"
+           data-tag="vsfs"
+           data-author="" >
+            <span class="post-title" title="OSTEP-40-VSFS">OSTEP-40-VSFS</span>
+            <span class="post-date" title="2024-05-15 14:40:25">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 uboot "
+           href="/2024/05/15/U-Boot-fdt-GPT/"
+           data-tag="fdt,GPT,rk3588"
+           data-author="" >
+            <span class="post-title" title="U-Boot-fdt-GPT">U-Boot-fdt-GPT</span>
+            <span class="post-date" title="2024-05-15 14:37:05">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 driver "
+           href="/2024/05/15/linux-block/"
+           data-tag="block"
+           data-author="" >
+            <span class="post-title" title="linux-block">linux-block</span>
+            <span class="post-date" title="2024-05-15 14:36:36">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/04/28/cpufreq/"
+           data-tag="power,cpufreq"
+           data-author="" >
+            <span class="post-title" title="cpufreq">cpufreq</span>
+            <span class="post-date" title="2024-04-28 17:04:13">2024/04/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/09/13/Hexo%E5%9C%A8%E5%A4%9A%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E6%8F%90%E4%BA%A4%E5%92%8C%E6%9B%B4%E6%96%B0/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Hexo在多台电脑上提交和更新">Hexo在多台电脑上提交和更新</span>
+            <span class="post-date" title="2023-09-13 15:35:30">2023/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/28/03-rust%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/"
+           data-tag="rust,rust复合类型"
+           data-author="" >
+            <span class="post-title" title="03-rust复合类型">03-rust复合类型</span>
+            <span class="post-date" title="2023-08-28 21:58:27">2023/08/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/02-rust%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/"
+           data-tag="rust,rust基本类型"
+           data-author="" >
+            <span class="post-title" title="02-rust基本类型">02-rust基本类型</span>
+            <span class="post-date" title="2023-08-26 21:17:00">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/01-rust%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="rust,rust环境搭建"
+           data-author="" >
+            <span class="post-title" title="01-rust环境搭建">01-rust环境搭建</span>
+            <span class="post-date" title="2023-08-26 17:03:59">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/00-rust%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99/"
+           data-tag="学习网站,rust"
+           data-author="" >
+            <span class="post-title" title="00-rust学习网站">00-rust学习网站</span>
+            <span class="post-date" title="2023-08-26 16:08:57">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/08/25/github+hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="github+hexo 博客搭建">github+hexo 博客搭建</span>
+            <span class="post-date" title="2023-08-25 19:32:35">2023/08/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/08/25/hello-world/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Hello World">Hello World</span>
+            <span class="post-date" title="2023-08-25 00:00:00">2023/08/25</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-03-rust复合类型" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">03-rust复合类型</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="rust">rust</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">rust</a>
+            
+            <a class="color4">rust复合类型</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2024-04-28 15:13:38'>2023-08-28 21:58</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:769</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%92%8C%E5%88%87%E7%89%87"><span class="toc-text">1.字符串和切片</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">什么是字符串?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String-%E4%B8%8E-str-%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-text">String 与 &amp;str 的转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B4%A2%E5%BC%95"><span class="toc-text">字符串索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%87%E7%89%87"><span class="toc-text">字符串切片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">操作字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%BD%E5%8A%A0-Push"><span class="toc-text">追加 (Push)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E5%85%A5-Insert"><span class="toc-text">插入 (Insert)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%BF%E6%8D%A2-Replace"><span class="toc-text">替换 (Replace)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4-Delete"><span class="toc-text">删除 (Delete)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5-Concatenate"><span class="toc-text">连接 (Concatenate)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E4%B9%89"><span class="toc-text">字符串转义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C-UTF-8-%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">操作 UTF-8 字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BE%E5%90%8E%E7%BB%83%E4%B9%A0"><span class="toc-text">课后练习</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%85%83%E7%BB%84"><span class="toc-text">2.元组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E5%85%83%E7%BB%84"><span class="toc-text">3. 元组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-test"><span class="toc-text">4. test</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-字符串和切片"><a href="#1-字符串和切片" class="headerlink" title="1.字符串和切片"></a>1.字符串和切片</h1><h2 id="什么是字符串"><a href="#什么是字符串" class="headerlink" title="什么是字符串?"></a><a target="_blank" rel="noopener" href="https://course.rs/basic/compound-type/string-slice.html#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AD%97%E7%AC%A6%E4%B8%B2">什么是字符串?</a></h2><p><strong>Rust 中的字符是 Unicode 类型，因此每个字符占据 4 个字节内存空间，但是在字符串中不一样，字符串是 UTF-8 编码，也就是字符串中的字符所占的字节数是变化的(1 - 4)</strong></p>
+<p><code>str</code> 类型是硬编码进可执行文件，也无法被修改，但是 <code>String</code> 则是一个可增长、可改变且具有所有权的 UTF-8 编码字符串，<strong>当 Rust 用户提到字符串时，往往指的就是 <code>String</code> 类型和 <code>&amp;str</code> 字符串切片类型，这两个类型都是 UTF-8 编码</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let a = [1, 2, 3, 4, 5];</span><br><span class="line"></span><br><span class="line">let slice = &amp;a[1..3];</span><br><span class="line"></span><br><span class="line">assert_eq!(slice, &amp;[2, 3]);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="String-与-str-的转换"><a href="#String-与-str-的转换" class="headerlink" title="String 与 &amp;str 的转换"></a><a target="_blank" rel="noopener" href="https://course.rs/basic/compound-type/string-slice.html#string-%E4%B8%8E-str-%E7%9A%84%E8%BD%AC%E6%8D%A2">String 与 &amp;str 的转换</a></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fn main() &#123;</span><br><span class="line">    let s = String::from(&quot;hello,world!&quot;);</span><br><span class="line">    say_hello(&amp;s);</span><br><span class="line">    say_hello(&amp;s[..]);</span><br><span class="line">    say_hello(s.as_str());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fn say_hello(s: &amp;str) &#123;</span><br><span class="line">    println!(&quot;&#123;&#125;&quot;,s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串索引"><a href="#字符串索引" class="headerlink" title="字符串索引"></a><a target="_blank" rel="noopener" href="https://course.rs/basic/compound-type/string-slice.html#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B4%A2%E5%BC%95">字符串索引</a></h2><h2 id="字符串切片"><a href="#字符串切片" class="headerlink" title="字符串切片"></a><a target="_blank" rel="noopener" href="https://course.rs/basic/compound-type/string-slice.html#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%87%E7%89%87">字符串切片</a></h2><p>通过索引区间来访问字符串时，<strong>需要格外的小心</strong>，一不注意，就会导致你程序的崩溃！</p>
+<h2 id="操作字符串"><a href="#操作字符串" class="headerlink" title="操作字符串"></a><a target="_blank" rel="noopener" href="https://course.rs/basic/compound-type/string-slice.html#%E6%93%8D%E4%BD%9C%E5%AD%97%E7%AC%A6%E4%B8%B2">操作字符串</a></h2><h4 id="追加-Push"><a href="#追加-Push" class="headerlink" title="追加 (Push)"></a><a target="_blank" rel="noopener" href="https://course.rs/basic/compound-type/string-slice.html#%E8%BF%BD%E5%8A%A0-push">追加 (Push)</a></h4><h4 id="插入-Insert"><a href="#插入-Insert" class="headerlink" title="插入 (Insert)"></a><a target="_blank" rel="noopener" href="https://course.rs/basic/compound-type/string-slice.html#%E6%8F%92%E5%85%A5-insert">插入 (Insert)</a></h4><h4 id="替换-Replace"><a href="#替换-Replace" class="headerlink" title="替换 (Replace)"></a><a target="_blank" rel="noopener" href="https://course.rs/basic/compound-type/string-slice.html#%E6%9B%BF%E6%8D%A2-replace">替换 (Replace)</a></h4><h4 id="删除-Delete"><a href="#删除-Delete" class="headerlink" title="删除 (Delete)"></a><a target="_blank" rel="noopener" href="https://course.rs/basic/compound-type/string-slice.html#%E5%88%A0%E9%99%A4-delete">删除 (Delete)</a></h4><h4 id="连接-Concatenate"><a href="#连接-Concatenate" class="headerlink" title="连接 (Concatenate)"></a><a target="_blank" rel="noopener" href="https://course.rs/basic/compound-type/string-slice.html#%E8%BF%9E%E6%8E%A5-concatenate">连接 (Concatenate)</a></h4><h2 id="字符串转义"><a href="#字符串转义" class="headerlink" title="字符串转义"></a><a target="_blank" rel="noopener" href="https://course.rs/basic/compound-type/string-slice.html#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E4%B9%89">字符串转义</a></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fn main() &#123;</span><br><span class="line">    println!(&quot;&#123;&#125;&quot;, &quot;hello \\x52\\x75\\x73\\x74&quot;);</span><br><span class="line">    let raw_str = r&quot;Escapes don&#x27;t work here: \x3F \u&#123;211D&#125;&quot;;</span><br><span class="line">    println!(&quot;&#123;&#125;&quot;, raw_str);</span><br><span class="line"></span><br><span class="line">    // 如果字符串包含双引号，可以在开头和结尾加 #</span><br><span class="line">    let quotes = r#&quot;And then I said: &quot;There is no escape!&quot;&quot;#;</span><br><span class="line">    println!(&quot;&#123;&#125;&quot;, quotes);</span><br><span class="line"></span><br><span class="line">    // 如果还是有歧义，可以继续增加，没有限制</span><br><span class="line">    let longer_delimiter = r###&quot;A string with &quot;# in it. And even &quot;##!&quot;###;</span><br><span class="line">    println!(&quot;&#123;&#125;&quot;, longer_delimiter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="操作-UTF-8-字符串"><a href="#操作-UTF-8-字符串" class="headerlink" title="操作 UTF-8 字符串"></a><a target="_blank" rel="noopener" href="https://course.rs/basic/compound-type/string-slice.html#%E6%93%8D%E4%BD%9C-utf-8-%E5%AD%97%E7%AC%A6%E4%B8%B2">操作 UTF-8 字符串</a></h2><p><a target="_blank" rel="noopener" href="https://course.rs/basic/compound-type/string-slice.html#%E8%AF%BE%E5%90%8E%E7%BB%83%E4%B9%A0">字符串与切片 - Rust语言圣经(Rust Course)</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for c in &quot;中国人&quot;.chars() &#123;</span><br><span class="line">    println!(&quot;&#123;&#125;&quot;, c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="课后练习"><a href="#课后练习" class="headerlink" title="课后练习"></a><a target="_blank" rel="noopener" href="https://course.rs/basic/compound-type/string-slice.html#%E8%AF%BE%E5%90%8E%E7%BB%83%E4%B9%A0">课后练习</a></h2><blockquote>
+<p>Rust By Practice，支持代码在线编辑和运行，并提供详细的习题解答。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zh.practice.rs/compound-types/string.html">字符串</a><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/sunface/rust-by-practice/blob/master/solutions/compound-types/string.md">习题解答</a></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://zh.practice.rs/compound-types/slice.html">切片</a><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/sunface/rust-by-practice/blob/master/solutions/compound-types/slice.md">习题解答</a></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://zh.practice.rs/collections/String.html">String</a><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/sunface/rust-by-practice/blob/master/solutions/collections/String.md">习题解答</a></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 填空并修复错误</span><br><span class="line">fn main() &#123;</span><br><span class="line">    let s = String::from(&quot;hello, 世界&quot;);</span><br><span class="line">    let slice1 = &amp;s[0..1]; //提示: `h` 在 UTF-8 编码中只占用 1 个字节</span><br><span class="line">    assert_eq!(slice1, &quot;h&quot;);</span><br><span class="line"></span><br><span class="line">    let slice2 = &amp;s[7..10];// 提示: `世` 在 UTF-8 编码中占用 3 个字节</span><br><span class="line">    assert_eq!(slice2, &quot;世&quot;);</span><br><span class="line">    </span><br><span class="line">    // 迭代 s 中的所有字符</span><br><span class="line">    for (i, c) in s.chars().enumerate() &#123;</span><br><span class="line">        if i == 7 &#123;</span><br><span class="line">            assert_eq!(c, &#x27;世&#x27;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    println!(&quot;Success!&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 填空</span><br><span class="line">fn main() &#123;</span><br><span class="line">    let mut s = String::new();</span><br><span class="line">     s.push_str(&quot;hello&quot;);</span><br><span class="line"></span><br><span class="line">    let v = vec![104, 101, 108, 108, 111];</span><br><span class="line"></span><br><span class="line">    // 将字节数组转换成 String</span><br><span class="line">    let s1 = String::from_utf8(v).unwrap();</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    assert_eq!(s, s1);</span><br><span class="line"></span><br><span class="line">    println!(&quot;Success!&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 填空</span><br><span class="line">use std::mem;</span><br><span class="line"></span><br><span class="line">fn main() &#123;</span><br><span class="line">    let story = String::from(&quot;Rust By Practice&quot;);</span><br><span class="line"></span><br><span class="line">    // 阻止 String 的数据被自动 drop</span><br><span class="line">    let mut story = mem::ManuallyDrop::new(story);</span><br><span class="line"></span><br><span class="line">    let ptr = story.as_mut_ptr();</span><br><span class="line">    let len = story.len();</span><br><span class="line">    let capacity = story.capacity();</span><br><span class="line"></span><br><span class="line">    assert_eq!(16, len);</span><br><span class="line"></span><br><span class="line">    // 我们可以基于 ptr 指针、长度和容量来重新构建 String. </span><br><span class="line">    // 这种操作必须标记为 unsafe，因为我们需要自己来确保这里的操作是安全的</span><br><span class="line">    let s = unsafe &#123; String::from_raw_parts(ptr, len, capacity) &#125;;</span><br><span class="line"></span><br><span class="line">    assert_eq!(*story, s);</span><br><span class="line"></span><br><span class="line">    println!(&quot;Success!&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-元组"><a href="#2-元组" class="headerlink" title="2.元组"></a>2.<a target="_blank" rel="noopener" href="https://course.rs/basic/compound-type/tuple.html#%E5%85%83%E7%BB%84">元组</a></h1><h1 id="3-元组"><a href="#3-元组" class="headerlink" title="3. 元组"></a>3. 元组</h1><h1 id="4-test"><a href="#4-test" class="headerlink" title="4. test"></a>4. test</h1><p>待续。。。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 yengii@qq.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23liZlYn7hrPL3Ouja',
+            clientSecret: 'e064a320f48ac03c7c6d4c59ec155391dba07921',
+            repo: 'yyheroi.github.io',
+            owner: 'yyheroi',
+            admin: ['yyheroi'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2023-2099 yyh
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
