@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>uboot-01-概念 | yyheroi</title>
-  <meta name="keywords" content=" uboot概念 ">
-  <meta name="description" content="uboot-01-概念 | yyheroi">
+  <title>操作系统中的缺页 | yyheroi</title>
+  <meta name="keywords" content=" 缺页 ">
+  <meta name="description" content="操作系统中的缺页 | yyheroi">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="[toc] Rust基本数据类型Rust 每个值都有其确切的数据类型，总的来说可以分为两类：基本类型和复合类型。 基本类型意味着它们往往是一个最小化原子类型，无法解构为其它类型(一般意义上来说)，由以下组成：  数值类型: 有符号整数 (i8, i16, i32, i64, isize)、 无符号整数 (u8, u16, u32, u64, usize) 、浮点数 (f32, f64)、以及有理数">
 <meta property="og:type" content="website">
@@ -699,9 +699,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-uboot-01-概念" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-操作系统中的缺页" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">uboot-01-概念</h1>
+        <h1 class="article-title">操作系统中的缺页</h1>
     
     <div class="article-meta">
         
@@ -711,7 +711,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="uboot">uboot</a>
+            <a  data-rel="test">test</a>
             
         </span>
         
@@ -719,19 +719,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color3">uboot概念</a>
+            <a class="color3">缺页</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2024-05-16 13:31:36'>2024-05-15 21:59</time>
+            发布时间 : <time class="date" title='最后更新: 2024-05-27 17:53:53'>2024-05-27 17:48</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:120</span>
+        <span>字数:323</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -761,7 +761,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#uboot%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4"><span class="toc-text">uboot常见命令</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -777,12 +777,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>uboot(Universal Boot Loader)</p>
-<p>uboot 官网为 <a target="_blank" rel="noopener" href="http://www.denx.de/wiki/U-Boot/">http://www.denx.de/wiki/U-Boot/</a></p>
-<p>Linux 系统要启动就必须需要一个 bootloader 程序，也就说芯片上电以后先运行一段<br>bootloader 程序。这段 bootloader 程序会先初始化DDR 等外设，然后将 Linux 内核从 flash(NAND，<br>NOR FLASH，SD，MMC 等)拷贝到 DDR 中，最后启动 Linux 内核</p>
-<p>uboot主要目的是为系统启动做准备</p>
-<p>uboot是一种通用的bootloader，支持多种架构</p>
-<h1 id="uboot常见命令"><a href="#uboot常见命令" class="headerlink" title="uboot常见命令"></a>uboot常见命令</h1>
+        <p>缺页是引入了虚拟内存后的一个概念。操作系统启动后，在内存中维护着一个虚拟地址表，进程需要的虚拟地址在虚拟地址表中记录。一个程序被加载运行时，只是加载了很少的一部分到内存，另外一部分在需要时再从磁盘载入。被加载到内存的部分标识为“驻留”，而未被加载到内存的部分标为“未驻留”。操作系统根据需要读取虚拟地址表，如果读到虚拟地址表中记录的地址被标为“未驻留”，表示这部分地址记录的程序代码未被加载到内存，需要从磁盘读入，则这种情况就表示”缺页”。这个时候，操作系统触发一个“缺页”的硬件陷阱，系统从磁盘换入这部分未“驻留”的代码。<br>       引入了分页机制(也就有了缺页机制)，则系统只需要加载程序的部分代码到内存，就可以创建进程运行， 需要程序的另一部分时再从磁盘载入并运行，从而允许比内存大很多的程序同时在内存运行。</p>
+<p>转：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ComputerInBook/article/details/101112983">https://blog.csdn.net/ComputerInBook/article/details/101112983</a></p>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 yengii@qq.com </span>
     </div>
