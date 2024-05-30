@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>dtb to dts</title>
+      <link href="/2024/05/30/dtb-to-dts/"/>
+      <url>/2024/05/30/dtb-to-dts/</url>
+      
+        <content type="html"><![CDATA[<p>[toc]</p><h2 id="rk3588-dtc-path"><a href="#rk3588-dtc-path" class="headerlink" title="[rk3588] dtc path"></a>[rk3588] dtc path</h2><p>linux&#x2F;kernel&#x2F;scripts&#x2F;dtc&#x2F;dtc </p><p>android&#x2F;out&#x2F;soong&#x2F;host&#x2F;linux-x86&#x2F;bin&#x2F;dtc</p><h2 id="使用adb获取fdt文件"><a href="#使用adb获取fdt文件" class="headerlink" title="使用adb获取fdt文件"></a>使用<a href="https://so.csdn.net/so/search?q=adb&spm=1001.2101.3001.7020">adb</a>获取fdt文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adb root</span><br><span class="line">adb pull /sys/firmware/fdt d:</span><br><span class="line">pwd</span><br></pre></td></tr></table></figure><h2 id="使用以下指令生成dts文件"><a href="#使用以下指令生成dts文件" class="headerlink" title="使用以下指令生成dts文件"></a>使用以下指令生成dts文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ./out/soong/host/linux-x86/bin/dtc</span><br><span class="line">./dtc -I dtb -O dts –o fdt2dts.dts fdt</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> kernel </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> dtb </tag>
+            
+            <tag> dts </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>shell脚本-符合意义</title>
       <link href="/2024/05/29/shell%E8%84%9A%E6%9C%AC-%E7%AC%A6%E5%90%88%E6%84%8F%E4%B9%89/"/>
       <url>/2024/05/29/shell%E8%84%9A%E6%9C%AC-%E7%AC%A6%E5%90%88%E6%84%8F%E4%B9%89/</url>
@@ -258,7 +285,7 @@
       <link href="/2024/05/16/pinctrl/"/>
       <url>/2024/05/16/pinctrl/</url>
       
-        <content type="html"><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>查看具体设备树中的宏定义</p><p>include&#x2F;dt-bindings&#x2F;gpio&#x2F;gpio.h</p><p>include&#x2F;dt-bindings&#x2F;pinctrl&#x2F;rockchip.h</p><p>dt-bindings&#x2F;clock&#x2F;rk3588-cru.h</p><p>查看物理单系统中的pinctrl配置，获取物理外设真实的device name</p><p>  cat &#x2F;sys&#x2F;kernel&#x2F;debug&#x2F;pinctrl&#x2F;pinctrl-maps</p>]]></content>
+        <content type="html"><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>查看具体设备树中的宏定义</p><p>include&#x2F;dt-bindings&#x2F;gpio&#x2F;gpio.h</p><p>include&#x2F;dt-bindings&#x2F;pinctrl&#x2F;rockchip.h</p><p>dt-bindings&#x2F;clock&#x2F;rk3588-cru.h</p><p>查看物理单系统中的pinctrl配置，获取物理外设真实的device name</p><p>  cat &#x2F;sys&#x2F;kernel&#x2F;debug&#x2F;pinctrl&#x2F;pinctrl-maps</p><p>pinctrl的三大作用,有助于理解相关结构体</p><p>1.引脚枚举与命名 enumerating and naming</p><p>2.引脚服用 Multiplexing：比如用作GPIO、I2C或其他功能</p><p>3.引脚配置 Configuration：比如上拉、下拉、open drain、驱动强度等</p>]]></content>
       
       
       <categories>
