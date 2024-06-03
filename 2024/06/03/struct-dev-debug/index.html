@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>pinctrl | yyheroi</title>
-  <meta name="keywords" content=" pinctrl ">
-  <meta name="description" content="pinctrl | yyheroi">
+  <title>struct-dev-debug | yyheroi</title>
+  <meta name="keywords" content=" debug ">
+  <meta name="description" content="struct-dev-debug | yyheroi">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="[toc] Rust基本数据类型Rust 每个值都有其确切的数据类型，总的来说可以分为两类：基本类型和复合类型。 基本类型意味着它们往往是一个最小化原子类型，无法解构为其它类型(一般意义上来说)，由以下组成：  数值类型: 有符号整数 (i8, i16, i32, i64, isize)、 无符号整数 (u8, u16, u32, u64, usize) 、浮点数 (f32, f64)、以及有理数">
 <meta property="og:type" content="website">
@@ -738,9 +738,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-pinctrl" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-struct-dev-debug" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">pinctrl</h1>
+        <h1 class="article-title">struct-dev-debug</h1>
     
     <div class="article-meta">
         
@@ -750,7 +750,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="kernel">kernel</a>
+            <a  data-rel="test">test</a>
             
         </span>
         
@@ -758,19 +758,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color3">pinctrl</a>
+            <a class="color1">debug</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2024-05-30 17:05:50'>2024-05-16 13:33</time>
+            发布时间 : <time class="date" title='最后更新: 2024-06-03 11:29:10'>2024-06-03 10:10</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:376</span>
+        <span>字数:224</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -800,7 +800,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#client%E7%AB%AF%E7%9B%B8%E5%85%B3%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-text">client端相关结构体</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -816,29 +816,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>查看具体设备树中的宏定义</p>
-<p>include&#x2F;dt-bindings&#x2F;gpio&#x2F;gpio.h</p>
-<p>include&#x2F;dt-bindings&#x2F;pinctrl&#x2F;rockchip.h</p>
-<p>dt-bindings&#x2F;clock&#x2F;rk3588-cru.h</p>
-<p>查看物理单系统中的pinctrl配置，获取物理外设真实的device name</p>
-<p>  cat &#x2F;sys&#x2F;kernel&#x2F;debug&#x2F;pinctrl&#x2F;pinctrl-maps</p>
-<p>pinctrl的三大作用,有助于理解相关结构体</p>
-<p>1.引脚枚举与命名 enumerating and naming</p>
-<p>2.引脚服用 Multiplexing：比如用作GPIO、I2C或其他功能</p>
-<p>3.引脚配置 Configuration：比如上拉、下拉、open drain、驱动强度等</p>
-<p>rk3588s.dtsi<br>rk3588s.-pinctrl.dtsi该文件枚举了3588所有的iomux实例</p>
-<p>查看引脚的复用情况<br>cat &#x2F;sys&#x2F;kernel&#x2F;debug&#x2F;pinctrl&#x2F;pinctrl-rockchip-pinctrl&#x2F;pinmux-pins</p>
-<p>RK3588频脚计算方式与一般的计算方式没有区别：<br>GPIO pin脚计算公式：pin &#x3D; bank * 32 + number<br>GPIO 小组编号计算公式：number &#x3D; group * 8 + X</p>
-<p>摘自官网：</p>
-<p>下面演示GPIO1_D0 pin脚计算方法：</p>
-<p>bank &#x3D; 1;      &#x2F;&#x2F;GPIO1_D0 &#x3D;&gt; 1, bank ∈ [0,4]</p>
-<p>group &#x3D; 3;      &#x2F;&#x2F;GPIO1_D0 &#x3D;&gt; 3, group ∈ {(A&#x3D;0), (B&#x3D;1), (C&#x3D;2), (D&#x3D;3)}</p>
-<p>X &#x3D; 0;       &#x2F;&#x2F;GPIO1_D0 &#x3D;&gt; 0, X ∈ [0,7]</p>
-<p>number &#x3D; group * 8 + X &#x3D; 3 * 8 + 0 &#x3D; 24</p>
-<p>pin &#x3D; bank*32 + number&#x3D; 1 * 32 + 24 &#x3D; 56;</p>
-<p>GPIO1_D0 对应的设备树属性描述为:&lt;&amp;gpio1 24 GPIO_ACTIVE_HIGH&gt;,由kernel-5.10&#x2F;include&#x2F;dt-bindings&#x2F;pinctrl&#x2F;rockchip.h的<br>的宏定义可知，也可以将GPIO1_D0描述为&lt;&amp;gpio1 RK_PD0 GPIO_ACTIVE_HIGH&gt;。</p>
-<h2 id="client端相关结构体"><a href="#client端相关结构体" class="headerlink" title="client端相关结构体"></a>client端相关结构体</h2><p><a target="_blank" rel="noopener" href="https://pixso.cn/app/board/2hWH9JSK6ESlVP76tmeENQ?showQuickFrame=true&icon_type=3&file_type=20">https://pixso.cn/app/board/2hWH9JSK6ESlVP76tmeENQ?showQuickFrame=true&amp;icon_type=3&amp;file_type=20</a> </p>
-<p><img src="/../imgs/image-20240530170508734.png" alt="image-20240530170508734"></p>
+        <p>最近调试pinctrl时需要打印全部的state</p>
+<p>可以通过struct dev查看 pinctrl client的相关信息,因为pinctrl client是通过设备树配置的，通过probe会构造struct dev</p>
+<p>在设备树中,pinctrl client 设备节点会包含 <code>pinctrl-names</code> 和 <code>pinctrl-0</code> 等属性,用于描述引脚配置</p>
+<p>可以使用 <code>dev_dbg()</code>、<code>dev_info()</code> 等宏来打印这个 <code>struct device *dev</code> 的调试信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">struct pinctrl_state *state;</span><br><span class="line">struct pinctrl_desc *desc;</span><br><span class="line">struct device *dev;</span><br><span class="line">struct pinctrl *p;</span><br><span class="line">	</span><br><span class="line">dev = pctldev-&gt;dev;</span><br><span class="line">desc = pctldev-&gt;desc;</span><br><span class="line">p = pctldev-&gt;p;</span><br><span class="line"></span><br><span class="line">printk(KERN_ERR&quot;[%s][%d]Device name: %s\n&quot;, __func__, __LINE__, dev_name(dev));</span><br><span class="line">printk(KERN_ERR&quot;[%s][%d]Device type: %s\n&quot;, __func__, __LINE__, dev-&gt;type ? dev-&gt;type-&gt;name : &quot;unknown&quot;);</span><br><span class="line">printk(KERN_ERR&quot;[%s][%d]Device driver: %s\n&quot;, __func__, __LINE__, dev-&gt;driver ? dev-&gt;driver-&gt;name : &quot;unknown&quot;);</span><br><span class="line">printk(KERN_ERR&quot;[%s][%d]desc-&gt;name %s\n&quot;, __func__, __LINE__, desc-&gt;name);</span><br><span class="line">list_for_each_entry(state, &amp;p-&gt;states, node) &#123;</span><br><span class="line">	printk(KERN_ERR&quot;[%s][%d] state-&gt;name %s\n&quot;, __func__, __LINE__, state-&gt;name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 yengii@qq.com </span>
