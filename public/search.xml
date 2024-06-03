@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>struct-dev-debug</title>
+      <link href="/2024/06/03/struct-dev-debug/"/>
+      <url>/2024/06/03/struct-dev-debug/</url>
+      
+        <content type="html"><![CDATA[<p>最近调试pinctrl时需要打印全部的state</p><p>可以通过struct dev查看 pinctrl client的相关信息,因为pinctrl client是通过设备树配置的，通过probe会构造struct dev</p><p>在设备树中,pinctrl client 设备节点会包含 <code>pinctrl-names</code> 和 <code>pinctrl-0</code> 等属性,用于描述引脚配置</p><p>可以使用 <code>dev_dbg()</code>、<code>dev_info()</code> 等宏来打印这个 <code>struct device *dev</code> 的调试信息</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">struct pinctrl_state *state;</span><br><span class="line">struct pinctrl_desc *desc;</span><br><span class="line">struct device *dev;</span><br><span class="line">struct pinctrl *p;</span><br><span class="line"></span><br><span class="line">dev = pctldev-&gt;dev;</span><br><span class="line">desc = pctldev-&gt;desc;</span><br><span class="line">p = pctldev-&gt;p;</span><br><span class="line"></span><br><span class="line">printk(KERN_ERR&quot;[%s][%d]Device name: %s\n&quot;, __func__, __LINE__, dev_name(dev));</span><br><span class="line">printk(KERN_ERR&quot;[%s][%d]Device type: %s\n&quot;, __func__, __LINE__, dev-&gt;type ? dev-&gt;type-&gt;name : &quot;unknown&quot;);</span><br><span class="line">printk(KERN_ERR&quot;[%s][%d]Device driver: %s\n&quot;, __func__, __LINE__, dev-&gt;driver ? dev-&gt;driver-&gt;name : &quot;unknown&quot;);</span><br><span class="line">printk(KERN_ERR&quot;[%s][%d]desc-&gt;name %s\n&quot;, __func__, __LINE__, desc-&gt;name);</span><br><span class="line">list_for_each_entry(state, &amp;p-&gt;states, node) &#123;</span><br><span class="line">printk(KERN_ERR&quot;[%s][%d] state-&gt;name %s\n&quot;, __func__, __LINE__, state-&gt;name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> test </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> debug </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>dtb to dts</title>
       <link href="/2024/05/30/dtb-to-dts/"/>
       <url>/2024/05/30/dtb-to-dts/</url>
