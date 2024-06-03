@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>ARMv8架构-内存虚拟化 | yyheroi</title>
+  <title>systemctl-详解 | yyheroi</title>
   <meta name="keywords" content=" test ">
-  <meta name="description" content="ARMv8架构-内存虚拟化 | yyheroi">
+  <meta name="description" content="systemctl-详解 | yyheroi">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="[toc] Rust基本数据类型Rust 每个值都有其确切的数据类型，总的来说可以分为两类：基本类型和复合类型。 基本类型意味着它们往往是一个最小化原子类型，无法解构为其它类型(一般意义上来说)，由以下组成：  数值类型: 有符号整数 (i8, i16, i32, i64, isize)、 无符号整数 (u8, u16, u32, u64, usize) 、浮点数 (f32, f64)、以及有理数">
 <meta property="og:type" content="website">
@@ -747,9 +747,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-ARMv8架构-内存虚拟化" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-systemctl-详解" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">ARMv8架构-内存虚拟化</h1>
+        <h1 class="article-title">systemctl-详解</h1>
     
     <div class="article-meta">
         
@@ -774,12 +774,12 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2024-05-17 14:58:23'>2024-05-17 14:45</time>
+            发布时间 : <time class="date" title='最后更新: 2024-06-03 14:13:44'>2024-06-03 14:10</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:524</span>
+        <span>字数:2.7k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -809,7 +809,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Systemd%E7%AE%80%E4%BB%8B"><span class="toc-text">一、Systemd简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Systemd%E6%96%B0%E7%89%B9%E6%80%A7"><span class="toc-text">二、Systemd新特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81Systemd%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text">三、Systemd核心概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Unit%E7%B1%BB%E5%9E%8B"><span class="toc-text">四、Unit类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%85%B3%E9%94%AE%E7%89%B9%E6%80%A7"><span class="toc-text">五、关键特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E4%B8%8D%E5%85%BC%E5%AE%B9"><span class="toc-text">六、不兼容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81Systemd%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7"><span class="toc-text">七、Systemd基本工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#unit%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F"><span class="toc-text">unit文件格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Unit%E6%96%87%E4%BB%B6%E7%BB%84%E6%88%90"><span class="toc-text">Unit文件组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#unit%E6%AE%B5%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9"><span class="toc-text">unit段常用选项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Service%E6%AE%B5%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9"><span class="toc-text">Service段常用选项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Install%E6%AE%B5%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9"><span class="toc-text">Install段常用选项</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -825,59 +825,168 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>ARM64为支持内存虚拟化，可以将地址类型分为如下三种：</p>
-<ul>
-<li><p><strong>VA（虚拟地址）</strong></p>
-<p> 最大宽度为48bit，VA地址空间可分为底部VA和顶部VA两个子区域，每个VM子区域最大支持256T<br> 底部VA：0x0000_0000_0000_0000 &#x3D;&gt;0x0000_FFFF_FFFF_FFFF<br> 顶部VA：0xFFFF_0000_0000_0000 &#x3D;&gt;0xFFFF_FFFF_FFFF_FFFF</p>
+        <h2 id="一、Systemd简介"><a href="#一、Systemd简介" class="headerlink" title="一、Systemd简介"></a>一、Systemd简介</h2><p>Systemd是由红帽公司的一名叫做Lennart Poettering的员工开发，systemd是Linux系统中最新的初始化系统（init）,它主要的设计目的是克服Sys V 固有的缺点，提高系统的启动速度，systemd和upstart是竞争对手，ubantu上使用的是upstart的启动方式，centos7上使用systemd替换了Sys V，Systemd目录是要取代Unix时代依赖一直在使用的init系统，兼容SysV和LSB的启动脚本，而且能够在进程启动中更有效地引导加载服务。<br>system：系统启动和服务器守护进程管理器，负责在系统启动或运行时，激活系统资源，服务器进程和其他进程，根据管理，字母d是守护进程（daemon）的缩写，systemd这个名字的含义就是它要守护整个系统。</p>
+<h2 id="二、Systemd新特性"><a href="#二、Systemd新特性" class="headerlink" title="二、Systemd新特性"></a>二、Systemd新特性</h2><ul>
+<li>系统引导时实现服务并行启动</li>
+<li>按需启动守护进程</li>
+<li>自动化的服务依赖关系管理</li>
+<li>同时采用socket式与D-Bus总线式激活服务</li>
+<li>系统状态快照和恢复</li>
+<li>利用Linux的cgroups监视进程</li>
+<li>维护挂载点和自动挂载点</li>
+<li>各服务间基于依赖关系进行精密控制</li>
+</ul>
+<h2 id="三、Systemd核心概念"><a href="#三、Systemd核心概念" class="headerlink" title="三、Systemd核心概念"></a>三、Systemd核心概念</h2><ul>
+<li>Unit<br>表示不同类型的sytemd对象，通过配置文件进行标识和配置，文件中主要包含了系统服务，监听socket、保存的系统快照以及其他与init相关的信息</li>
+<li>配置文件:<br>&#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system：每个服务最主要的启动脚本设置，类似于之前的&#x2F;etc&#x2F;initd.d<br>&#x2F;run&#x2F;system&#x2F;system：系统执行过程中所产生的服务脚本，比上面的目录优先运行<br>&#x2F;etc&#x2F;system&#x2F;system：管理员建立的执行脚本，类似于&#x2F;etc&#x2F;rc.d&#x2F;rcN.d&#x2F;Sxx类的功能，比上面目录优先运行，在三者之中，此目录优先级最高</li>
+</ul>
+<h2 id="四、Unit类型"><a href="#四、Unit类型" class="headerlink" title="四、Unit类型"></a>四、Unit类型</h2><ul>
+<li><p>systemctl -t help ：查看unit类型</p>
 </li>
-<li><p><strong>IPA（中间物理地址）</strong></p>
-<p> 如果不支持Stage 2转换，那么IPA&#x3D;&#x3D;PA。如果支持Stage 2，IPA作为Stage 1的OA(Output Adress)，IPA作为Stage 2的IA(Input Adress)。它最大支持48bit。</p>
+<li><p>service unit：文件扩展名为.service，用于定义系统服务</p>
 </li>
-<li><p><strong>PA（物理地址）</strong></p>
-<p> 物理内存单元映射中地址，可以看做是PE到内存系统的输出地址(OA)，其最大支持48bit。</p>
+<li><p>target unit：文件扩展名为.target，用于模拟实现“运行级别”</p>
+</li>
+<li><p>device unit: .device,用于定义内核识别的设备</p>
+</li>
+<li><p>mount unit ：.mount，定义文件系统挂载点</p>
+</li>
+<li><p>socket unit ：.socket,用于标识进程间通信用的socket文件，也可以在系统启动时，延迟启动服务，实现按需启动</p>
+</li>
+<li><p>snapshot unit：.snapshot，关系系统快照</p>
+</li>
+<li><p>swap unit：.swap，用于表示swap设备</p>
+</li>
+<li><p>automount unit：.automount，文件系统的自动挂载点如：&#x2F;misc目录</p>
+</li>
+<li><p>path unit：.path，用于定义文件系统中的一个文件或目录使用，常用于当文件系统变化时，延迟激活服务，如spool目录</p>
+</li>
+<li><p>time：.timer由systemd管理的计时器</p>
+<p>注：使用systemctl控制单元时，通常需要使用单元文件的全名，包括扩展名，但是有些单元可以在systemctl中使用简写方式，如果无扩展名，systemctl默认把扩展名当做.service。例如netcfg和netcfg.service是等同的挂载点会自动转化为相应的.mount单元，例如&#x2F;home等价于home.mount设备会自动转化为相应的.device单元，所以&#x2F;dev&#x2F;sd2等价于dev-sda2.device</p>
 </li>
 </ul>
-<p><img src="/..%5Cimgs%5Cimage2019-5-10_14-22-29.png" alt="图2 ARM64内存虚拟化"></p>
-<p> 上图是ARM64内存虚拟化的框图，虚拟机通过TTBRn_EL1完成Stage 1的地址转换，将虚拟机使用的VA转换成IPA。然后再通过VTTBR_EL2完成Stage 2的地址转换，将IPA转换成PA。</p>
-<p><img src="/../imgs/image2019-5-10_14-24-0.png" alt=" 图2 Stage 1地址转换"></p>
-<p>上图是Stage 1（一阶地址转换图）图解，其转换过程如下：</p>
-<table>
-<thead>
-<tr>
-<th>TTBR 寄存器提供Level 0查找的基地址，通过此基地址和IA[n:39] &#x3D;&gt; 查找到Level 1基地址</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Level 1基地址结合IA[38：30]&#x3D;&gt; 查找到Level2 的基地址</td>
-</tr>
-<tr>
-<td>Level 2基地址结合IA[29：21]&#x3D;&gt; 查找到Level3 的基地址</td>
-</tr>
-<tr>
-<td>Level 3基地址结合IA[20：12]&#x3D;&gt; 查找物理页框所在地址OA</td>
-</tr>
-<tr>
-<td>最后得到需要的物理地址PA[47：0] &lt;&#x3D; OA[47:12] + IA[11：0]</td>
-</tr>
-</tbody></table>
-<p><img src="/../imgs/image2019-5-10_14-24-58.png" alt=" 图3 Stage 2地址转换"></p>
-<p> 上图是Stage 2（二阶地址转换图）图解，，其转换过程如下：</p>
-<table>
-<thead>
-<tr>
-<th>Stage 2有级联table的概念，可以减少level的级数</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>所谓级联就是假如有IA[40:0]，而Level1解析地址段为IA[38:30]，超过了2个bit，而2^40 &#x3D; 2^2*2^38，所以相当于要2^2个这样的translation table来实现级联解析。ARMv8规定，Stage 2最多支持4-bit级联，也就是最大级联2^4 &#x3D;&#x3D; 16个translation table级联解析.以达到减少查找level的目的.</td>
-</tr>
-<tr>
-<td>VTTBR_EL2寄存器提供初始Level查找基地址，Stage 2只为EL2服务</td>
-</tr>
-<tr>
-<td>同Stage 1，Level 1支持1GB的内存block，Level 2支持2MB的内存block</td>
-</tr>
-</tbody></table>
+<h2 id="五、关键特性"><a href="#五、关键特性" class="headerlink" title="五、关键特性"></a>五、关键特性</h2><ul>
+<li>基于socket的激活机制：socket与服务进程分离</li>
+<li>基于D-Bus的激活机制</li>
+<li>基于device的激活机制</li>
+<li>基于path的激活机制</li>
+<li>系统快照：保存各unit的当前状态信息于持久存储设备中想后兼容sysv init脚本</li>
+</ul>
+<h2 id="六、不兼容"><a href="#六、不兼容" class="headerlink" title="六、不兼容"></a>六、不兼容</h2><ul>
+<li>systemctl命令固定不变，不可扩展</li>
+<li>非由systemd启动的服务，systemctl无语与之通信和控制，如：使用之前sys v风格管理的进程就无法收systemd控制</li>
+</ul>
+<h2 id="七、Systemd基本工具"><a href="#七、Systemd基本工具" class="headerlink" title="七、Systemd基本工具"></a>七、Systemd基本工具</h2><p>监视和控制systemd的主要命令是systemctl。该命令可用于查看系统状态和管理系统及服务。</p>
+<ul>
+<li>管理服务</li>
+</ul>
+<p>命令：systemctl  command name.service</p>
+<p>启动：service name start –&gt;systemctl start name.service</p>
+<p>停止：service name stop –&gt;systemctl stop name.service</p>
+<p>重启：service name restart–&gt;systemctl restart name.service</p>
+<p>状态：service name status–&gt;systemctl status name.service</p>
+<ul>
+<li><p>条件式重启(已启动才重启，否则不做任何操作)<br><code>systemctl try-restart name.service</code></p>
+</li>
+<li><p>重载或重启服务(先加载，然后再启动)<br><code>systemctl reload-or-try-restart name.service</code></p>
+</li>
+<li><p>禁止自动和手动启动<br><code>systemctl mask name.service</code><br>执行此条命令实则创建了一个链接 ln -s ‘&#x2F;dev&#x2F;null’ ‘&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;sshd.service’</p>
+</li>
+<li><p>取消禁止<br><code>systemctl unmask name.service</code><br>删除此前创建的链接</p>
+</li>
+<li><p>服务查看(查看某服务当前激活与否的状态)<br><code>systemctl is-active name.service</code><br>如果启动会显示active，否则会显示unknown</p>
+</li>
+<li><p>查看所有已经激活的服务<br><code>systemctl list-units –t|–type service</code></p>
+</li>
+<li><p>查看所有服务</p>
+<p>systemctl list-units –t service -a</p>
+<p>设定某服务开机启动</p>
+</li>
+<li><p><code>chkconfig name on–&gt;systemctl enable name.service</code></p>
+</li>
+</ul>
+<p>设定某服务开机禁止启动<br><code>chkconfig name off –&gt;systemctl disable name.service</code></p>
+<p>查看所有服务的开机自启状态<br><code>chkconfig –list–&gt;systemctl list-unit-files -t service</code> </p>
+<ul>
+<li>用来列出该服务在那些运行级别下启用或禁用</li>
+</ul>
+<p>chkconfig sshd –list –&gt;ls &#x2F;etc&#x2F;system&#x2F;system&#x2F;*.wants&#x2F;sshd.service</p>
+<p>[root@www ~]# ls &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;*.wants&#x2F;sshd.service</p>
+<p>&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;multi-user.target.wants&#x2F;sshd.service</p>
+<ul>
+<li><p>查看服务是否开机自启<br><code>systemctl is-enabled name.servcice</code></p>
+</li>
+<li><p>查看服务的依赖关系<br><code>systemctl list-dependencies</code>  </p>
+</li>
+<li><p>查看启动失败的服务<br><code>systemctl -failed -t service</code></p>
+</li>
+<li><p>查看服务单元的启用和禁用状态<br><code>systemctl list-unit-files –t=service</code></p>
+</li>
+<li><p>杀死进程<br><code>systemctl kill 进程名</code><br>[图片上传失败…(image-53509-1519920006718)]</p>
+</li>
+<li><p>服务状态<br>systemctl list-units -t service -a 显示状态<br>loaded：unit配置文件已处理<br>active（running）：一次或多次持续处理的运行<br>active（exited）：成功完成一次性的配置<br>active（waiting）:运行中，等待一个事件<br>inactive：不运行<br>enabled：开机启动<br>disabled：开机不启动<br>static：开机不启动，但可以被另一个启用的服务激活</p>
+</li>
+<li><p>运行级别<br>target units：<br>unit配置文件：.target 以target结尾的文件<br>ls &#x2F;usr&#x2F;lib&#x2F;system&#x2F;system&#x2F;*.target<br>systemctl list-unit-files -type target -all<br>0–&gt;runlevel0.target, poweroff.target<br>1–&gt;runlevel1.target, rescue.target<br>2–&gt;runlevel2.target, muti-user.target<br>3–&gt;runlevel3.target, mutil-user.target<br>4–&gt;runlevel4.target, multi-user.target<br>5–&gt;runlevel5.target, graphical.target<br>6–&gt;runlevel6.target, reboot.target</p>
+</li>
+<li><p>查看依赖性<br><code>systemctl list-dependencies graphical.target</code></p>
+</li>
+<li><p>查看默认运行级别<br>systemctl get-default 在Sys V风格的系统上是查看&#x2F;etc&#x2F;inittab文件其中有一条id:5:initdefault:</p>
+</li>
+<li><p>级别切换<br><code>systemctl isolate muti-user.target</code><br>注意：只有当&#x2F;lib&#x2F;system&#x2F;system&#x2F;*.target文件中AllowIsolate&#x3D;yes时才能奇幻（修改文件需执行systemctl daemon-reload生效）</p>
+</li>
+<li><p>设定默认运行级别<br><code>systemctl set-default muti-user.target</code><br>实则将multi-user.target链接至default.target<br><code>ls –l /etc/system/system/default.target</code></p>
+</li>
+<li><p>进入紧急救援模式<br><code>systemctl rescue</code></p>
+</li>
+<li><p>切换至emergency模式<br><code>systemctl emergency</code></p>
+</li>
+<li><p>在systemd风格的系统上还能使用sysv风格系统上的关机，重启等命令，指示将该命令链接到systemctl的一个软链接<br>关机：<code>systemctl halt systemctl poweroff</code><br>重启：<code>systemctl reboot</code><br>挂起：<code>systemctl suspend</code><br>休眠：<code>systemctl hibernate</code><br>休眠并挂起：<code>systemctl hybrid-sleep</code></p>
+</li>
+</ul>
+<blockquote>
+<p>使用systemctl控制单元时，通常需要使用单元文件的全名，包括扩展名，但是有些单元可以在systemctl中使用简写方式</p>
+<p>如果无扩展名，systemctl默认把扩展名当做.service。例如netcfg和netcfg.service是等同的</p>
+<p>挂载点会自动转化为相应的.mount单元，例如&#x2F;home等价于home.mount</p>
+<p>设备会自动转化为相应的.device单元，所以&#x2F;dev&#x2F;sd2等价于dev-sda2.device<br>加载initramfs驱动模块</p>
+<p>加载内核选项</p>
+<p>内核初始化，centos7使用systemd代替init</p>
+<p>执行initrd.target所有单元，包括挂载&#x2F;etc&#x2F;fstab</p>
+<p>从initramfs根文件系统切换到磁盘根目录</p>
+<p>systemd执行默认target配置，配置文件&#x2F;etc&#x2F;systemd&#x2F;default.target &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;</p>
+<p>systemd执行sysinit.target初始化系统及basic.target准备操作系统</p>
+<p>systemd启动multi-user.target下的本机与服务器服务</p>
+<p>systemd执行multi-user.target下的&#x2F;etc&#x2F;rc.d&#x2F;rc.local</p>
+<p>systemd执行multi-user.target下的getty.target及登入服务</p>
+<p>systemd执行graphical需要的服务（此为图形界面所有）</p>
+</blockquote>
+<h2 id="unit文件格式"><a href="#unit文件格式" class="headerlink" title="unit文件格式"></a>unit文件格式</h2><p>以#开头的行后面的内容会被认为是注释<br>相关布尔值，1、yes、on、ture都是开启，0、no、off、false都是关闭<br>时间单位默认是秒</p>
+<h2 id="Unit文件组成"><a href="#Unit文件组成" class="headerlink" title="Unit文件组成"></a>Unit文件组成</h2><ul>
+<li>[Unit]：定义与Unit类型无关的通用选项，用于提供unit的扫描信息，unit行为及依赖关系等</li>
+<li>[Service]：与特定类型相关的专用选项；此处为Service类型</li>
+<li>[Install]：定义由“systemctl enable及systemctl disable”命令在实现服务启用或禁用时用到的一些选项</li>
+</ul>
+<h2 id="unit段常用选项"><a href="#unit段常用选项" class="headerlink" title="unit段常用选项"></a>unit段常用选项</h2><ul>
+<li><p>Description：描述信息</p>
+<p>After：定义unit的启动次序，表示当前unit应该晚育那些unit启动，其功能与before相反<br>Requires：依赖到的其他units，强依赖，被一来的units无法激活时，当前unit即无法激活<br>Wants：依赖到的其他units，弱依赖<br>Conflicts：定义units间的冲突关系</p>
+</li>
+</ul>
+<h2 id="Service段常用选项"><a href="#Service段常用选项" class="headerlink" title="Service段常用选项"></a>Service段常用选项</h2><ul>
+<li>Type：定义硬性ExecStart及相关参数的功能的unit进程启动类型</li>
+<li>simple：默认值；这个daemon主要有ExecStart接的指令串来启动，启动后常驻于内存中</li>
+<li>forking：由ExecStart启动的程序透过spawns延伸出其他子程序来作为此daemon的主要服务原生父程序在启动结束后就会终止</li>
+<li>onshot：用于执行一项任务，随后立即退出的服务，不会常驻于内存中</li>
+<li>notify：与simple相同，但约定服务会在就绪后想systemd发送一个信号，需要配合NotifyAccess来让Systemd接收消息</li>
+<li>idle：与simple类似，要执行这个daemon必须要所有的工作都顺利执行完毕后才会执行。这类的daemon通常是开机到最后才只能即可的服务</li>
+<li>EnvironmentFile：环境配置文件</li>
+<li>ExeStart：指明启动unit要运行命令或脚本的绝对路径</li>
+<li>ExeStartPre：ExecStart前运行</li>
+<li>ExeStartPost：ExecStart后运行</li>
+<li>ExecStop：指明停止unit要运行的命令或脚本</li>
+<li>Restart：当设定Restart&#x3D;1时，则当次daemon服务意外终止后，会在此自动启动此服务</li>
+</ul>
+<h2 id="Install段常用选项"><a href="#Install段常用选项" class="headerlink" title="Install段常用选项"></a>Install段常用选项</h2><ul>
+<li>Alias：别名(可使用systemctl command Alial.service)<br>RequiredBy:被那些units所依赖，强依赖<br>WantedBy：被那些units所依赖，弱依赖<br>Also：安装本服务的时候还要安装别的相关服务<br>注意：对于新创建的unit文件，或者修改了的unit文件，要通知systemd重载次配置文件，而后可以选择重启：<code>systemctl daemon-reload</code></li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 yengii@qq.com </span>
