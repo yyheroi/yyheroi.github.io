@@ -159,7 +159,43 @@ it reaches the target step by step, up_threshold->up, down_threshold->down
 - /kernel/power/qos.c
 ```
 
+## rk3588-cpufreq
 
+>查看cpufreq节点
+>RK3588的cpu是4个A55+4个A76，分为3组单独管理，节点分别是：
+>/sys/devices/system/cpu/cpufreq/policy0:（对应4个A55：CPU0-3）
+>affected_cpus     cpuinfo_max_freq  cpuinfo_transition_latency  scaling_available_frequencies  scaling_cur_freq  scaling_governor  scaling_min_freq  stats
+>cpuinfo_cur_freq  cpuinfo_min_freq  related_cpus                scaling_available_governors    scaling_driver    scaling_max_freq  scaling_setspeed
+>
+>/sys/devices/system/cpu/cpufreq/policy4:(对应2个A76：CPU4-5)
+>affected_cpus     cpuinfo_max_freq  cpuinfo_transition_latency  scaling_available_frequencies  scaling_cur_freq  scaling_governor  scaling_min_freq  stats
+>cpuinfo_cur_freq  cpuinfo_min_freq  related_cpus                scaling_available_governors    scaling_driver    scaling_max_freq  scaling_setspeed
+>
+>/sys/devices/system/cpu/cpufreq/policy6:(对应2个A76：CPU6-7)
+>affected_cpus     cpuinfo_max_freq  cpuinfo_transition_latency  scaling_available_frequencies  scaling_cur_freq  scaling_governor  scaling_min_freq  stats
+>cpuinfo_cur_freq  cpuinfo_min_freq  related_cpus                scaling_available_governors    scaling_drive
+>                        
+>
+>CPU性能模式
+>echo performance > /sys/devices/system/cpu/cpufreq/policy6/scaling_governor
+>cat /sys/devices/system/cpu/cpufreq/policy6/scaling_governor
+>获取cpu运行的模式
+>cat /sys/devices/system/cpu/cpufreq/policy6/scaling_available_governors
+>获取当前CPU支持的频点
+>cat /sys/devices/system/cpu/cpufreq/policy6/scaling_available_frequencies
+>
+>cat /sys/devices/system/cpu/cpufreq/policy6/cpuinfo_cur_freq       
+>
+>
+>2.0设置cpufrq为performance模式
+>echo performance > /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
+>echo performance > /sys/devices/system/cpu/cpufreq/policy4/scaling_governor
+>echo performance > /sys/devices/system/cpu/cpufreq/policy6/scaling_governor
+>
+>查看模式
+>cat /sys/devices/system/cpu/cpufreq/policy*/scaling_governor
+>查看频率
+>cat /sys/devices/system/cpu/cpufreq/policy*/cpuinfo_cur_freq       
 
 ## Reference
 

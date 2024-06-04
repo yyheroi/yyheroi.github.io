@@ -343,7 +343,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="26">
-<input type="hidden" id="yelog_site_word_count" value="19.6k">
+<input type="hidden" id="yelog_site_word_count" value="19.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -776,12 +776,12 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2024-04-28 17:07:20'>2024-04-28 17:04</time>
+            发布时间 : <time class="date" title='最后更新: 2024-06-04 13:31:19'>2024-04-28 17:04</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:788</span>
+        <span>字数:1.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -811,7 +811,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cpufreq"><span class="toc-text">cpufreq</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Driver"><span class="toc-text">Driver</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Core"><span class="toc-text">Core</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sysfs"><span class="toc-text">Sysfs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Governors"><span class="toc-text">Governors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Files"><span class="toc-text">Files</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cpufreq"><span class="toc-text">cpufreq</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Driver"><span class="toc-text">Driver</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Core"><span class="toc-text">Core</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sysfs"><span class="toc-text">Sysfs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Governors"><span class="toc-text">Governors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Files"><span class="toc-text">Files</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rk3588-cpufreq"><span class="toc-text">rk3588-cpufreq</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -827,7 +827,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cpufreq"><span class="toc-text">cpufreq</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Driver"><span class="toc-text">Driver</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Core"><span class="toc-text">Core</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sysfs"><span class="toc-text">Sysfs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Governors"><span class="toc-text">Governors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Files"><span class="toc-text">Files</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li></ol></div></p>
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cpufreq"><span class="toc-text">cpufreq</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Driver"><span class="toc-text">Driver</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Core"><span class="toc-text">Core</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sysfs"><span class="toc-text">Sysfs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Governors"><span class="toc-text">Governors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Files"><span class="toc-text">Files</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rk3588-cpufreq"><span class="toc-text">rk3588-cpufreq</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li></ol></div></p>
 <h1 id="cpufreq"><a href="#cpufreq" class="headerlink" title="cpufreq"></a>cpufreq</h1><p>CPUFreq框架是内核的CPU调频框架，整个调频框架由以下几个部分组成：</p>
 <ul>
 <li>cpufreq driver</li>
@@ -889,8 +889,15 @@
 <p>it reaches the target step by step, up_threshold-&gt;up, down_threshold-&gt;down</p>
 <h2 id="Files"><a href="#Files" class="headerlink" title="Files"></a>Files</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- /drivers/cpufreq/cpufreq.c</span><br><span class="line">- /drivers/cpufreq/cpufreq-dt.c</span><br><span class="line">- /drivers/cpufreq/cpufreq_stats.c</span><br><span class="line">- /drivers/cpufreq/cpufreq_conservative.c</span><br><span class="line">- /drivers/cpufreq/cpufreq_governor.c</span><br><span class="line">- /drivers/cpufreq/cpufreq_ondemand.c</span><br><span class="line">- /drivers/cpufreq/cpufreq_powersave.c</span><br><span class="line">- /drivers/cpufreq/cpufreq_performance.c</span><br><span class="line">- /drivers/cpufreq/cpufreq_userspace.c</span><br><span class="line">- /kernel/sched/cpufreq_schedutil.c</span><br><span class="line">- /kernel/power/qos.c</span><br></pre></td></tr></table></figure>
 
-
-
+<h2 id="rk3588-cpufreq"><a href="#rk3588-cpufreq" class="headerlink" title="rk3588-cpufreq"></a>rk3588-cpufreq</h2><blockquote>
+<p>查看cpufreq节点<br>RK3588的cpu是4个A55+4个A76，分为3组单独管理，节点分别是：<br>&#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy0:（对应4个A55：CPU0-3）<br>affected_cpus     cpuinfo_max_freq  cpuinfo_transition_latency  scaling_available_frequencies  scaling_cur_freq  scaling_governor  scaling_min_freq  stats<br>cpuinfo_cur_freq  cpuinfo_min_freq  related_cpus                scaling_available_governors    scaling_driver    scaling_max_freq  scaling_setspeed</p>
+<p>&#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy4:(对应2个A76：CPU4-5)<br>affected_cpus     cpuinfo_max_freq  cpuinfo_transition_latency  scaling_available_frequencies  scaling_cur_freq  scaling_governor  scaling_min_freq  stats<br>cpuinfo_cur_freq  cpuinfo_min_freq  related_cpus                scaling_available_governors    scaling_driver    scaling_max_freq  scaling_setspeed</p>
+<p>&#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy6:(对应2个A76：CPU6-7)<br>affected_cpus     cpuinfo_max_freq  cpuinfo_transition_latency  scaling_available_frequencies  scaling_cur_freq  scaling_governor  scaling_min_freq  stats<br>cpuinfo_cur_freq  cpuinfo_min_freq  related_cpus                scaling_available_governors    scaling_drive</p>
+<p>CPU性能模式<br>echo performance &gt; &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy6&#x2F;scaling_governor<br>cat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy6&#x2F;scaling_governor<br>获取cpu运行的模式<br>cat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy6&#x2F;scaling_available_governors<br>获取当前CPU支持的频点<br>cat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy6&#x2F;scaling_available_frequencies</p>
+<p>cat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy6&#x2F;cpuinfo_cur_freq       </p>
+<p>2.0设置cpufrq为performance模式<br>echo performance &gt; &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy0&#x2F;scaling_governor<br>echo performance &gt; &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy4&#x2F;scaling_governor<br>echo performance &gt; &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy6&#x2F;scaling_governor</p>
+<p>查看模式<br>cat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy*&#x2F;scaling_governor<br>查看频率<br>cat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy*&#x2F;cpuinfo_cur_freq       </p>
+</blockquote>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.kernel.org/doc/html/latest/admin-guide/pm/cpufreq.html">https://www.kernel.org/doc/html/latest/admin-guide/pm/cpufreq.html</a></p>
 <p><a target="_blank" rel="noopener" href="https://docs.kernel.org/scheduler/schedutil.html">https://docs.kernel.org/scheduler/schedutil.html</a></p>
 <p><a target="_blank" rel="noopener" href="http://www.wowotech.net/pm_subsystem/cpufreq_overview.html">http://www.wowotech.net/pm_subsystem/cpufreq_overview.html</a></p>
