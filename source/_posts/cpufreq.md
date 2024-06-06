@@ -159,7 +159,7 @@ it reaches the target step by step, up_threshold->up, down_threshold->down
 - /kernel/power/qos.c
 ```
 
-## rk3588-cpufreq
+## rk3588-cpufreq-sys
 
 >查看cpufreq节点
 >RK3588的cpu是4个A55+4个A76，分为3组单独管理，节点分别是：
@@ -197,9 +197,138 @@ it reaches the target step by step, up_threshold->up, down_threshold->down
 >查看频率
 >cat /sys/devices/system/cpu/cpufreq/policy*/cpuinfo_cur_freq       
 
+## rk3588-cpufreq-code
+
+![cpufreq framework](../imgs/f613cfd922113b82148afb75eb6edc0f20150613141951.gif)
+
+相关文件
+
+kernel/drivers/cpufreq/cpufreq.c
+
+kernel/drivers/cpufreq/rockchip-cpufreq.c
+
+kernel/drivers/cpufreq/cpufreq-dt-platdev.c
+
+kernel/drivers/cpufreq/cpufreq-dt.c
+
+```
+CONFIG_CPU_FREQ=y
+CONFIG_CPU_FREQ_STAT=y
+CONFIG_CPU_FREQ_TIMES=y
+CONFIG_CPU_FREQ_GOV_POWERSAVE=y
+CONFIG_CPU_FREQ_GOV_USERSPACE=y
+CONFIG_CPU_FREQ_GOV_ONDEMAND=y
+CONFIG_CPU_FREQ_GOV_CONSERVATIVE=y
+CONFIG_CPU_FREQ_GOV_INTERACTIVE=y
+CONFIG_CPU_FREQ_GOV_PERFORMANCE=y
+CONFIG_CPU_FREQ_GOV_COMMON=y
+CONFIG_CPU_FREQ_GOV_ATTR_SET=y
+CONFIG_CPU_FREQ_DEFAULT_GOV_SCHEDUTIL=y
+CONFIG_CPUFREQ_DT=y
+```
+
+
+
+### 1. CPUFreq核心和接口
+
+cpufreq代码为CPUFreq架构的驱 动程序（那些执行硬件频率切换的代码）以及 “通知器” 提供了一个标准化的接口。 包括设备驱动程序；需要了解策略变化（如 ACPI 热量管理），或所有频率变化（如计时代码）， 甚至需要强制限制为指定频率（如 ARM 架构上的 LCD 驱动程序）的其它内核组件。 此外，内核 “常数” loops_per_jiffy 会根据频率变化而更新。
+
+cpufreq策略的引用计数由 cpufreq_cpu_get 和 cpufreq_cpu_put 来完成，以确保 cpufreq 驱 动程序被正确地注册到核心中，并且驱动程序在 cpufreq_put_cpu 被调用之前不会被卸载。这也保证 了每个CPU核的cpufreq 策略在使用期间不会被释放。
+
+### 2. CPUFreq 通知器
+
+CPUFreq通知器遵循标准的内核通知器接口。 关于通知器的细节请参阅 linux/include/linux/notifier.h。
+
+这里有两个不同的CPUfreq通知器 - 策略通知器和转换通知器。
+
+#### 2.1 CPUFreq策略通知器
+
+当创建或移除策略时，这些都会被通知。
+
+阶段是在通知器的第二个参数中指定的。当第一次创建策略时，阶段是CPUFREQ_CREATE_POLICY，当 策略被移除时，阶段是CPUFREQ_REMOVE_POLICY。
+
+第三个参数 `void *pointer` 指向一个结构体cpufreq_policy，其包括min，max(新策略的下限和 上限（单位为kHz）)这几个值。
+
+#### 2.2 CPUFreq转换通知器
+
+当CPUfreq驱动切换CPU核心频率时，策略中的每个在线CPU都会收到两次通知，这些变化没有任何外部干 预。
+
+第二个参数指定阶段 - CPUFREQ_PRECHANGE or CPUFREQ_POSTCHANGE.
+
+第三个参数是一个包含如下值的结构体cpufreq_freqs：
+
+| policy | 指向struct cpufreq_policy的指针 |
+| ------ | ------------------------------- |
+| old    | 旧频率                          |
+| new    | 新频率                          |
+| flags  | cpufreq驱动的标志               |
+
+
+
+
+
+```
+core_initcall(cpufreq_core_init);
+	cpufreq_default_governor		//获取默认的cpufreq策略 如schedutil powersave performace等
+	kobject_create_and_add			//创建sys/devices/system/cpu/cpufreq接口
+	
+```
+
+
+
+```
+module_init(rockchip_cpufreq_driver_init)
+	for_each_possible_cpu
+	rockchip_cluster_info_lookup
+	rockchip_cpufreq_cluster_init
+	cpufreq_register_notifier		//注册通知CPUFREQ_POLICY_NOTYFIER  CPUFREQ_TRANSITION_NOTIFIER 
+		rockchip_cpufreq_notifier
+			rockchip_cpufreq_add_monitor
+				rockchip_system_monitor_register
+```
+
+
+
+```
+#define for_each_cpu(cpu, mask)				\
+	for ((cpu) = -1;				\
+		(cpu) = cpumask_next((cpu), (mask)),	\
+		(cpu) < nr_cpu_ids;)
+		
+#define for_each_possible_cpu(cpu) for_each_cpu((cpu), cpu_possible_mask)
+
+
+/* Valid inputs for n are -1 and 0. */
+static inline unsigned int cpumask_next(int n, const struct cpumask *srcp)
+{
+	return n+1;
+}
+
+#if NR_CPUS == 1
+#define nr_cpu_ids		1U
+#else
+extern unsigned int nr_cpu_ids;
+#endif
+```
+
+
+
+```
+dt_cpufreq_probe
+	cpufreq_register_driver
+		subsys_interface_register 
+			cpufreq_interface
+			cpufreq_add_dev
+				cpufreq_online
+					cpufreq_add_policy_cpu
+						cpufreq_start_governor
+```
+
+
+
+
+
 ## Reference
-
-
 
 https://www.kernel.org/doc/html/latest/admin-guide/pm/cpufreq.html
 
@@ -212,3 +341,7 @@ http://www.wowotech.net/pm_subsystem/cpufreq_driver.html
 http://www.wowotech.net/pm_subsystem/cpufreq_core.html
 
 http://www.wowotech.net/pm_subsystem/cpufreq_governor.html
+
+ module_init()加载顺序 
+
+https://blog.csdn.net/shafa00419/article/details/85234867)
