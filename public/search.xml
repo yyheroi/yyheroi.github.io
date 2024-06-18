@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>linux-内存管理</title>
+      <link href="/2024/06/17/linux-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"/>
+      <url>/2024/06/17/linux-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<h2 id="一、内存寻址"><a href="#一、内存寻址" class="headerlink" title="一、内存寻址"></a>一、内存寻址</h2><h2 id="1-内存地址"><a href="#1-内存地址" class="headerlink" title="1.内存地址"></a>1.内存地址</h2><h3 id="逻辑地址-logical-address"><a href="#逻辑地址-logical-address" class="headerlink" title="逻辑地址(logical address)"></a>逻辑地址(logical address)</h3><p>包含在机器语言指令中用来指定一个操作数或一条指令的地址。每一个逻辑地址都由一个段（segment）和偏移量（offset）组成，偏移量指明了从段开始的地方到实际地址之间的距离</p><h3 id="线性地址（linear-address）（也称虚拟地址-virtual-address）"><a href="#线性地址（linear-address）（也称虚拟地址-virtual-address）" class="headerlink" title="线性地址（linear address）（也称虚拟地址  virtual address）"></a>线性地址（linear address）（也称虚拟地址  virtual address）</h3><p>是一个32位无符号整数，可以用来表示最高达4G的地址。线性地址通常用十六进制数字来表示，值的范围从0x0000 0000 到 0xffff ffff</p><h3 id="物理地址（physical-address）"><a href="#物理地址（physical-address）" class="headerlink" title="物理地址（physical address）"></a>物理地址（physical address）</h3><p>用于内存芯片级内存单元寻址。它们与从处理器的地址引脚发送到内存总线的电信号相对应</p><h3 id="内存控制单元（MMU）"><a href="#内存控制单元（MMU）" class="headerlink" title="内存控制单元（MMU）"></a>内存控制单元（MMU）</h3><p>通过一种称为分段单元（segmentation unit）的硬件电路把一个逻辑地址转换为线性地址；接着，第二个称为分页单元（paging unit）的硬件电路把线性地址转换位一个物理地址</p><p>逻辑地址—&gt;<code>分页单元</code>—&gt;线性地址—&gt;<code>分页单元</code>—&gt;物理地址</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> kernel </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 内存管理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>systemctl-详解</title>
       <link href="/2024/06/03/systemctl-%E8%AF%A6%E8%A7%A3/"/>
       <url>/2024/06/03/systemctl-%E8%AF%A6%E8%A7%A3/</url>
