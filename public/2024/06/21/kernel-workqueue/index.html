@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hello World | yyheroi</title>
+  <title>kernel-workqueue | yyheroi</title>
   <meta name="keywords" content=" test ">
-  <meta name="description" content="Hello World | yyheroi">
+  <meta name="description" content="kernel-workqueue | yyheroi">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="[toc] Rust基本数据类型Rust 每个值都有其确切的数据类型，总的来说可以分为两类：基本类型和复合类型。 基本类型意味着它们往往是一个最小化原子类型，无法解构为其它类型(一般意义上来说)，由以下组成：  数值类型: 有符号整数 (i8, i16, i32, i64, isize)、 无符号整数 (u8, u16, u32, u64, usize) 、浮点数 (f32, f64)、以及有理数">
 <meta property="og:type" content="website">
@@ -778,9 +778,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-kernel-workqueue" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Hello World</h1>
+        <h1 class="article-title">kernel-workqueue</h1>
     
     <div class="article-meta">
         
@@ -805,12 +805,12 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2024-04-28 15:13:38'>2023-08-25 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2024-06-24 16:42:10'>2024-06-21 17:26</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:75</span>
+        <span>字数:2.3k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -840,7 +840,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -856,19 +856,43 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <p>一、workqueue的作用及在Linux中断处理中的应用<br>1.1、workqueue的概述<br>Linux工作队列（Workqueue）是一个内核中的机制，它可以异步执行一些任务。在Linux内核中，当需要处理一些不是紧急的、需要后台执行的任务时，就会将这些任务加入到工作队列中，然后由内核计划适当的时间来执行这些任务。</p>
+<p>工作队列的特点是异步执行，即任务的执行不会阻塞当前进程，而是交给后台线程进行处理。这种方式可以避免阻塞主线程，提高系统的响应速度和并发能力。</p>
+<p>工作队列具有多种使用场景，比如定时器事件、网络I&#x2F;O事件、驱动程序事件等，都可以通过工作队列来异步处理。</p>
+<p>1.2、workqueue在Linux中断处理中的作用<br>workqueue是一种异步执行工作的机制，它可以在Linux中断处理中使用。当内核需要异步执行某些任务时，可以使用workqueue机制。</p>
+<p>在Linux中断处理中，有些操作不能直接执行，因为它们可能会阻塞中断处理程序。例如，如果一个中断处理程序需要访问磁盘，那么它可能需要等待磁盘访问完成才能继续执行，这将导致中断处理程序的延迟和性能下降。为了避免这种情况，可以使用workqueue机制。</p>
+<p>workqueue机制允许中断处理程序将任务提交给工作队列，在稍后的时间异步执行。这样，中断处理程序可以立即返回，并且不会阻塞其他中断处理程序的执行。工作队列是一组线程，它们可以同时执行多个任务。当工作队列中有任务时，内核会自动调度线程来执行任务。</p>
+<p>workqueue机制是一种非常有效的机制，可以帮助内核异步执行任务，提高系统的性能和可靠性。<br><img src="/../imgs/d32faea7d5004b979cc98527aa0973e8.png" alt="在这里插入图片描述"></p>
+<p>二、workqueue的实现原理<br>workqueue通过使用worker线程池来执行延迟性任务，能够提高系统的吞吐量和响应速度，适用于需要进行异步任务调度的场景。</p>
+<p>workqueue是Linux系统中用于实现异步任务调度的机制，它允许驱动程序和内核线程安排延迟执行的工作。</p>
+<p>workqueue由一个或多个worker线程池组成，每个worker线程都会不断地从workqueue中获取需要执行的工作项。<br>当驱动程序或内核模块需要执行一些延迟性的任务时，可以将这些任务封装成工作项（work）并添加到workqueue队列中。<br>worker线程在空闲时，从workqueue队列中取出一个工作项，并将其放入自己的私有队列中，等待执行。<br>一旦worker线程完成当前正在执行的工作项，就会从自己的私有队列中取出下一个工作项进行处理。<br>若workqueue队列中没有可用的工作项，则worker线程会等待直到有新的工作项被添加到队列中。<br>在workqueue中，还提供了几种不同的队列类型，如普通队列、高优先级队列和延迟队列等，以满足不同场景下的需求。<br>2.1、工作队列和工作者线程的关系<br>工作队列和工作者线程是相互依存的关系，它们通过协同工作来处理系统中的任务。</p>
+<p>工作队列是一个先进先出的任务列表，其中包含需要被执行的任务。工作者线程则是实际执行这些任务的线程。当有新的任务添加到工作队列中时，工作者线程会自动从队列中取出任务并执行。</p>
+<p>工作者线程通常是由内核创建的，其数量可以根据系统负载情况进行调整。当任务数量增加时，可以增加工作者线程的数量以加快任务处理速度。而当任务数量减少时，可以减少工作者线程的数量以节省系统资源。<br><img src="/../imgs/2b8686c61a24478a8112e4b83228f177.png" alt="在这里插入图片描述"></p>
+<p>2.2、工作队列的创建和销毁<br>在Linux内核中，工作队列通过struct workqueue_struct结构体来表示。创建和销毁工作队列通常通过以下函数：</p>
+<p>创建工作队列：create_workqueue(const char *name); 该函数创建并返回一个指向工作队列的指针。参数name是工作队列的名称。<br>销毁工作队列：destroy_workqueue(struct workqueue_struct *wq); 该函数销毁由指针wq所表示的工作队列。<br>例如，创建和销毁一个名为“my_work”的工作队列：</p>
+<p>工作队列的创建和销毁<br>在Linux内核中，工作队列通过struct workqueue_struct结构体来表示。创建和销毁工作队列通常通过以下函数：</p>
+<p>创建工作队列：create_workqueue(const char *name); 该函数创建并返回一个指向工作队列的指针。参数name是工作队列的名称。<br>销毁工作队列：destroy_workqueue(struct workqueue_struct *wq); 该函数销毁由指针wq所表示的工作队列。<br>2.3、工作者线程的创建和销毁<br>Linux 内核中的工作者线程是一种特殊的内核线程，用于执行一些异步的、需要花费较长时间或者需要消耗大量 CPU 资源的任务。它们主要用于处理 I&#x2F;O 操作、网络操作、文件系统缓存等等。</p>
+<p>在 Linux 内核中，工作者线程的创建和销毁是由系统自动管理的。当进程请求创建一个工作者线程时，内核会检查当前是否有可用的空闲线程。如果没有，则会创建一个新的线程。当任务完成后，工作者线程会被回收并返回到线程池中，以备下次使用。</p>
+<p>为了提高效率，Linux 内核还可以在运行时动态地调整线程池中工作者线程的数量。当系统负载较高时，内核会增加线程池中的线程数量，以处理更多的任务。当负载降低时，内核会减少线程池中的线程数量，以节省资源。</p>
+<p>例如，展示如何在 Linux 内核中创建和销毁工作者线程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;linux/module.h&gt;</span><br><span class="line">#include &lt;linux/kernel.h&gt;</span><br><span class="line">#include &lt;linux/workqueue.h&gt;</span><br><span class="line">#if 1</span><br><span class="line">#define YYHDEBUG(fmt, ...) \</span><br><span class="line">    printk(KERN_ERR &quot;yyh debug [%s][%d] &quot; fmt, __func__, __LINE__, ##__VA_ARGS__)</span><br><span class="line">#else </span><br><span class="line">#define YYHDEBUG(debug)</span><br><span class="line">#endif</span><br><span class="line">static struct workqueue_struct *my_wq;</span><br><span class="line"></span><br><span class="line">typedef struct &#123;</span><br><span class="line">    struct work_struct my_work;</span><br><span class="line">    int x;</span><br><span class="line">&#125; my_work_t;</span><br><span class="line"></span><br><span class="line">static void my_work_handler(struct work_struct *work)</span><br><span class="line">&#123;</span><br><span class="line">    my_work_t *my_work = (my_work_t *)work;</span><br><span class="line">    YYHDEBUG(&quot;my_work_handler: x=%d\n&quot;, my_work-&gt;x);</span><br><span class="line">    kfree(my_work);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static int __init my_module_init(void)</span><br><span class="line">&#123;</span><br><span class="line">    my_work_t *my_work;</span><br><span class="line"></span><br><span class="line">    /* 创建工作者队列 */</span><br><span class="line">    my_wq = create_workqueue(&quot;my_queue&quot;);</span><br><span class="line">    if (!my_wq) &#123;</span><br><span class="line">        YYHDEBUG(&quot;create_workqueue failed!\n&quot;);</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /* 创建并提交工作者线程 */</span><br><span class="line">    my_work = (my_work_t *)kmalloc(sizeof(my_work_t), GFP_KERNEL);</span><br><span class="line">    if (!my_work) &#123;</span><br><span class="line">        YYHDEBUG(&quot;kmalloc failed!\n&quot;);</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">    INIT_WORK((struct work_struct *)my_work, my_work_handler);</span><br><span class="line">    my_work-&gt;x = 1;</span><br><span class="line">    queue_work(my_wq, (struct work_struct *)my_work);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static void __exit my_module_exit(void)</span><br><span class="line">&#123;</span><br><span class="line">    /* 销毁工作者队列 */</span><br><span class="line">    flush_workqueue(my_wq);</span><br><span class="line">    destroy_workqueue(my_wq);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(my_module_init);</span><br><span class="line">module_exit(my_module_exit);</span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(&quot;GPL&quot;);</span><br><span class="line">MODULE_AUTHOR(&quot;Lion Long&quot;);</span><br><span class="line">MODULE_DESCRIPTION(&quot;A simple example Linux module.&quot;);</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>例子展示了如何创建一个名为“my_queue”的工作者队列，然后创建一个工作者线程来处理一个名为“my_work”的工作对象。“my_work_handler”函数将打印出传递给工作对象的参数“x”，并释放工作对象的内存。在模块初始化期间，创建工作者队列和工作对象，并提交工作对象到队列中。在模块退出期间，销毁工作者队列。</p>
+<p>Linux 内核中的工作者线程是一种非常重要的机制，能够显著提高系统的性能和响应速度。虽然用户无法直接控制工作者线程的创建和销毁，但可以通过一些系统调优技巧来优化工作者线程的使用效果。<br>2.4、扩展知识：用户态线程的创建<br>线程创建：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;pthread.h&gt;</span><br><span class="line"></span><br><span class="line">int pthread_create(pthread_t *thread, const pthread_attr_t *attr,</span><br><span class="line">                   void *(*start_routine)(void*), void *arg);</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>该函数用于创建一个新的线程，并将其添加到调用进程中。参数 thread 是指向新线程标识符的指针，参数 attr 是指向线程属性的指针（通常为 NULL），参数 start_routine 是指向线程执行函数的指针，参数 arg 是传递给线程执行函数的参数。</p>
+<p>线程销毁：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void pthread_exit(void *value_ptr);</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>该函数用于终止当前线程，并返回一个指针值。这个值可以由其他线程通过 pthread_join 函数获取，也可以被忽略。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int pthread_join(pthread_t thread, void **value_ptr);</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+
+<p>该函数用于阻塞当前线程，直到指定的线程 thread 终止。如果指针 value_ptr 不为 NULL，则会将线程的返回值存储在 value_ptr 指向的位置中。</p>
+<p>注意：如果线程没有被显式地分离，则它将一直存在于内存中，直到进程结束。因此，在创建线程时，应该考虑是否需要将它们分离或者等待它们的结束。</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Long_xu/article/details/1314057422.2">https://blog.csdn.net/Long_xu/article/details/1314057422.2</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 yengii@qq.com </span>
