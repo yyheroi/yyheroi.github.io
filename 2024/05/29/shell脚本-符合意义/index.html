@@ -6,19 +6,21 @@
   <meta name="keywords" content=" test ">
   <meta name="description" content="shell脚本-符合意义 | yyheroi">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="1.字符串和切片什么是字符串?Rust 中的字符是 Unicode 类型，因此每个字符占据 4 个字节内存空间，但是在字符串中不一样，字符串是 UTF-8 编码，也就是字符串中的字符所占的字节数是变化的(1 - 4) str 类型是硬编码进可执行文件，也无法被修改，但是 String 则是一个可增长、可改变且具有所有权的 UTF-8 编码字符串，当 Rust 用户提到字符串时，往往指的就是 Str">
+<meta name="description" content="[toc] Rust基本数据类型Rust 每个值都有其确切的数据类型，总的来说可以分为两类：基本类型和复合类型。 基本类型意味着它们往往是一个最小化原子类型，无法解构为其它类型(一般意义上来说)，由以下组成：  数值类型: 有符号整数 (i8, i16, i32, i64, isize)、 无符号整数 (u8, u16, u32, u64, usize) 、浮点数 (f32, f64)、以及有理数">
 <meta property="og:type" content="website">
-<meta property="og:title" content="03-rust复合类型">
-<meta property="og:url" content="http://example.com/back_posts/03-rust%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B.html">
+<meta property="og:title" content="02-rust基本类型">
+<meta property="og:url" content="http://example.com/back_posts/02-rust%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B.html">
 <meta property="og:site_name" content="yyheroi">
-<meta property="og:description" content="1.字符串和切片什么是字符串?Rust 中的字符是 Unicode 类型，因此每个字符占据 4 个字节内存空间，但是在字符串中不一样，字符串是 UTF-8 编码，也就是字符串中的字符所占的字节数是变化的(1 - 4) str 类型是硬编码进可执行文件，也无法被修改，但是 String 则是一个可增长、可改变且具有所有权的 UTF-8 编码字符串，当 Rust 用户提到字符串时，往往指的就是 Str">
+<meta property="og:description" content="[toc] Rust基本数据类型Rust 每个值都有其确切的数据类型，总的来说可以分为两类：基本类型和复合类型。 基本类型意味着它们往往是一个最小化原子类型，无法解构为其它类型(一般意义上来说)，由以下组成：  数值类型: 有符号整数 (i8, i16, i32, i64, isize)、 无符号整数 (u8, u16, u32, u64, usize) 、浮点数 (f32, f64)、以及有理数">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-28T13:58:27.000Z">
-<meta property="article:modified_time" content="2024-05-15T06:11:08.981Z">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-54b3a6d435d2482243edc4be9ab98153_1440w.png">
+<meta property="article:published_time" content="2023-08-26T13:17:00.000Z">
+<meta property="article:modified_time" content="2024-05-15T06:11:08.980Z">
 <meta property="article:author" content="yyh">
-<meta property="article:tag" content="rust复合类型">
+<meta property="article:tag" content="rust基本类型">
 <meta property="article:tag" content="rust">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic2.zhimg.com/80/v2-54b3a6d435d2482243edc4be9ab98153_1440w.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -225,7 +227,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(28)</small>
+                <small>(29)</small>
             
         </div>
     </li>
@@ -252,7 +254,7 @@
         <div data-rel="test">
             
             test
-            <small>(14)</small>
+            <small>(15)</small>
         </div>
         
     </li>
@@ -340,8 +342,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="28">
-<input type="hidden" id="yelog_site_word_count" value="22.8k">
+<input type="hidden" id="yelog_site_posts_number" value="29">
+<input type="hidden" id="yelog_site_word_count" value="25.1k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -496,6 +498,15 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/06/21/kernel-workqueue/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="kernel-workqueue">kernel-workqueue</span>
+            <span class="post-date" title="2024-06-21 17:26:17">2024/06/21</span>
+        </a>
         
         
         <a  class="全部文章 test "
