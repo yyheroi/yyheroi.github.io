@@ -11,4 +11,4 @@ if [ $# -eq 1 ]; then
 fi
 cp source/_posts/* source/back_posts -rf
 cp source/_posts/* ../_posts -rf
-cp source/imgs/*   ../../imgs -rf
+cp source/imgs/*   ../imgs -rf
