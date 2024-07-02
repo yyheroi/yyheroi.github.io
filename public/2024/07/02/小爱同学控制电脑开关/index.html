@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>小爱同学控制电脑开关 | yyheroi</title>
+  <meta name="keywords" content=" test , wol ">
+  <meta name="description" content="小爱同学控制电脑开关 | yyheroi">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="[toc] cpufreqCPUFreq框架是内核的CPU调频框架，整个调频框架由以下几个部分组成：  cpufreq driver cpufreq framework (core) cpufreq governor  一些基本概念： P-state: voltage and frequency point 总体上，CPU Freq主要在sysfs向userspace提供了调频操作和策略设置节点。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="cpufreq">
+<meta property="og:url" content="http://example.com/back_posts/cpufreq.html">
+<meta property="og:site_name" content="yyheroi">
+<meta property="og:description" content="[toc] cpufreqCPUFreq框架是内核的CPU调频框架，整个调频框架由以下几个部分组成：  cpufreq driver cpufreq framework (core) cpufreq governor  一些基本概念： P-state: voltage and frequency point 总体上，CPU Freq主要在sysfs向userspace提供了调频操作和策略设置节点。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/imgs/f613cfd922113b82148afb75eb6edc0f20150613141951.gif">
+<meta property="article:published_time" content="2024-04-28T09:04:13.000Z">
+<meta property="article:modified_time" content="2024-06-06T11:41:25.795Z">
+<meta property="article:author" content="yyh">
+<meta property="article:tag" content="power">
+<meta property="article:tag" content="cpufreq">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/f613cfd922113b82148afb75eb6edc0f20150613141951.gif">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>yyh</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/yyheroi"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="facebook"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-facebook"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+            <a title="instagram"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-instagram"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="reddit"
+               href="https://www.reddit.com/user/yyheroi/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-reddit"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            <a title="csdn"
+               href="https://blog.csdn.net/qq_45698138"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-csdn"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="oschina"
+               href="https://my.oschina.net/yyheroi"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-oschina"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:yengii@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=2252102866&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="kugou"
+               href="https://www.kugou.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-kugou"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/#/user/home?id=88151013"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(30)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="rust">
+            
+            rust
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="test">
+            
+            test
+            <small>(16)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="uboot">
+            
+            uboot
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="kernel">
+            
+            kernel
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="OSTEP">
+            
+            OSTEP
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="driver">
+            
+            driver
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="30">
+<input type="hidden" id="yelog_site_word_count" value="26.5k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>内存管理</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>缺页</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>学习网站</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>block</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>cgroup</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Clion</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>cpufreq</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>debug</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>dtb</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>dts</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ethrnet</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>fdt</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GPT</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>PHY芯片</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>pinctrl</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>power</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rk3588</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust复合类型</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust环境搭建</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust基本类型</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>test</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>uboot概念</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vscode</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vsfs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>wol</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/07/02/%E5%B0%8F%E7%88%B1%E5%90%8C%E5%AD%A6%E6%8E%A7%E5%88%B6%E7%94%B5%E8%84%91%E5%BC%80%E5%85%B3/"
+           data-tag="test,wol"
+           data-author="" >
+            <span class="post-title" title="小爱同学控制电脑开关">小爱同学控制电脑开关</span>
+            <span class="post-date" title="2024-07-02 20:50:22">2024/07/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/06/21/kernel-workqueue/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="kernel-workqueue">kernel-workqueue</span>
+            <span class="post-date" title="2024-06-21 17:26:17">2024/06/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/06/19/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8-reversed-memory-%E9%A2%84%E7%95%99%E5%86%85%E5%AD%98/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="设备驱动-reversed-memory-预留内存">设备驱动-reversed-memory-预留内存</span>
+            <span class="post-date" title="2024-06-19 09:56:22">2024/06/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/06/17/linux-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"
+           data-tag="内存管理"
+           data-author="" >
+            <span class="post-title" title="linux-内存管理">linux-内存管理</span>
+            <span class="post-date" title="2024-06-17 16:21:33">2024/06/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/06/03/systemctl-%E8%AF%A6%E8%A7%A3/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="systemctl-详解">systemctl-详解</span>
+            <span class="post-date" title="2024-06-03 14:10:50">2024/06/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/06/03/struct-dev-debug/"
+           data-tag="debug"
+           data-author="" >
+            <span class="post-title" title="struct-dev-debug">struct-dev-debug</span>
+            <span class="post-date" title="2024-06-03 10:10:43">2024/06/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/05/30/dtb-to-dts/"
+           data-tag="dtb,dts"
+           data-author="" >
+            <span class="post-title" title="dtb to dts">dtb to dts</span>
+            <span class="post-date" title="2024-05-30 11:05:15">2024/05/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/29/shell%E8%84%9A%E6%9C%AC-%E7%AC%A6%E5%90%88%E6%84%8F%E4%B9%89/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="shell脚本-符合意义">shell脚本-符合意义</span>
+            <span class="post-date" title="2024-05-29 14:31:03">2024/05/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/27/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E7%BC%BA%E9%A1%B5/"
+           data-tag="缺页"
+           data-author="" >
+            <span class="post-title" title="操作系统中的缺页">操作系统中的缺页</span>
+            <span class="post-date" title="2024-05-27 17:48:11">2024/05/27</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/25/Windows%E4%B8%8B%E9%80%9A%E8%BF%87ssh%E6%8C%82%E8%BD%BD%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%AE%E5%BD%95/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Windows下通过ssh挂载远程服务器目录">Windows下通过ssh挂载远程服务器目录</span>
+            <span class="post-date" title="2024-05-25 11:27:05">2024/05/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 driver "
+           href="/2024/05/23/01%E4%BB%A5%E5%A4%AA%E7%BD%91ethernet-%E6%A6%82%E5%BF%B5/"
+           data-tag="ethrnet"
+           data-author="" >
+            <span class="post-title" title="01以太网ethernet-概念">01以太网ethernet-概念</span>
+            <span class="post-date" title="2024-05-23 15:30:58">2024/05/23</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/vscode-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E5%A4%B1%E8%B4%A5/"
+           data-tag="vscode"
+           data-author="" >
+            <span class="post-title" title="vscode-远程连接失败">vscode-远程连接失败</span>
+            <span class="post-date" title="2024-05-17 17:14:04">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/vscode-%E5%AE%89%E8%A3%85-%E5%8D%B8%E8%BD%BD/"
+           data-tag="vscode"
+           data-author="" >
+            <span class="post-title" title="vscode-安装-卸载">vscode-安装-卸载</span>
+            <span class="post-date" title="2024-05-17 15:17:18">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/ARMv8%E6%9E%B6%E6%9E%84-%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F%E5%8C%96/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="ARMv8架构-内存虚拟化">ARMv8架构-内存虚拟化</span>
+            <span class="post-date" title="2024-05-17 14:45:28">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/Clion202204-%E7%A0%B4%E8%A7%A3/"
+           data-tag="Clion"
+           data-author="" >
+            <span class="post-title" title="Clion202204-破解">Clion202204-破解</span>
+            <span class="post-date" title="2024-05-17 10:10:50">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/16/PHY%E8%8A%AF%E7%89%87/"
+           data-tag="PHY芯片"
+           data-author="" >
+            <span class="post-title" title="PHY芯片">PHY芯片</span>
+            <span class="post-date" title="2024-05-16 18:58:06">2024/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/05/16/cgroup/"
+           data-tag="cgroup"
+           data-author="" >
+            <span class="post-title" title="cgroup">cgroup</span>
+            <span class="post-date" title="2024-05-16 15:30:33">2024/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/05/16/pinctrl/"
+           data-tag="pinctrl"
+           data-author="" >
+            <span class="post-title" title="pinctrl">pinctrl</span>
+            <span class="post-date" title="2024-05-16 13:33:03">2024/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 uboot "
+           href="/2024/05/15/uboot-01-%E6%A6%82%E5%BF%B5/"
+           data-tag="uboot概念"
+           data-author="" >
+            <span class="post-title" title="uboot-01-概念">uboot-01-概念</span>
+            <span class="post-date" title="2024-05-15 21:59:01">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 OSTEP "
+           href="/2024/05/15/OSTEP-40-VSFS/"
+           data-tag="vsfs"
+           data-author="" >
+            <span class="post-title" title="OSTEP-40-VSFS">OSTEP-40-VSFS</span>
+            <span class="post-date" title="2024-05-15 14:40:25">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 uboot "
+           href="/2024/05/15/U-Boot-fdt-GPT/"
+           data-tag="fdt,GPT,rk3588"
+           data-author="" >
+            <span class="post-title" title="U-Boot-fdt-GPT">U-Boot-fdt-GPT</span>
+            <span class="post-date" title="2024-05-15 14:37:05">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 driver "
+           href="/2024/05/15/linux-block/"
+           data-tag="block"
+           data-author="" >
+            <span class="post-title" title="linux-block">linux-block</span>
+            <span class="post-date" title="2024-05-15 14:36:36">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/04/28/cpufreq/"
+           data-tag="power,cpufreq"
+           data-author="" >
+            <span class="post-title" title="cpufreq">cpufreq</span>
+            <span class="post-date" title="2024-04-28 17:04:13">2024/04/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/09/13/Hexo%E5%9C%A8%E5%A4%9A%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E6%8F%90%E4%BA%A4%E5%92%8C%E6%9B%B4%E6%96%B0/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Hexo在多台电脑上提交和更新">Hexo在多台电脑上提交和更新</span>
+            <span class="post-date" title="2023-09-13 15:35:30">2023/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/28/03-rust%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/"
+           data-tag="rust,rust复合类型"
+           data-author="" >
+            <span class="post-title" title="03-rust复合类型">03-rust复合类型</span>
+            <span class="post-date" title="2023-08-28 21:58:27">2023/08/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/02-rust%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/"
+           data-tag="rust,rust基本类型"
+           data-author="" >
+            <span class="post-title" title="02-rust基本类型">02-rust基本类型</span>
+            <span class="post-date" title="2023-08-26 21:17:00">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/01-rust%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="rust,rust环境搭建"
+           data-author="" >
+            <span class="post-title" title="01-rust环境搭建">01-rust环境搭建</span>
+            <span class="post-date" title="2023-08-26 17:03:59">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/00-rust%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99/"
+           data-tag="学习网站,rust"
+           data-author="" >
+            <span class="post-title" title="00-rust学习网站">00-rust学习网站</span>
+            <span class="post-date" title="2023-08-26 16:08:57">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/08/25/github+hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="github+hexo 博客搭建">github+hexo 博客搭建</span>
+            <span class="post-date" title="2023-08-25 19:32:35">2023/08/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/08/25/hello-world/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Hello World">Hello World</span>
+            <span class="post-date" title="2023-08-25 00:00:00">2023/08/25</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-小爱同学控制电脑开关" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">小爱同学控制电脑开关</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="test">test</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">test</a>
+            
+            <a class="color4">wol</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2024-07-02 22:40:15'>2024-07-02 20:50</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.4k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-text">一、环境准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%BC%80%E5%85%B3%E6%9C%BA%E5%8E%9F%E7%90%86"><span class="toc-text">二、开关机原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%A1%86%E6%9E%B6"><span class="toc-text">数据传输框架</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-text">三、环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B7%B4%E6%B3%95%E4%BA%91%E5%B9%B3%E5%8F%B0%E8%AE%BE%E7%BD%AE"><span class="toc-text">1.巴法云平台设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%B1%B3%E5%AE%B6%E8%AE%BE%E7%BD%AE"><span class="toc-text">2.米家设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-windows%E7%BD%91%E7%BB%9C%E5%94%A4%E9%86%92%E8%AE%BE%E7%BD%AE"><span class="toc-text">3.windows网络唤醒设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%90%AD%E5%BB%BAesp32%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%B9%B6%E9%83%A8%E7%BD%B2"><span class="toc-text">4.搭建esp32开发环境并部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-text">（1）新建项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%AF%BC%E5%85%A5esp32%E5%BA%93"><span class="toc-text">（2）导入esp32库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%883%EF%BC%89-%E6%B7%BB%E5%8A%A0%E5%BA%93"><span class="toc-text">（3） 添加库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%AF%BC%E5%85%A5%E5%BA%93"><span class="toc-text">（4）导入库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%85%B3%E6%9C%BApython%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="toc-text">5.关机python脚本配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#main-py"><span class="toc-text">main.py</span></a></li></ol></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a>一、环境准备</h1><p>win11、小爱音箱、esp32(通过wol唤醒电脑)、巴法云平台注册</p>
+<p>这里使用的是esp32-cam</p>
+<p><img src="/../imgs/image-20240702211605888.png" alt="image-20240702211605888"></p>
+<h1 id="二、开关机原理"><a href="#二、开关机原理" class="headerlink" title="二、开关机原理"></a>二、开关机原理</h1><p>开机利用WOL技术，Wake-On-LAN简称WOL，是一种电源管理功能；如果存在网络活动，则允许设备将操作系统从待机或休眠模式中唤醒。许多主板厂商支持IBM提出的网络唤醒标准。该标准允许网络管理员远程打开PC机电源,以便进行文件升级、资源跟踪和设备清点等工作。WOL在还未广泛的采用,但在网络时代却具有广阔的发展前景。Wake-On-LAN的实现，主要是向目标主机发送特殊格式的数据包，是AMD公司制作的MagicPacket这套软件以生成网络唤醒所需要的特殊数据包，俗称魔术包（Magic Packet）。MagicPacket格式虽然只是AMD公司开发推广的技术，并非世界公认的标准，但是仍然受到很多网卡制造商的支持，因此许多具有网络唤醒功能的网卡都能与之兼容。wol基本实现原理实现是向需要被唤醒的终端网卡发送<code>FFFFFFFFFFFFFF+目标主机MAC地址(重复16次)</code>所组成的一个数据包，网卡收到数据后终端。（需要主板支持WOL，在BIOS中设置打开）</p>
+<p>wol参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/a18359388932/article/details/126949062">https://blog.csdn.net/a18359388932/article/details/126949062</a></p>
+<p>关机则通过获取巴法云获取关机指令，再通过python执行关机命令实现。</p>
+<h2 id="数据传输框架"><a href="#数据传输框架" class="headerlink" title="数据传输框架"></a>数据传输框架</h2><p>小爱其实是不直接操作内网被控的电脑，而是通过小爱给一个第三方物联网平台巴法云发送一个消息，而你内网要部署一个用来接收巴法云下发的消息的程序，一旦接收到状态有发生变化，就执行一些执行，比如发送魔术包开机，再比如通过脚本ssh登录你的主机Windows主机执行关机命令.</p>
+<p><img src="/../imgs/xiaoaiui.png" alt="xiaoaiui.png"></p>
+<h1 id="三、环境搭建"><a href="#三、环境搭建" class="headerlink" title="三、环境搭建"></a>三、环境搭建</h1><h2 id="1-巴法云平台设置"><a href="#1-巴法云平台设置" class="headerlink" title="1.巴法云平台设置"></a>1.巴法云平台设置</h2><p>打开巴法科技&amp;巴法云-巴法设备云-巴法物联网云平台 (bemfa.com)，点击注册</p>
+<p>TCP创客云-》新建主题 pc006 -》设置昵称为电脑</p>
+<p>注意：</p>
+<p>新建主题的名称<code>pc</code>可以任意修改，但末尾必须是006，表示开关设备</p>
+<p>修改设备昵称，这个昵称<code>电脑</code>就是后面在米家中控制的名称</p>
+<p>记住私钥、主题（<code>pc006</code>）后续会用到</p>
+<p><img src="/../imgs/image-20240702214224123.png" alt="image-20240702214224123"></p>
+<h2 id="2-米家设置"><a href="#2-米家设置" class="headerlink" title="2.米家设置"></a>2.米家设置</h2><p>打开手机app<code>米家</code>-我的-添加其他平台-添加-选择巴法-登录巴法账号-同步设备；</p>
+<p>同步成功后会显示出电脑图标，后面就可以通过小爱同学语音控制”打开电脑”</p>
+<h2 id="3-windows网络唤醒设置"><a href="#3-windows网络唤醒设置" class="headerlink" title="3.windows网络唤醒设置"></a>3.windows网络唤醒设置</h2><p>进入BIOS设置wol（自行百度设置）</p>
+<p>1.打开设备管理器，点击网络适配器，右键属性，将电源管理的两个勾勾打上；</p>
+<p><img src="/../imgs/cce3ff865e6348cb9da8625fe5b92fe0.png" alt="电源管理"></p>
+<p>在高级设置里面将关机网络唤醒和魔术封包唤醒开启</p>
+<p><img src="/../imgs/82c684268ac443d191e73eb73b60aec4.png" alt="网络唤醒"></p>
+<h2 id="4-搭建esp32开发环境并部署"><a href="#4-搭建esp32开发环境并部署" class="headerlink" title="4.搭建esp32开发环境并部署"></a>4.搭建esp32开发环境并部署</h2><p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43935402/article/details/125590294">https://blog.csdn.net/weixin_43935402/article/details/125590294</a></p>
+<p>环境搭建完毕后：</p>
+<p>本项目使用 Arduino 框架。</p>
+<ul>
+<li>WakeOnLan : <a target="_blank" rel="noopener" href="https://github.com/a7md0/WakeOnLan">https://github.com/a7md0/WakeOnLan</a></li>
+<li>AsyncTCP : <a target="_blank" rel="noopener" href="https://github.com/me-no-dev/AsyncTCP">https://github.com/me-no-dev/AsyncTCP</a></li>
+</ul>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/yeyt97/ESP32-Bemfa-WOL-Tool/tree/main">https://github.com/yeyt97/ESP32-Bemfa-WOL-Tool/tree/main</a></p>
+<h2 id="（1）新建项目"><a href="#（1）新建项目" class="headerlink" title="（1）新建项目"></a>（1）新建项目</h2><p><img src="/../imgs/image-20240702220340059.png" alt="image-20240702220340059"></p>
+<h2 id="（2）导入esp32库"><a href="#（2）导入esp32库" class="headerlink" title="（2）导入esp32库"></a>（2）导入esp32库</h2><p><img src="/../imgs/image-20240702220502413.png" alt="image-20240702220502413"></p>
+<h2 id="（3）-添加库"><a href="#（3）-添加库" class="headerlink" title="（3） 添加库"></a>（3） 添加库</h2><p><img src="/../imgs/image-20240702220705763.png" alt="image-20240702220705763"></p>
+<p>添加库WakeOnLan </p>
+<p><img src="/../imgs/image-20240702220828261.png" alt="image-20240702220828261"></p>
+<p>添加库AsyncTCP </p>
+<p><img src="/../imgs/image-20240702220932130.png" alt="image-20240702220932130"></p>
+<h2 id="（4）导入库"><a href="#（4）导入库" class="headerlink" title="（4）导入库"></a>（4）导入库</h2><p><img src="/../imgs/image-20240702221037900.png" alt="image-20240702221037900"></p>
+<p>添加文件bemfa_client.hpp、wifi_helper.hpp：</p>
+<p><img src="/../imgs/image-20240702221620487.png" alt="image-20240702221620487"></p>
+<p>将main.cpp拷贝到.ino文件中</p>
+<p><img src="/../imgs/image-20240702222853017.png" alt="image-20240702222853017"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;bemfa_client.hpp&quot;</span><br><span class="line">#include &quot;WakeOnLan.h&quot;</span><br><span class="line">#include &quot;wifi_helper.hpp&quot;</span><br><span class="line"></span><br><span class="line">BemfaClient* bemfaClient;</span><br><span class="line">WifiHelper* wifiHelper;</span><br><span class="line"></span><br><span class="line">WiFiUDP UDP;</span><br><span class="line">WakeOnLan WOL(UDP);</span><br><span class="line"></span><br><span class="line">const int LED_Pin = 2;</span><br><span class="line"></span><br><span class="line">const char *SSID = &quot;xxx&quot;;  // wifi名称</span><br><span class="line">const char *PSW = &quot;xxx&quot;;  // wifi密码</span><br><span class="line"></span><br><span class="line">const char *UID = &quot;xxx&quot;;  // 巴法云的UID</span><br><span class="line">const char *TOPIC = &quot;pc006&quot;;  // 巴法云中创建的TOPIC(不是昵称)</span><br><span class="line"></span><br><span class="line">const char *TARGET_MAC_ADDR = &quot;xxx&quot;;  // 要启动的电脑的MAC地址</span><br><span class="line"></span><br><span class="line">void blinkTwice() &#123;</span><br><span class="line">    digitalWrite(LED_Pin, HIGH);</span><br><span class="line">    delay(200);</span><br><span class="line">    digitalWrite(LED_Pin, LOW);</span><br><span class="line">    delay(200);</span><br><span class="line">    digitalWrite(LED_Pin, HIGH);</span><br><span class="line">    delay(200);</span><br><span class="line">    digitalWrite(LED_Pin, LOW);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void setup() &#123;</span><br><span class="line">    Serial.begin(115200);</span><br><span class="line">    Serial.println(&quot;Beginning...&quot;);</span><br><span class="line">    wifiHelper = new WifiHelper(SSID, PSW, LED_Pin);</span><br><span class="line">    bemfaClient = new BemfaClient(UID, TOPIC);</span><br><span class="line">    bemfaClient-&gt;addCommand(&quot;on&quot;, []&#123;</span><br><span class="line">        Serial.println(&quot;Send magic packet&quot;);</span><br><span class="line">        WOL.setRepeat(3, 100);</span><br><span class="line">        WOL.calculateBroadcastAddress(WiFi.localIP(), WiFi.subnetMask());</span><br><span class="line">        WOL.sendMagicPacket(TARGET_MAC_ADDR);</span><br><span class="line">        blinkTwice();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void loop() &#123;</span><br><span class="line">    wifiHelper-&gt;tick();</span><br><span class="line">    bemfaClient-&gt;tick();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译烧录即可，然后通过小爱同学“打开电脑”即可控制电脑开机</p>
+<h2 id="5-关机python脚本配置"><a href="#5-关机python脚本配置" class="headerlink" title="5.关机python脚本配置"></a>5.关机python脚本配置</h2><p>安装python</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/using/index.html">https://docs.python.org/zh-cn/3/using/index.html</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#安装相关依赖</span><br><span class="line">pip install requests</span><br><span class="line">pip install schedule</span><br><span class="line">pip install pyinstaller</span><br></pre></td></tr></table></figure>
+
+<p>python打包<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/weilaiqinkong/p/17240065.html">https://www.cnblogs.com/weilaiqinkong/p/17240065.html</a></p>
+<p>如：pyinstaller -F -w main.py</p>
+<p>巴法云平台tcp连接参考：<a target="_blank" rel="noopener" href="https://bbs.bemfa.com/81">https://bbs.bemfa.com/81</a></p>
+<h3 id="main-py"><a href="#main-py" class="headerlink" title="main.py"></a>main.py</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># -*- coding: utf-8</span><br><span class="line">import socket</span><br><span class="line">import threading</span><br><span class="line">import time</span><br><span class="line">import os</span><br><span class="line">import shutil</span><br><span class="line">import sys</span><br><span class="line">import getpass</span><br><span class="line"></span><br><span class="line">def connTCP():</span><br><span class="line">    global tcp_client_socket</span><br><span class="line">    # 创建socket</span><br><span class="line">    tcp_client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">    # IP 和端口</span><br><span class="line">    server_ip = &#x27;bemfa.com&#x27;</span><br><span class="line">    server_port = 8344</span><br><span class="line">    try:</span><br><span class="line">        # 连接服务器</span><br><span class="line">        tcp_client_socket.connect((server_ip, server_port))</span><br><span class="line">        #发送订阅指令</span><br><span class="line">        substr = &#x27;cmd=1&amp;uid=巴法云私钥&amp;topic=pc006\r\n&#x27;</span><br><span class="line">        tcp_client_socket.send(substr.encode(&quot;utf-8&quot;))</span><br><span class="line">    except:</span><br><span class="line">        time.sleep(2)</span><br><span class="line">        connTCP()</span><br><span class="line"></span><br><span class="line">#心跳</span><br><span class="line">def Ping():</span><br><span class="line">    # 发送心跳</span><br><span class="line">    try:</span><br><span class="line">        keeplive = &#x27;ping\r\n&#x27;</span><br><span class="line">        tcp_client_socket.send(keeplive.encode(&quot;utf-8&quot;))</span><br><span class="line">    except:</span><br><span class="line">        time.sleep(2)</span><br><span class="line">        connTCP()</span><br><span class="line">    #开启定时，30秒发送一次心跳</span><br><span class="line">    t = threading.Timer(30,Ping)</span><br><span class="line">    t.start()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">connTCP()</span><br><span class="line">Ping()</span><br><span class="line"></span><br><span class="line">while True:</span><br><span class="line">    # 接收服务器发送过来的数据</span><br><span class="line">    recvData = tcp_client_socket.recv(1024)</span><br><span class="line">    if len(recvData) != 0:</span><br><span class="line">        data = recvData.decode(&#x27;utf-8&#x27;)</span><br><span class="line">        print(&#x27;recv:&#x27;, data)</span><br><span class="line">        if &quot;on&quot; in data:</span><br><span class="line">            print(&quot;do nothing!&quot;)</span><br><span class="line">        elif &quot;off&quot; in data:</span><br><span class="line">            print(&quot;starting poweroff after 3s ...&quot;)</span><br><span class="line">            # 3s后 系统自动关机</span><br><span class="line">            print(os.system(&#x27;shutdown -s -t 3&#x27;))</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;conn err&quot;)</span><br><span class="line">        connTCP()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>设置main.exe开机启动</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/muxiaomu/p/16649990.html">https://www.cnblogs.com/muxiaomu/p/16649990.html</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 yengii@qq.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23liZlYn7hrPL3Ouja',
+            clientSecret: 'e064a320f48ac03c7c6d4c59ec155391dba07921',
+            repo: 'yyheroi.github.io',
+            owner: 'yyheroi',
+            admin: ['yyheroi'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2023-2099 yyh
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
