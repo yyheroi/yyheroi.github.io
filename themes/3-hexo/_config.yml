@@ -18,9 +18,9 @@ link:
     linkedin:
     instagram: https://www.facebook.com/faker.tops
     reddit: https://www.reddit.com/user/yyheroi/
-    weibo:  
-    jianshu:  
-    zhihu: 
+    weibo:
+    jianshu:
+    zhihu:
     csdn: https://blog.csdn.net/qq_45698138
     oschina: https://my.oschina.net/yyheroi
     juejin:
@@ -55,6 +55,7 @@ category:
     - dirver
     - OSTEP
     - debug
+    - RVOS
   width:
     lg: 120 # 1468px<屏幕宽度 左侧分类宽度
     md: 100 # 1024px<屏幕宽度<=1468px 左侧分类宽度

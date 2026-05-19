@@ -6,21 +6,19 @@
   <meta name="keywords" content=" rust , rust基本类型 ">
   <meta name="description" content="02-rust基本类型 | yyheroi">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="[toc] Rust基本数据类型Rust 每个值都有其确切的数据类型，总的来说可以分为两类：基本类型和复合类型。 基本类型意味着它们往往是一个最小化原子类型，无法解构为其它类型(一般意义上来说)，由以下组成：  数值类型: 有符号整数 (i8, i16, i32, i64, isize)、 无符号整数 (u8, u16, u32, u64, usize) 、浮点数 (f32, f64)、以及有理数">
+<meta name="description" content="相关网站GitHub-rust 关于本书 - Rust语言圣经(Rust Course)">
 <meta property="og:type" content="website">
-<meta property="og:title" content="02-rust基本类型">
-<meta property="og:url" content="http://example.com/back_posts/02-rust%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B.html">
+<meta property="og:title" content="00-rust学习网站">
+<meta property="og:url" content="http://example.com/back_posts/00-rust%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99.html">
 <meta property="og:site_name" content="yyheroi">
-<meta property="og:description" content="[toc] Rust基本数据类型Rust 每个值都有其确切的数据类型，总的来说可以分为两类：基本类型和复合类型。 基本类型意味着它们往往是一个最小化原子类型，无法解构为其它类型(一般意义上来说)，由以下组成：  数值类型: 有符号整数 (i8, i16, i32, i64, isize)、 无符号整数 (u8, u16, u32, u64, usize) 、浮点数 (f32, f64)、以及有理数">
+<meta property="og:description" content="相关网站GitHub-rust 关于本书 - Rust语言圣经(Rust Course)">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic2.zhimg.com/80/v2-54b3a6d435d2482243edc4be9ab98153_1440w.png">
-<meta property="article:published_time" content="2023-08-26T13:17:00.000Z">
-<meta property="article:modified_time" content="2024-05-15T06:11:08.980Z">
+<meta property="article:published_time" content="2023-08-26T08:08:57.000Z">
+<meta property="article:modified_time" content="2026-05-18T11:22:01.259Z">
 <meta property="article:author" content="yyh">
-<meta property="article:tag" content="rust基本类型">
 <meta property="article:tag" content="rust">
+<meta property="article:tag" content="学习网站">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://pic2.zhimg.com/80/v2-54b3a6d435d2482243edc4be9ab98153_1440w.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -47,7 +45,7 @@
 
 <script src="/js/iconfont.js?v=1.1.0" ></script>
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 8.1.2"></head>
 <div style="display: none">
   <input class="theme_disqus_on" value="false">
   <input class="theme_preload_comment" value="">
@@ -227,7 +225,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(30)</small>
+                <small>(31)</small>
             
         </div>
     </li>
@@ -311,6 +309,21 @@
             
                 
     <li>
+        <div data-rel="RVOS">
+            
+            RVOS
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
         <div data-rel="driver">
             
             driver
@@ -342,8 +355,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="30">
-<input type="hidden" id="yelog_site_word_count" value="26.5k">
+<input type="hidden" id="yelog_site_posts_number" value="31">
+<input type="hidden" id="yelog_site_word_count" value="26.4k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -473,7 +486,15 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RVOS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>test</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>traps</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -502,6 +523,15 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 RVOS "
+           href="/2026/05/19/RVOS-traps/"
+           data-tag="RVOS,traps"
+           data-author="" >
+            <span class="post-title" title="RVOS-traps">RVOS-traps</span>
+            <span class="post-date" title="2026-05-19 19:17:22">2026/05/19</span>
+        </a>
         
         
         <a  class="全部文章 test "
@@ -820,7 +850,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2024-04-28 15:13:38'>2023-08-26 21:17</time>
+            发布时间 : <time class="date" title='最后更新: 2026-05-18 19:22:01'>2023-08-26 21:17</time>
         
     </div>
     <div class="article-meta">
@@ -855,7 +885,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Rust%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">Rust基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-text">1.数值类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B5%AE%E7%82%B9%E7%B1%BB%E5%9E%8B"><span class="toc-text">2.浮点类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%BA%8F%E5%88%97-Range"><span class="toc-text">3.序列(Range)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9C%89%E7%90%86%E6%95%B0%E5%92%8C%E5%A4%8D%E6%95%B0"><span class="toc-text">4.有理数和复数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%87%BD%E6%95%B0%E8%A6%81%E7%82%B9"><span class="toc-text">5.函数要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%9A"><span class="toc-text">返回值：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%BB%83%E4%B9%A0"><span class="toc-text">6.练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97Range"><span class="toc-text">序列Range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">语句与表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">7.总结：</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Rust%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">Rust基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-text">1.数值类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B5%AE%E7%82%B9%E7%B1%BB%E5%9E%8B"><span class="toc-text">2.浮点类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%BA%8F%E5%88%97-Range"><span class="toc-text">3.序列(Range)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9C%89%E7%90%86%E6%95%B0%E5%92%8C%E5%A4%8D%E6%95%B0"><span class="toc-text">4.有理数和复数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%87%BD%E6%95%B0%E8%A6%81%E7%82%B9"><span class="toc-text">5.函数要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%9A"><span class="toc-text">返回值：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%BB%83%E4%B9%A0"><span class="toc-text">6.练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97Range"><span class="toc-text">序列Range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">语句与表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">7.总结：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -871,7 +901,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Rust%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">Rust基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-text">1.数值类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B5%AE%E7%82%B9%E7%B1%BB%E5%9E%8B"><span class="toc-text">2.浮点类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%BA%8F%E5%88%97-Range"><span class="toc-text">3.序列(Range)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9C%89%E7%90%86%E6%95%B0%E5%92%8C%E5%A4%8D%E6%95%B0"><span class="toc-text">4.有理数和复数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%87%BD%E6%95%B0%E8%A6%81%E7%82%B9"><span class="toc-text">5.函数要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%9A"><span class="toc-text">返回值：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%BB%83%E4%B9%A0"><span class="toc-text">6.练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97Range"><span class="toc-text">序列Range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">语句与表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">7.总结：</span></a></li></ol></li></ol></div></p>
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Rust%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">Rust基本数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-text">1.数值类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B5%AE%E7%82%B9%E7%B1%BB%E5%9E%8B"><span class="toc-text">2.浮点类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%BA%8F%E5%88%97-Range"><span class="toc-text">3.序列(Range)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9C%89%E7%90%86%E6%95%B0%E5%92%8C%E5%A4%8D%E6%95%B0"><span class="toc-text">4.有理数和复数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%87%BD%E6%95%B0%E8%A6%81%E7%82%B9"><span class="toc-text">5.函数要点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%9A"><span class="toc-text">返回值：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%BB%83%E4%B9%A0"><span class="toc-text">6.练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%8F%E5%88%97Range"><span class="toc-text">序列Range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">语句与表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">7.总结：</span></a></li></ol></li></ol></div></p>
 <h1 id="Rust基本数据类型"><a href="#Rust基本数据类型" class="headerlink" title="Rust基本数据类型"></a>Rust基本数据类型</h1><p>Rust 每个值都有其确切的数据类型，总的来说可以分为两类：基本类型和复合类型。 基本类型意味着它们往往是一个最小化原子类型，无法解构为其它类型(一般意义上来说)，由以下组成：</p>
 <ul>
 <li>数值类型: 有符号整数 (<code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, <code>isize</code>)、 无符号整数 (<code>u8</code>, <code>u16</code>, <code>u32</code>, <code>u64</code>, <code>usize</code>) 、浮点数 (<code>f32</code>, <code>f64</code>)、以及有理数、复数</li>
@@ -984,7 +1014,7 @@
 <li><strong>Rust 的数值上可以使用方法</strong>. 例如你可以用以下方法来将 <code>13.14</code> 取整：<code>13.14_f32.round()</code>，在这里我们使用了类型后缀，因为编译器需要知道 <code>13.14</code> 的具体类型</li>
 </ul>
 <h2 id="5-函数要点"><a href="#5-函数要点" class="headerlink" title="5.函数要点"></a>5.<a target="_blank" rel="noopener" href="https://course.rs/basic/base-type/function.html#%E5%87%BD%E6%95%B0%E8%A6%81%E7%82%B9">函数要点</a></h2><ul>
-<li>函数名和变量名使用<a target="_blank" rel="noopener" href="https://course.rs/practice/naming.html">蛇形命名法(snake case)</a>，例如 <code>fn add_two() -&gt; &#123;&#125;</code></li>
+<li>函数名和变量名使用<a target="_blank" rel="noopener" href="https://course.rs/practice/naming.html">蛇形命名法(snake case)</a>，例如 <code>fn add_two() -&gt; {}</code></li>
 <li>函数的位置可以随便放，Rust 不关心我们在哪里定义了函数，只要有定义即可</li>
 <li>每个函数参数都需要标注类型</li>
 </ul>
