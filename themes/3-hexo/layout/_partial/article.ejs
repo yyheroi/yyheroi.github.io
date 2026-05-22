@@ -19,11 +19,15 @@
         </span>
         <% } %>
         <% if (post.tags && post.tags.length){ %>
-        <span class="tag">
+        <span class="article-tag">
             <i class="iconfont icon-tag"></i>
-            <% post.tags.forEach(function(tag, i){ %>
-            <a class="color<%= tag.name.length % 5 + 1 %>"><%=tag.name%></a>
-            <% }) %>
+            <% if (post.tags && post.tags.length > 0) { %>
+                <% post.tags.forEach(function(tag, i){ %>
+                    <% if (tag && tag.name) { %>
+                        <a class="color<%= tag.name.length % 5 + 1 %>"><%=tag.name%></a>
+                    <% } %>
+                <% }) %>
+            <% } %>
         </span>
         <% } %>
     </div>

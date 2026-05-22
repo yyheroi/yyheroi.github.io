@@ -7,6 +7,11 @@ tags:
   - traps
   - RISC-V
 date: 2026-05-19 19:17:22
+categories:
+- RVOS
+tags:
+- RVOS
+- traps
 ---
 
 本文梳理 RISC-V 在 Machine 模式下的 Trap 处理机制，并对照 `05-traps` 参考实现与 RVOS 中的 trap 子系统，说明硬件自动行为、CSR 语义及软件 Top/Bottom Half 分工。

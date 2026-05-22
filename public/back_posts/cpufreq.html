@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>cpufreq | yyheroi</title>
+  <meta name="keywords" content="  ,  ">
+  <meta name="description" content="cpufreq | yyheroi">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="相关网站GitHub-rust 关于本书 - Rust语言圣经(Rust Course)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="00-rust学习网站">
+<meta property="og:url" content="http://example.com/back_posts/00-rust%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99.html">
+<meta property="og:site_name" content="yyheroi">
+<meta property="og:description" content="相关网站GitHub-rust 关于本书 - Rust语言圣经(Rust Course)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-26T08:08:57.000Z">
+<meta property="article:modified_time" content="2026-05-19T11:33:54.649Z">
+<meta property="article:author" content="yyh">
+<meta property="article:tag" content="rust">
+<meta property="article:tag" content="学习网站">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>yyh</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/yyheroi"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="facebook"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-facebook"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+            <a title="instagram"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-instagram"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="reddit"
+               href="https://www.reddit.com/user/yyheroi/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-reddit"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            <a title="csdn"
+               href="https://blog.csdn.net/qq_45698138"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-csdn"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="oschina"
+               href="https://my.oschina.net/yyheroi"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-oschina"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:yengii@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=2252102866&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="kugou"
+               href="https://www.kugou.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-kugou"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/#/user/home?id=88151013"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(31)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="rust">
+            
+            rust
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="test">
+            
+            test
+            <small>(16)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="uboot">
+            
+            uboot
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="kernel">
+            
+            kernel
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="OSTEP">
+            
+            OSTEP
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="RVOS">
+            
+            RVOS
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="driver">
+            
+            driver
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="31">
+<input type="hidden" id="yelog_site_word_count" value="26.4k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>内存管理</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>缺页</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>学习网站</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>block</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>cgroup</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Clion</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>cpufreq</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>debug</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>dtb</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>dts</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ethrnet</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>fdt</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GPT</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>PHY芯片</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>pinctrl</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>power</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rk3588</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust复合类型</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust环境搭建</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust基本类型</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RVOS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>test</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>traps</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>uboot概念</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vscode</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vsfs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>wol</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 RVOS "
+           href="/2026/05/19/RVOS-traps/"
+           data-tag="RVOS,traps"
+           data-author="" >
+            <span class="post-title" title="RVOS-traps">RVOS-traps</span>
+            <span class="post-date" title="2026-05-19 19:17:22">2026/05/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/07/02/%E5%B0%8F%E7%88%B1%E5%90%8C%E5%AD%A6%E6%8E%A7%E5%88%B6%E7%94%B5%E8%84%91%E5%BC%80%E5%85%B3/"
+           data-tag="test,wol"
+           data-author="" >
+            <span class="post-title" title="小爱同学控制电脑开关">小爱同学控制电脑开关</span>
+            <span class="post-date" title="2024-07-02 20:50:22">2024/07/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/06/21/kernel-workqueue/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="kernel-workqueue">kernel-workqueue</span>
+            <span class="post-date" title="2024-06-21 17:26:17">2024/06/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/06/19/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8-reversed-memory-%E9%A2%84%E7%95%99%E5%86%85%E5%AD%98/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="设备驱动-reversed-memory-预留内存">设备驱动-reversed-memory-预留内存</span>
+            <span class="post-date" title="2024-06-19 09:56:22">2024/06/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/06/17/linux-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"
+           data-tag="内存管理"
+           data-author="" >
+            <span class="post-title" title="linux-内存管理">linux-内存管理</span>
+            <span class="post-date" title="2024-06-17 16:21:33">2024/06/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/06/03/systemctl-%E8%AF%A6%E8%A7%A3/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="systemctl-详解">systemctl-详解</span>
+            <span class="post-date" title="2024-06-03 14:10:50">2024/06/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/06/03/struct-dev-debug/"
+           data-tag="debug"
+           data-author="" >
+            <span class="post-title" title="struct-dev-debug">struct-dev-debug</span>
+            <span class="post-date" title="2024-06-03 10:10:43">2024/06/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/05/30/dtb-to-dts/"
+           data-tag="dtb,dts"
+           data-author="" >
+            <span class="post-title" title="dtb to dts">dtb to dts</span>
+            <span class="post-date" title="2024-05-30 11:05:15">2024/05/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/29/shell%E8%84%9A%E6%9C%AC-%E7%AC%A6%E5%90%88%E6%84%8F%E4%B9%89/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="shell脚本-符合意义">shell脚本-符合意义</span>
+            <span class="post-date" title="2024-05-29 14:31:03">2024/05/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/27/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E7%BC%BA%E9%A1%B5/"
+           data-tag="缺页"
+           data-author="" >
+            <span class="post-title" title="操作系统中的缺页">操作系统中的缺页</span>
+            <span class="post-date" title="2024-05-27 17:48:11">2024/05/27</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/25/Windows%E4%B8%8B%E9%80%9A%E8%BF%87ssh%E6%8C%82%E8%BD%BD%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%AE%E5%BD%95/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Windows下通过ssh挂载远程服务器目录">Windows下通过ssh挂载远程服务器目录</span>
+            <span class="post-date" title="2024-05-25 11:27:05">2024/05/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 driver "
+           href="/2024/05/23/01%E4%BB%A5%E5%A4%AA%E7%BD%91ethernet-%E6%A6%82%E5%BF%B5/"
+           data-tag="ethrnet"
+           data-author="" >
+            <span class="post-title" title="01以太网ethernet-概念">01以太网ethernet-概念</span>
+            <span class="post-date" title="2024-05-23 15:30:58">2024/05/23</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/vscode-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E5%A4%B1%E8%B4%A5/"
+           data-tag="vscode"
+           data-author="" >
+            <span class="post-title" title="vscode-远程连接失败">vscode-远程连接失败</span>
+            <span class="post-date" title="2024-05-17 17:14:04">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/vscode-%E5%AE%89%E8%A3%85-%E5%8D%B8%E8%BD%BD/"
+           data-tag="vscode"
+           data-author="" >
+            <span class="post-title" title="vscode-安装-卸载">vscode-安装-卸载</span>
+            <span class="post-date" title="2024-05-17 15:17:18">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/ARMv8%E6%9E%B6%E6%9E%84-%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F%E5%8C%96/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="ARMv8架构-内存虚拟化">ARMv8架构-内存虚拟化</span>
+            <span class="post-date" title="2024-05-17 14:45:28">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/Clion202204-%E7%A0%B4%E8%A7%A3/"
+           data-tag="Clion"
+           data-author="" >
+            <span class="post-title" title="Clion202204-破解">Clion202204-破解</span>
+            <span class="post-date" title="2024-05-17 10:10:50">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/16/PHY%E8%8A%AF%E7%89%87/"
+           data-tag="PHY芯片"
+           data-author="" >
+            <span class="post-title" title="PHY芯片">PHY芯片</span>
+            <span class="post-date" title="2024-05-16 18:58:06">2024/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/05/16/cgroup/"
+           data-tag="cgroup"
+           data-author="" >
+            <span class="post-title" title="cgroup">cgroup</span>
+            <span class="post-date" title="2024-05-16 15:30:33">2024/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/05/16/pinctrl/"
+           data-tag="pinctrl"
+           data-author="" >
+            <span class="post-title" title="pinctrl">pinctrl</span>
+            <span class="post-date" title="2024-05-16 13:33:03">2024/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 uboot "
+           href="/2024/05/15/uboot-01-%E6%A6%82%E5%BF%B5/"
+           data-tag="uboot概念"
+           data-author="" >
+            <span class="post-title" title="uboot-01-概念">uboot-01-概念</span>
+            <span class="post-date" title="2024-05-15 21:59:01">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 OSTEP "
+           href="/2024/05/15/OSTEP-40-VSFS/"
+           data-tag="vsfs"
+           data-author="" >
+            <span class="post-title" title="OSTEP-40-VSFS">OSTEP-40-VSFS</span>
+            <span class="post-date" title="2024-05-15 14:40:25">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 uboot "
+           href="/2024/05/15/U-Boot-fdt-GPT/"
+           data-tag="fdt,GPT,rk3588"
+           data-author="" >
+            <span class="post-title" title="U-Boot-fdt-GPT">U-Boot-fdt-GPT</span>
+            <span class="post-date" title="2024-05-15 14:37:05">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 driver "
+           href="/2024/05/15/linux-block/"
+           data-tag="block"
+           data-author="" >
+            <span class="post-title" title="linux-block">linux-block</span>
+            <span class="post-date" title="2024-05-15 14:36:36">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/04/28/cpufreq/"
+           data-tag="power,cpufreq"
+           data-author="" >
+            <span class="post-title" title="cpufreq">cpufreq</span>
+            <span class="post-date" title="2024-04-28 17:04:13">2024/04/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/09/13/Hexo%E5%9C%A8%E5%A4%9A%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E6%8F%90%E4%BA%A4%E5%92%8C%E6%9B%B4%E6%96%B0/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Hexo在多台电脑上提交和更新">Hexo在多台电脑上提交和更新</span>
+            <span class="post-date" title="2023-09-13 15:35:30">2023/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/28/03-rust%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/"
+           data-tag="rust,rust复合类型"
+           data-author="" >
+            <span class="post-title" title="03-rust复合类型">03-rust复合类型</span>
+            <span class="post-date" title="2023-08-28 21:58:27">2023/08/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/02-rust%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/"
+           data-tag="rust,rust基本类型"
+           data-author="" >
+            <span class="post-title" title="02-rust基本类型">02-rust基本类型</span>
+            <span class="post-date" title="2023-08-26 21:17:00">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/01-rust%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="rust,rust环境搭建"
+           data-author="" >
+            <span class="post-title" title="01-rust环境搭建">01-rust环境搭建</span>
+            <span class="post-date" title="2023-08-26 17:03:59">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/00-rust%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99/"
+           data-tag="学习网站,rust"
+           data-author="" >
+            <span class="post-title" title="00-rust学习网站">00-rust学习网站</span>
+            <span class="post-date" title="2023-08-26 16:08:57">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/08/25/github+hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="github+hexo 博客搭建">github+hexo 博客搭建</span>
+            <span class="post-date" title="2023-08-25 19:32:35">2023/08/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/08/25/hello-world/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Hello World">Hello World</span>
+            <span class="post-date" title="2023-08-25 00:00:00">2023/08/25</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">cpufreq</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel=""></a>
+            
+        </span>
+        
+        
+        <span class="article-tag">
+            <i class="iconfont icon-tag"></i>
+            
+                
+                    
+                
+                    
+                
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2026-05-19 19:33:54'>2024-04-28 17:04</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.7k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cpufreq"><span class="toc-text">cpufreq</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Driver"><span class="toc-text">Driver</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Core"><span class="toc-text">Core</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sysfs"><span class="toc-text">Sysfs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Governors"><span class="toc-text">Governors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Files"><span class="toc-text">Files</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rk3588-cpufreq-sys"><span class="toc-text">rk3588-cpufreq-sys</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rk3588-cpufreq-code"><span class="toc-text">rk3588-cpufreq-code</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-CPUFreq%E6%A0%B8%E5%BF%83%E5%92%8C%E6%8E%A5%E5%8F%A3"><span class="toc-text">1. CPUFreq核心和接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-CPUFreq-%E9%80%9A%E7%9F%A5%E5%99%A8"><span class="toc-text">2. CPUFreq 通知器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-CPUFreq%E7%AD%96%E7%95%A5%E9%80%9A%E7%9F%A5%E5%99%A8"><span class="toc-text">2.1 CPUFreq策略通知器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-CPUFreq%E8%BD%AC%E6%8D%A2%E9%80%9A%E7%9F%A5%E5%99%A8"><span class="toc-text">2.2 CPUFreq转换通知器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cpufreq"><span class="toc-text">cpufreq</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Driver"><span class="toc-text">Driver</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Core"><span class="toc-text">Core</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sysfs"><span class="toc-text">Sysfs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Governors"><span class="toc-text">Governors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Files"><span class="toc-text">Files</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rk3588-cpufreq-sys"><span class="toc-text">rk3588-cpufreq-sys</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rk3588-cpufreq-code"><span class="toc-text">rk3588-cpufreq-code</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-CPUFreq%E6%A0%B8%E5%BF%83%E5%92%8C%E6%8E%A5%E5%8F%A3"><span class="toc-text">1. CPUFreq核心和接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-CPUFreq-%E9%80%9A%E7%9F%A5%E5%99%A8"><span class="toc-text">2. CPUFreq 通知器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-CPUFreq%E7%AD%96%E7%95%A5%E9%80%9A%E7%9F%A5%E5%99%A8"><span class="toc-text">2.1 CPUFreq策略通知器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-CPUFreq%E8%BD%AC%E6%8D%A2%E9%80%9A%E7%9F%A5%E5%99%A8"><span class="toc-text">2.2 CPUFreq转换通知器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li></ol></div></p>
+<h1 id="cpufreq"><a href="#cpufreq" class="headerlink" title="cpufreq"></a>cpufreq</h1><p>CPUFreq框架是内核的CPU调频框架，整个调频框架由以下几个部分组成：</p>
+<ul>
+<li>cpufreq driver</li>
+<li>cpufreq framework (core)</li>
+<li>cpufreq governor</li>
+</ul>
+<p>一些基本概念：</p>
+<p>P-state: voltage and frequency point</p>
+<p>总体上，CPU Freq主要在sysfs向userspace提供了调频操作和策略设置节点。当使用一些自动调频的governor时，允许governor从系统获取信息，自动触发调频动作。</p>
+<p>另外，还向其他模块提供了qos频率投票，以及调频事件的notifier机制。</p>
+<p>下面分开来看每个部分。</p>
+<h2 id="Driver"><a href="#Driver" class="headerlink" title="Driver"></a>Driver</h2><p>Cpufreq Driver主要负责底层调频的操作，核心是实现 <code>cpufreq_dirver</code> 对象，并通过 <code>cpufreq_register_driver</code> 将驱动注册到系统，供core部分使用。</p>
+<p>其中，最核心的几个回调包括：</p>
+<ul>
+<li>online: hotplug callback</li>
+<li>offline: hotplug callback</li>
+<li>target_index: set freq</li>
+<li>set_boost: enter into boost mode</li>
+</ul>
+<p>以 <code>mediatek-cpufreq-hw.c</code> 为例，其freq table保存在硬件寄存器中，driver初始化时，从硬件中读出freq table，并实现相关调频回调，最终注册到core。</p>
+<p>db845c使用的 <code>qcom-cpufreq-hw.c</code> 为例，其freq table保存在dts中，driver使用OPP框架来读取这些配置，并实现cpufreq回调。</p>
+<p>* OPP（Operating Performance Point，提供dts的freq-valt-table配置，及获取接口。</p>
+<h2 id="Core"><a href="#Core" class="headerlink" title="Core"></a>Core</h2><p>Core部分核心文件是 <code>/drivers/cpufreq/cpufreq.c</code></p>
+<p>这个文件主要实现了BOOST，DRIVER，SYSFS，FREQ，NOTIFIER，GOVERNOR，POLICY相关功能的操作接口。</p>
+<p><code>cpufreq_register_driver</code> (cpufreq_driver* cpufreq_driver)</p>
+<p><code>cpufreq_register_governor</code> (cpufreq_governor_list)</p>
+<p><code>cpufreq_register_notifier</code> (cpufreq_transition_notifier_list)</p>
+<p><code>cpufreq_policy_alloc</code> (cpufreq_policy* PERCPU:cpufreq_cpu_data)</p>
+<p><code>cpufreq_policy</code> 是一个调频实体，对应一个调频域（freq domain），一般为一个cluster，这个结构保存了每个调频实体（通常是一个cluster）调频相关的所有私有信息。同时，他作为调频操作的句柄，cpufreq顶层操作接口使用policy来对一个调频实体进行操作。</p>
+<p>每个CPU有一个percpu的指针指向其所属的policy，cluster中的多个CPU共享一个policy。（<code>cpufreq_cpu_data</code>）</p>
+<p>Mainflow：</p>
+<p>1、cpufreq driver注册</p>
+<p>2、governor注册（每个policy初始化自己的governor）</p>
+<p>3、cpu hotplug state: “cpufreq:online”，<code>cpuhp_cpufreq_online</code>、<code>cpuhp_cpufreq_offline</code>，创建出percpu policy，绑定driver、governor</p>
+<p>4、向sysfs创建节点，提供功能</p>
+<p>5、governor开始工作，通过 <code>__cpufreq_driver_target</code> 进行调频。</p>
+<ul>
+<li>Qos是调频投票机制，用来实现max_freq、min_freq limitation。(<code>cpufreq_notifier_min</code> <code>cpufreq_notifier_max</code>)，在其他module有需求投票后，freq constrants会被更新。</li>
+</ul>
+<h2 id="Sysfs"><a href="#Sysfs" class="headerlink" title="Sysfs"></a>Sysfs</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/sys/devices/system/cpu/cpu0/cpufreq/policyX</span><br><span class="line">scaling_driver			r	# cpufreq driver name</span><br><span class="line">affected_cpus			r	# cpu</span><br><span class="line">related_cpus			r	# &lt;?&gt;</span><br><span class="line">scaling_cur_freq		rw	# cur freq</span><br><span class="line">scaling_min_freq		rw	# min freq limit</span><br><span class="line">scaling_max_freq		rw	# max freq limit</span><br><span class="line">scaling_governor		rw	# selected governor</span><br><span class="line">scaling_available_governors	r	# available governors</span><br><span class="line">scaling_setspeed		r	# &lt;not supported&gt;</span><br><span class="line">cpuinfo_min_freq		r	# hardware min freq</span><br><span class="line">cpuinfo_max_freq		r	# hardware max freq</span><br><span class="line">cpuinfo_transition_latency	r	# hardware latency</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Governors"><a href="#Governors" class="headerlink" title="Governors"></a>Governors</h2><p>Governor负责从系统收集信息，并触发调频动作。</p>
+<p><strong>powersave</strong></p>
+<p>always lowest frequency</p>
+<p><strong>performance</strong></p>
+<p>always highest frequency</p>
+<p><strong>schedutil</strong></p>
+<p>uses CPU utilization data from scheduler to determine target frequence</p>
+<p>待完成</p>
+<p><strong>userspace</strong></p>
+<p>allow user space set the frequency</p>
+<p><strong>ondemand</strong></p>
+<p>uses CPU load as a CPU frequency selection metric</p>
+<p>it reaches the target by CPU load, 0-&gt;min, 100-&gt;max</p>
+<p><strong>conservative</strong></p>
+<p>uses CPU load as a CPU frequency selection metric</p>
+<p>it reaches the target step by step, up_threshold-&gt;up, down_threshold-&gt;down</p>
+<h2 id="Files"><a href="#Files" class="headerlink" title="Files"></a>Files</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- /drivers/cpufreq/cpufreq.c</span><br><span class="line">- /drivers/cpufreq/cpufreq-dt.c</span><br><span class="line">- /drivers/cpufreq/cpufreq_stats.c</span><br><span class="line">- /drivers/cpufreq/cpufreq_conservative.c</span><br><span class="line">- /drivers/cpufreq/cpufreq_governor.c</span><br><span class="line">- /drivers/cpufreq/cpufreq_ondemand.c</span><br><span class="line">- /drivers/cpufreq/cpufreq_powersave.c</span><br><span class="line">- /drivers/cpufreq/cpufreq_performance.c</span><br><span class="line">- /drivers/cpufreq/cpufreq_userspace.c</span><br><span class="line">- /kernel/sched/cpufreq_schedutil.c</span><br><span class="line">- /kernel/power/qos.c</span><br></pre></td></tr></table></figure>
+
+<h2 id="rk3588-cpufreq-sys"><a href="#rk3588-cpufreq-sys" class="headerlink" title="rk3588-cpufreq-sys"></a>rk3588-cpufreq-sys</h2><blockquote>
+<p>查看cpufreq节点<br>RK3588的cpu是4个A55+4个A76，分为3组单独管理，节点分别是：<br>&#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy0:（对应4个A55：CPU0-3）<br>affected_cpus     cpuinfo_max_freq  cpuinfo_transition_latency  scaling_available_frequencies  scaling_cur_freq  scaling_governor  scaling_min_freq  stats<br>cpuinfo_cur_freq  cpuinfo_min_freq  related_cpus                scaling_available_governors    scaling_driver    scaling_max_freq  scaling_setspeed</p>
+<p>&#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy4:(对应2个A76：CPU4-5)<br>affected_cpus     cpuinfo_max_freq  cpuinfo_transition_latency  scaling_available_frequencies  scaling_cur_freq  scaling_governor  scaling_min_freq  stats<br>cpuinfo_cur_freq  cpuinfo_min_freq  related_cpus                scaling_available_governors    scaling_driver    scaling_max_freq  scaling_setspeed</p>
+<p>&#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy6:(对应2个A76：CPU6-7)<br>affected_cpus     cpuinfo_max_freq  cpuinfo_transition_latency  scaling_available_frequencies  scaling_cur_freq  scaling_governor  scaling_min_freq  stats<br>cpuinfo_cur_freq  cpuinfo_min_freq  related_cpus                scaling_available_governors    scaling_drive</p>
+<p>CPU性能模式<br>echo performance &gt; &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy6&#x2F;scaling_governor<br>cat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy6&#x2F;scaling_governor<br>获取cpu运行的模式<br>cat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy6&#x2F;scaling_available_governors<br>获取当前CPU支持的频点<br>cat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy6&#x2F;scaling_available_frequencies</p>
+<p>cat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy6&#x2F;cpuinfo_cur_freq       </p>
+<p>2.0设置cpufrq为performance模式<br>echo performance &gt; &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy0&#x2F;scaling_governor<br>echo performance &gt; &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy4&#x2F;scaling_governor<br>echo performance &gt; &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy6&#x2F;scaling_governor</p>
+<p>查看模式<br>cat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy*&#x2F;scaling_governor<br>查看频率<br>cat &#x2F;sys&#x2F;devices&#x2F;system&#x2F;cpu&#x2F;cpufreq&#x2F;policy*&#x2F;cpuinfo_cur_freq       </p>
+</blockquote>
+<h2 id="rk3588-cpufreq-code"><a href="#rk3588-cpufreq-code" class="headerlink" title="rk3588-cpufreq-code"></a>rk3588-cpufreq-code</h2><p><img src="/../imgs/f613cfd922113b82148afb75eb6edc0f20150613141951.gif" alt="cpufreq framework"></p>
+<p>相关文件</p>
+<p>kernel&#x2F;drivers&#x2F;cpufreq&#x2F;cpufreq.c</p>
+<p>kernel&#x2F;drivers&#x2F;cpufreq&#x2F;rockchip-cpufreq.c</p>
+<p>kernel&#x2F;drivers&#x2F;cpufreq&#x2F;cpufreq-dt-platdev.c</p>
+<p>kernel&#x2F;drivers&#x2F;cpufreq&#x2F;cpufreq-dt.c</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CONFIG_CPU_FREQ=y</span><br><span class="line">CONFIG_CPU_FREQ_STAT=y</span><br><span class="line">CONFIG_CPU_FREQ_TIMES=y</span><br><span class="line">CONFIG_CPU_FREQ_GOV_POWERSAVE=y</span><br><span class="line">CONFIG_CPU_FREQ_GOV_USERSPACE=y</span><br><span class="line">CONFIG_CPU_FREQ_GOV_ONDEMAND=y</span><br><span class="line">CONFIG_CPU_FREQ_GOV_CONSERVATIVE=y</span><br><span class="line">CONFIG_CPU_FREQ_GOV_INTERACTIVE=y</span><br><span class="line">CONFIG_CPU_FREQ_GOV_PERFORMANCE=y</span><br><span class="line">CONFIG_CPU_FREQ_GOV_COMMON=y</span><br><span class="line">CONFIG_CPU_FREQ_GOV_ATTR_SET=y</span><br><span class="line">CONFIG_CPU_FREQ_DEFAULT_GOV_SCHEDUTIL=y</span><br><span class="line">CONFIG_CPUFREQ_DT=y</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-CPUFreq核心和接口"><a href="#1-CPUFreq核心和接口" class="headerlink" title="1. CPUFreq核心和接口"></a>1. CPUFreq核心和接口</h3><p>cpufreq代码为CPUFreq架构的驱 动程序（那些执行硬件频率切换的代码）以及 “通知器” 提供了一个标准化的接口。 包括设备驱动程序；需要了解策略变化（如 ACPI 热量管理），或所有频率变化（如计时代码）， 甚至需要强制限制为指定频率（如 ARM 架构上的 LCD 驱动程序）的其它内核组件。 此外，内核 “常数” loops_per_jiffy 会根据频率变化而更新。</p>
+<p>cpufreq策略的引用计数由 cpufreq_cpu_get 和 cpufreq_cpu_put 来完成，以确保 cpufreq 驱 动程序被正确地注册到核心中，并且驱动程序在 cpufreq_put_cpu 被调用之前不会被卸载。这也保证 了每个CPU核的cpufreq 策略在使用期间不会被释放。</p>
+<h3 id="2-CPUFreq-通知器"><a href="#2-CPUFreq-通知器" class="headerlink" title="2. CPUFreq 通知器"></a>2. CPUFreq 通知器</h3><p>CPUFreq通知器遵循标准的内核通知器接口。 关于通知器的细节请参阅 linux&#x2F;include&#x2F;linux&#x2F;notifier.h。</p>
+<p>这里有两个不同的CPUfreq通知器 - 策略通知器和转换通知器。</p>
+<h4 id="2-1-CPUFreq策略通知器"><a href="#2-1-CPUFreq策略通知器" class="headerlink" title="2.1 CPUFreq策略通知器"></a>2.1 CPUFreq策略通知器</h4><p>当创建或移除策略时，这些都会被通知。</p>
+<p>阶段是在通知器的第二个参数中指定的。当第一次创建策略时，阶段是CPUFREQ_CREATE_POLICY，当 策略被移除时，阶段是CPUFREQ_REMOVE_POLICY。</p>
+<p>第三个参数 <code>void *pointer</code> 指向一个结构体cpufreq_policy，其包括min，max(新策略的下限和 上限（单位为kHz）)这几个值。</p>
+<h4 id="2-2-CPUFreq转换通知器"><a href="#2-2-CPUFreq转换通知器" class="headerlink" title="2.2 CPUFreq转换通知器"></a>2.2 CPUFreq转换通知器</h4><p>当CPUfreq驱动切换CPU核心频率时，策略中的每个在线CPU都会收到两次通知，这些变化没有任何外部干 预。</p>
+<p>第二个参数指定阶段 - CPUFREQ_PRECHANGE or CPUFREQ_POSTCHANGE.</p>
+<p>第三个参数是一个包含如下值的结构体cpufreq_freqs：</p>
+<table>
+<thead>
+<tr>
+<th>policy</th>
+<th>指向struct cpufreq_policy的指针</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>old</td>
+<td>旧频率</td>
+</tr>
+<tr>
+<td>new</td>
+<td>新频率</td>
+</tr>
+<tr>
+<td>flags</td>
+<td>cpufreq驱动的标志</td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">core_initcall(cpufreq_core_init);</span><br><span class="line">	cpufreq_default_governor		//获取默认的cpufreq策略 如schedutil powersave performace等</span><br><span class="line">	kobject_create_and_add			//创建sys/devices/system/cpu/cpufreq接口</span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">module_init(rockchip_cpufreq_driver_init)</span><br><span class="line">	for_each_possible_cpu</span><br><span class="line">	rockchip_cluster_info_lookup</span><br><span class="line">	rockchip_cpufreq_cluster_init</span><br><span class="line">	cpufreq_register_notifier		//注册通知CPUFREQ_POLICY_NOTYFIER  CPUFREQ_TRANSITION_NOTIFIER </span><br><span class="line">		rockchip_cpufreq_notifier</span><br><span class="line">			rockchip_cpufreq_add_monitor</span><br><span class="line">				rockchip_system_monitor_register</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#define for_each_cpu(cpu, mask)				\</span><br><span class="line">	for ((cpu) = -1;				\</span><br><span class="line">		(cpu) = cpumask_next((cpu), (mask)),	\</span><br><span class="line">		(cpu) &lt; nr_cpu_ids;)</span><br><span class="line">		</span><br><span class="line">#define for_each_possible_cpu(cpu) for_each_cpu((cpu), cpu_possible_mask)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* Valid inputs for n are -1 and 0. */</span><br><span class="line">static inline unsigned int cpumask_next(int n, const struct cpumask *srcp)</span><br><span class="line">&#123;</span><br><span class="line">	return n+1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#if NR_CPUS == 1</span><br><span class="line">#define nr_cpu_ids		1U</span><br><span class="line">#else</span><br><span class="line">extern unsigned int nr_cpu_ids;</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dt_cpufreq_probe</span><br><span class="line">	cpufreq_register_driver</span><br><span class="line">		subsys_interface_register </span><br><span class="line">			cpufreq_interface</span><br><span class="line">			cpufreq_add_dev</span><br><span class="line">				cpufreq_online</span><br><span class="line">					cpufreq_add_policy_cpu</span><br><span class="line">						cpufreq_start_governor</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.kernel.org/doc/html/latest/admin-guide/pm/cpufreq.html">https://www.kernel.org/doc/html/latest/admin-guide/pm/cpufreq.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.kernel.org/scheduler/schedutil.html">https://docs.kernel.org/scheduler/schedutil.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.wowotech.net/pm_subsystem/cpufreq_overview.html">http://www.wowotech.net/pm_subsystem/cpufreq_overview.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.wowotech.net/pm_subsystem/cpufreq_driver.html">http://www.wowotech.net/pm_subsystem/cpufreq_driver.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.wowotech.net/pm_subsystem/cpufreq_core.html">http://www.wowotech.net/pm_subsystem/cpufreq_core.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.wowotech.net/pm_subsystem/cpufreq_governor.html">http://www.wowotech.net/pm_subsystem/cpufreq_governor.html</a></p>
+<p> module_init()加载顺序 </p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/shafa00419/article/details/85234867">https://blog.csdn.net/shafa00419/article/details/85234867</a>)</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 yengii@qq.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23liZlYn7hrPL3Ouja',
+            clientSecret: 'e064a320f48ac03c7c6d4c59ec155391dba07921',
+            repo: 'yyheroi.github.io',
+            owner: 'yyheroi',
+            admin: ['yyheroi'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2023-2099 yyh
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

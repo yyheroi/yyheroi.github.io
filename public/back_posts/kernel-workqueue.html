@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>kernel-workqueue | yyheroi</title>
+  <meta name="keywords" content="  ">
+  <meta name="description" content="kernel-workqueue | yyheroi">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="相关网站GitHub-rust 关于本书 - Rust语言圣经(Rust Course)">
+<meta property="og:type" content="website">
+<meta property="og:title" content="00-rust学习网站">
+<meta property="og:url" content="http://example.com/back_posts/00-rust%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99.html">
+<meta property="og:site_name" content="yyheroi">
+<meta property="og:description" content="相关网站GitHub-rust 关于本书 - Rust语言圣经(Rust Course)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-26T08:08:57.000Z">
+<meta property="article:modified_time" content="2026-05-19T11:33:54.649Z">
+<meta property="article:author" content="yyh">
+<meta property="article:tag" content="rust">
+<meta property="article:tag" content="学习网站">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>yyh</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/yyheroi"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="facebook"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-facebook"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+            <a title="instagram"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-instagram"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="reddit"
+               href="https://www.reddit.com/user/yyheroi/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-reddit"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            <a title="csdn"
+               href="https://blog.csdn.net/qq_45698138"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-csdn"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="oschina"
+               href="https://my.oschina.net/yyheroi"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-oschina"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:yengii@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=2252102866&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="kugou"
+               href="https://www.kugou.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-kugou"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/#/user/home?id=88151013"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(31)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="rust">
+            
+            rust
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="test">
+            
+            test
+            <small>(16)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="uboot">
+            
+            uboot
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="kernel">
+            
+            kernel
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="OSTEP">
+            
+            OSTEP
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="RVOS">
+            
+            RVOS
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="driver">
+            
+            driver
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="31">
+<input type="hidden" id="yelog_site_word_count" value="26.4k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>内存管理</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>缺页</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>学习网站</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>block</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>cgroup</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Clion</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>cpufreq</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>debug</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>dtb</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>dts</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ethrnet</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>fdt</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GPT</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>PHY芯片</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>pinctrl</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>power</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rk3588</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust复合类型</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust环境搭建</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rust基本类型</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RVOS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>test</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>traps</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>uboot概念</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vscode</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>vsfs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>wol</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 RVOS "
+           href="/2026/05/19/RVOS-traps/"
+           data-tag="RVOS,traps"
+           data-author="" >
+            <span class="post-title" title="RVOS-traps">RVOS-traps</span>
+            <span class="post-date" title="2026-05-19 19:17:22">2026/05/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/07/02/%E5%B0%8F%E7%88%B1%E5%90%8C%E5%AD%A6%E6%8E%A7%E5%88%B6%E7%94%B5%E8%84%91%E5%BC%80%E5%85%B3/"
+           data-tag="test,wol"
+           data-author="" >
+            <span class="post-title" title="小爱同学控制电脑开关">小爱同学控制电脑开关</span>
+            <span class="post-date" title="2024-07-02 20:50:22">2024/07/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/06/21/kernel-workqueue/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="kernel-workqueue">kernel-workqueue</span>
+            <span class="post-date" title="2024-06-21 17:26:17">2024/06/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/06/19/%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8-reversed-memory-%E9%A2%84%E7%95%99%E5%86%85%E5%AD%98/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="设备驱动-reversed-memory-预留内存">设备驱动-reversed-memory-预留内存</span>
+            <span class="post-date" title="2024-06-19 09:56:22">2024/06/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/06/17/linux-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"
+           data-tag="内存管理"
+           data-author="" >
+            <span class="post-title" title="linux-内存管理">linux-内存管理</span>
+            <span class="post-date" title="2024-06-17 16:21:33">2024/06/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/06/03/systemctl-%E8%AF%A6%E8%A7%A3/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="systemctl-详解">systemctl-详解</span>
+            <span class="post-date" title="2024-06-03 14:10:50">2024/06/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/06/03/struct-dev-debug/"
+           data-tag="debug"
+           data-author="" >
+            <span class="post-title" title="struct-dev-debug">struct-dev-debug</span>
+            <span class="post-date" title="2024-06-03 10:10:43">2024/06/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/05/30/dtb-to-dts/"
+           data-tag="dtb,dts"
+           data-author="" >
+            <span class="post-title" title="dtb to dts">dtb to dts</span>
+            <span class="post-date" title="2024-05-30 11:05:15">2024/05/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/29/shell%E8%84%9A%E6%9C%AC-%E7%AC%A6%E5%90%88%E6%84%8F%E4%B9%89/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="shell脚本-符合意义">shell脚本-符合意义</span>
+            <span class="post-date" title="2024-05-29 14:31:03">2024/05/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/27/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E7%BC%BA%E9%A1%B5/"
+           data-tag="缺页"
+           data-author="" >
+            <span class="post-title" title="操作系统中的缺页">操作系统中的缺页</span>
+            <span class="post-date" title="2024-05-27 17:48:11">2024/05/27</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/25/Windows%E4%B8%8B%E9%80%9A%E8%BF%87ssh%E6%8C%82%E8%BD%BD%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%AE%E5%BD%95/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Windows下通过ssh挂载远程服务器目录">Windows下通过ssh挂载远程服务器目录</span>
+            <span class="post-date" title="2024-05-25 11:27:05">2024/05/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 driver "
+           href="/2024/05/23/01%E4%BB%A5%E5%A4%AA%E7%BD%91ethernet-%E6%A6%82%E5%BF%B5/"
+           data-tag="ethrnet"
+           data-author="" >
+            <span class="post-title" title="01以太网ethernet-概念">01以太网ethernet-概念</span>
+            <span class="post-date" title="2024-05-23 15:30:58">2024/05/23</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/vscode-%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E5%A4%B1%E8%B4%A5/"
+           data-tag="vscode"
+           data-author="" >
+            <span class="post-title" title="vscode-远程连接失败">vscode-远程连接失败</span>
+            <span class="post-date" title="2024-05-17 17:14:04">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/vscode-%E5%AE%89%E8%A3%85-%E5%8D%B8%E8%BD%BD/"
+           data-tag="vscode"
+           data-author="" >
+            <span class="post-title" title="vscode-安装-卸载">vscode-安装-卸载</span>
+            <span class="post-date" title="2024-05-17 15:17:18">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/ARMv8%E6%9E%B6%E6%9E%84-%E5%86%85%E5%AD%98%E8%99%9A%E6%8B%9F%E5%8C%96/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="ARMv8架构-内存虚拟化">ARMv8架构-内存虚拟化</span>
+            <span class="post-date" title="2024-05-17 14:45:28">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/17/Clion202204-%E7%A0%B4%E8%A7%A3/"
+           data-tag="Clion"
+           data-author="" >
+            <span class="post-title" title="Clion202204-破解">Clion202204-破解</span>
+            <span class="post-date" title="2024-05-17 10:10:50">2024/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2024/05/16/PHY%E8%8A%AF%E7%89%87/"
+           data-tag="PHY芯片"
+           data-author="" >
+            <span class="post-title" title="PHY芯片">PHY芯片</span>
+            <span class="post-date" title="2024-05-16 18:58:06">2024/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/05/16/cgroup/"
+           data-tag="cgroup"
+           data-author="" >
+            <span class="post-title" title="cgroup">cgroup</span>
+            <span class="post-date" title="2024-05-16 15:30:33">2024/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/05/16/pinctrl/"
+           data-tag="pinctrl"
+           data-author="" >
+            <span class="post-title" title="pinctrl">pinctrl</span>
+            <span class="post-date" title="2024-05-16 13:33:03">2024/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 uboot "
+           href="/2024/05/15/uboot-01-%E6%A6%82%E5%BF%B5/"
+           data-tag="uboot概念"
+           data-author="" >
+            <span class="post-title" title="uboot-01-概念">uboot-01-概念</span>
+            <span class="post-date" title="2024-05-15 21:59:01">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 OSTEP "
+           href="/2024/05/15/OSTEP-40-VSFS/"
+           data-tag="vsfs"
+           data-author="" >
+            <span class="post-title" title="OSTEP-40-VSFS">OSTEP-40-VSFS</span>
+            <span class="post-date" title="2024-05-15 14:40:25">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 uboot "
+           href="/2024/05/15/U-Boot-fdt-GPT/"
+           data-tag="fdt,GPT,rk3588"
+           data-author="" >
+            <span class="post-title" title="U-Boot-fdt-GPT">U-Boot-fdt-GPT</span>
+            <span class="post-date" title="2024-05-15 14:37:05">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 driver "
+           href="/2024/05/15/linux-block/"
+           data-tag="block"
+           data-author="" >
+            <span class="post-title" title="linux-block">linux-block</span>
+            <span class="post-date" title="2024-05-15 14:36:36">2024/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 kernel "
+           href="/2024/04/28/cpufreq/"
+           data-tag="power,cpufreq"
+           data-author="" >
+            <span class="post-title" title="cpufreq">cpufreq</span>
+            <span class="post-date" title="2024-04-28 17:04:13">2024/04/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/09/13/Hexo%E5%9C%A8%E5%A4%9A%E5%8F%B0%E7%94%B5%E8%84%91%E4%B8%8A%E6%8F%90%E4%BA%A4%E5%92%8C%E6%9B%B4%E6%96%B0/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Hexo在多台电脑上提交和更新">Hexo在多台电脑上提交和更新</span>
+            <span class="post-date" title="2023-09-13 15:35:30">2023/09/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/28/03-rust%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B/"
+           data-tag="rust,rust复合类型"
+           data-author="" >
+            <span class="post-title" title="03-rust复合类型">03-rust复合类型</span>
+            <span class="post-date" title="2023-08-28 21:58:27">2023/08/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/02-rust%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/"
+           data-tag="rust,rust基本类型"
+           data-author="" >
+            <span class="post-title" title="02-rust基本类型">02-rust基本类型</span>
+            <span class="post-date" title="2023-08-26 21:17:00">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/01-rust%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="rust,rust环境搭建"
+           data-author="" >
+            <span class="post-title" title="01-rust环境搭建">01-rust环境搭建</span>
+            <span class="post-date" title="2023-08-26 17:03:59">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 rust "
+           href="/2023/08/26/00-rust%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99/"
+           data-tag="学习网站,rust"
+           data-author="" >
+            <span class="post-title" title="00-rust学习网站">00-rust学习网站</span>
+            <span class="post-date" title="2023-08-26 16:08:57">2023/08/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/08/25/github+hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="github+hexo 博客搭建">github+hexo 博客搭建</span>
+            <span class="post-date" title="2023-08-25 19:32:35">2023/08/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 test "
+           href="/2023/08/25/hello-world/"
+           data-tag="test"
+           data-author="" >
+            <span class="post-title" title="Hello World">Hello World</span>
+            <span class="post-date" title="2023-08-25 00:00:00">2023/08/25</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">kernel-workqueue</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel=""></a>
+            
+        </span>
+        
+        
+        <span class="article-tag">
+            <i class="iconfont icon-tag"></i>
+            
+                
+                    
+                
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2026-05-19 19:33:54'>2024-06-21 17:26</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:2.3k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一、workqueue的作用及在Linux中断处理中的应用<br>1.1、workqueue的概述<br>Linux工作队列（Workqueue）是一个内核中的机制，它可以异步执行一些任务。在Linux内核中，当需要处理一些不是紧急的、需要后台执行的任务时，就会将这些任务加入到工作队列中，然后由内核计划适当的时间来执行这些任务。</p>
+<p>工作队列的特点是异步执行，即任务的执行不会阻塞当前进程，而是交给后台线程进行处理。这种方式可以避免阻塞主线程，提高系统的响应速度和并发能力。</p>
+<p>工作队列具有多种使用场景，比如定时器事件、网络I&#x2F;O事件、驱动程序事件等，都可以通过工作队列来异步处理。</p>
+<p>1.2、workqueue在Linux中断处理中的作用<br>workqueue是一种异步执行工作的机制，它可以在Linux中断处理中使用。当内核需要异步执行某些任务时，可以使用workqueue机制。</p>
+<p>在Linux中断处理中，有些操作不能直接执行，因为它们可能会阻塞中断处理程序。例如，如果一个中断处理程序需要访问磁盘，那么它可能需要等待磁盘访问完成才能继续执行，这将导致中断处理程序的延迟和性能下降。为了避免这种情况，可以使用workqueue机制。</p>
+<p>workqueue机制允许中断处理程序将任务提交给工作队列，在稍后的时间异步执行。这样，中断处理程序可以立即返回，并且不会阻塞其他中断处理程序的执行。工作队列是一组线程，它们可以同时执行多个任务。当工作队列中有任务时，内核会自动调度线程来执行任务。</p>
+<p>workqueue机制是一种非常有效的机制，可以帮助内核异步执行任务，提高系统的性能和可靠性。<br><img src="/../imgs/d32faea7d5004b979cc98527aa0973e8.png" alt="在这里插入图片描述"></p>
+<p>二、workqueue的实现原理<br>workqueue通过使用worker线程池来执行延迟性任务，能够提高系统的吞吐量和响应速度，适用于需要进行异步任务调度的场景。</p>
+<p>workqueue是Linux系统中用于实现异步任务调度的机制，它允许驱动程序和内核线程安排延迟执行的工作。</p>
+<p>workqueue由一个或多个worker线程池组成，每个worker线程都会不断地从workqueue中获取需要执行的工作项。<br>当驱动程序或内核模块需要执行一些延迟性的任务时，可以将这些任务封装成工作项（work）并添加到workqueue队列中。<br>worker线程在空闲时，从workqueue队列中取出一个工作项，并将其放入自己的私有队列中，等待执行。<br>一旦worker线程完成当前正在执行的工作项，就会从自己的私有队列中取出下一个工作项进行处理。<br>若workqueue队列中没有可用的工作项，则worker线程会等待直到有新的工作项被添加到队列中。<br>在workqueue中，还提供了几种不同的队列类型，如普通队列、高优先级队列和延迟队列等，以满足不同场景下的需求。<br>2.1、工作队列和工作者线程的关系<br>工作队列和工作者线程是相互依存的关系，它们通过协同工作来处理系统中的任务。</p>
+<p>工作队列是一个先进先出的任务列表，其中包含需要被执行的任务。工作者线程则是实际执行这些任务的线程。当有新的任务添加到工作队列中时，工作者线程会自动从队列中取出任务并执行。</p>
+<p>工作者线程通常是由内核创建的，其数量可以根据系统负载情况进行调整。当任务数量增加时，可以增加工作者线程的数量以加快任务处理速度。而当任务数量减少时，可以减少工作者线程的数量以节省系统资源。<br><img src="/../imgs/2b8686c61a24478a8112e4b83228f177.png" alt="在这里插入图片描述"></p>
+<p>2.2、工作队列的创建和销毁<br>在Linux内核中，工作队列通过struct workqueue_struct结构体来表示。创建和销毁工作队列通常通过以下函数：</p>
+<p>创建工作队列：create_workqueue(const char *name); 该函数创建并返回一个指向工作队列的指针。参数name是工作队列的名称。<br>销毁工作队列：destroy_workqueue(struct workqueue_struct *wq); 该函数销毁由指针wq所表示的工作队列。<br>例如，创建和销毁一个名为“my_work”的工作队列：</p>
+<p>工作队列的创建和销毁<br>在Linux内核中，工作队列通过struct workqueue_struct结构体来表示。创建和销毁工作队列通常通过以下函数：</p>
+<p>创建工作队列：create_workqueue(const char *name); 该函数创建并返回一个指向工作队列的指针。参数name是工作队列的名称。<br>销毁工作队列：destroy_workqueue(struct workqueue_struct *wq); 该函数销毁由指针wq所表示的工作队列。<br>2.3、工作者线程的创建和销毁<br>Linux 内核中的工作者线程是一种特殊的内核线程，用于执行一些异步的、需要花费较长时间或者需要消耗大量 CPU 资源的任务。它们主要用于处理 I&#x2F;O 操作、网络操作、文件系统缓存等等。</p>
+<p>在 Linux 内核中，工作者线程的创建和销毁是由系统自动管理的。当进程请求创建一个工作者线程时，内核会检查当前是否有可用的空闲线程。如果没有，则会创建一个新的线程。当任务完成后，工作者线程会被回收并返回到线程池中，以备下次使用。</p>
+<p>为了提高效率，Linux 内核还可以在运行时动态地调整线程池中工作者线程的数量。当系统负载较高时，内核会增加线程池中的线程数量，以处理更多的任务。当负载降低时，内核会减少线程池中的线程数量，以节省资源。</p>
+<p>例如，展示如何在 Linux 内核中创建和销毁工作者线程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;linux/module.h&gt;</span><br><span class="line">#include &lt;linux/kernel.h&gt;</span><br><span class="line">#include &lt;linux/workqueue.h&gt;</span><br><span class="line">#if 1</span><br><span class="line">#define YYHDEBUG(fmt, ...) \</span><br><span class="line">    printk(KERN_ERR &quot;yyh debug [%s][%d] &quot; fmt, __func__, __LINE__, ##__VA_ARGS__)</span><br><span class="line">#else </span><br><span class="line">#define YYHDEBUG(debug)</span><br><span class="line">#endif</span><br><span class="line">static struct workqueue_struct *my_wq;</span><br><span class="line"></span><br><span class="line">typedef struct &#123;</span><br><span class="line">    struct work_struct my_work;</span><br><span class="line">    int x;</span><br><span class="line">&#125; my_work_t;</span><br><span class="line"></span><br><span class="line">static void my_work_handler(struct work_struct *work)</span><br><span class="line">&#123;</span><br><span class="line">    my_work_t *my_work = (my_work_t *)work;</span><br><span class="line">    YYHDEBUG(&quot;my_work_handler: x=%d\n&quot;, my_work-&gt;x);</span><br><span class="line">    kfree(my_work);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static int __init my_module_init(void)</span><br><span class="line">&#123;</span><br><span class="line">    my_work_t *my_work;</span><br><span class="line"></span><br><span class="line">    /* 创建工作者队列 */</span><br><span class="line">    my_wq = create_workqueue(&quot;my_queue&quot;);</span><br><span class="line">    if (!my_wq) &#123;</span><br><span class="line">        YYHDEBUG(&quot;create_workqueue failed!\n&quot;);</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /* 创建并提交工作者线程 */</span><br><span class="line">    my_work = (my_work_t *)kmalloc(sizeof(my_work_t), GFP_KERNEL);</span><br><span class="line">    if (!my_work) &#123;</span><br><span class="line">        YYHDEBUG(&quot;kmalloc failed!\n&quot;);</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">    INIT_WORK((struct work_struct *)my_work, my_work_handler);</span><br><span class="line">    my_work-&gt;x = 1;</span><br><span class="line">    queue_work(my_wq, (struct work_struct *)my_work);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static void __exit my_module_exit(void)</span><br><span class="line">&#123;</span><br><span class="line">    /* 销毁工作者队列 */</span><br><span class="line">    flush_workqueue(my_wq);</span><br><span class="line">    destroy_workqueue(my_wq);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(my_module_init);</span><br><span class="line">module_exit(my_module_exit);</span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(&quot;GPL&quot;);</span><br><span class="line">MODULE_AUTHOR(&quot;Lion Long&quot;);</span><br><span class="line">MODULE_DESCRIPTION(&quot;A simple example Linux module.&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>例子展示了如何创建一个名为“my_queue”的工作者队列，然后创建一个工作者线程来处理一个名为“my_work”的工作对象。“my_work_handler”函数将打印出传递给工作对象的参数“x”，并释放工作对象的内存。在模块初始化期间，创建工作者队列和工作对象，并提交工作对象到队列中。在模块退出期间，销毁工作者队列。</p>
+<p>Linux 内核中的工作者线程是一种非常重要的机制，能够显著提高系统的性能和响应速度。虽然用户无法直接控制工作者线程的创建和销毁，但可以通过一些系统调优技巧来优化工作者线程的使用效果。<br>2.4、扩展知识：用户态线程的创建<br>线程创建：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;pthread.h&gt;</span><br><span class="line"></span><br><span class="line">int pthread_create(pthread_t *thread, const pthread_attr_t *attr,</span><br><span class="line">                   void *(*start_routine)(void*), void *arg);</span><br></pre></td></tr></table></figure>
+
+<p>该函数用于创建一个新的线程，并将其添加到调用进程中。参数 thread 是指向新线程标识符的指针，参数 attr 是指向线程属性的指针（通常为 NULL），参数 start_routine 是指向线程执行函数的指针，参数 arg 是传递给线程执行函数的参数。</p>
+<p>线程销毁：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void pthread_exit(void *value_ptr);</span><br></pre></td></tr></table></figure>
+
+<p>该函数用于终止当前线程，并返回一个指针值。这个值可以由其他线程通过 pthread_join 函数获取，也可以被忽略。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int pthread_join(pthread_t thread, void **value_ptr);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>该函数用于阻塞当前线程，直到指定的线程 thread 终止。如果指针 value_ptr 不为 NULL，则会将线程的返回值存储在 value_ptr 指向的位置中。</p>
+<p>注意：如果线程没有被显式地分离，则它将一直存在于内存中，直到进程结束。因此，在创建线程时，应该考虑是否需要将它们分离或者等待它们的结束。</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Long_xu/article/details/1314057422.2">https://blog.csdn.net/Long_xu/article/details/1314057422.2</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 yengii@qq.com </span>
+    </div>
+</article>
+
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: 'Ov23liZlYn7hrPL3Ouja',
+            clientSecret: 'e064a320f48ac03c7c6d4c59ec155391dba07921',
+            repo: 'yyheroi.github.io',
+            owner: 'yyheroi',
+            admin: ['yyheroi'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2023-2099 yyh
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
