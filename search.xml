@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>riscv-isa</title>
+      <link href="/2026/05/22/riscv-isa/"/>
+      <url>/2026/05/22/riscv-isa/</url>
+      
+        <content type="html"><![CDATA[<embed src="/files/RISC-V 指令集手册第一卷 - 中文版 -20240411 版.pdf" type="application/pdf" width="100%" height="600px" />]]></content>
+      
+      
+      <categories>
+          
+          <category> RVOS </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> riscv </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>RVOS-traps</title>
       <link href="/2026/05/19/RVOS-traps/"/>
       <url>/2026/05/19/RVOS-traps/</url>
