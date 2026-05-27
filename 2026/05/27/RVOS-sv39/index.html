@@ -878,7 +878,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2026-05-27 16:34:25'>2026-05-27 10:54</time>
+            发布时间 : <time class="date" title='最后更新: 2026-05-27 17:33:07'>2026-05-27 10:54</time>
         
     </div>
     <div class="article-meta">
@@ -951,7 +951,7 @@
 <li>PPN[2,1,0]:合并最终的物理内存页号，没有什么分开的意义</li>
 </ul>
 <h2 id="页表项-pte-page-table-entry"><a href="#页表项-pte-page-table-entry" class="headerlink" title="页表项 pte(page table entry)"></a>页表项 pte(page table entry)</h2><p>页表项，用于表示映射信息</p>
-<p><img src="/./RVOS-sv39/pte-image.png" alt="image-2026-05-27-pte"></p>
+<p><img src="/2026/05/27/RVOS-sv39/pte-image.png" alt="image-2026-05-27-pte"></p>
 <ul>
 <li>V：有效位，表示页表项是否 valid。</li>
 <li>R, W, X：这些位分别表示页面是否可读、可写和可执行。当所有三个都为零时，PTE 指向页面表的下一级；否则，它是一个 leaf PTE。</li>
@@ -969,7 +969,7 @@
 <li>翻译 12-20 这几位，找到对应的物理的 12-55 位。</li>
 </ul>
 <p>翻译完成的物理内存有两部分，一部分是刚刚翻译的 12-55 位，另一部分是页面上的偏移，即虚拟地址的 0-11 位。</p>
-<h2 id="satp寄存器"><a href="#satp寄存器" class="headerlink" title="satp寄存器"></a>satp寄存器</h2><p><code>satp(supervisor address translation and protection)</code> 寄存器是 <code>riscv</code> 指令集中的特权寄存器，专门用于控制内存分页<br><img src="/./RVOS-sv39/satp-image.png" alt="image-2026-05-27-satp"></p>
+<h2 id="satp寄存器"><a href="#satp寄存器" class="headerlink" title="satp寄存器"></a>satp寄存器</h2><p><code>satp(supervisor address translation and protection)</code> 寄存器是 <code>riscv</code> 指令集中的特权寄存器，专门用于控制内存分页<br><img src="/2026/05/27/RVOS-sv39/satp-image.png" alt="image-2026-05-27-satp"></p>
 <ul>
 <li>PPN ：保存根物理页号，实际值为「根页表物理地址右移 12 位」</li>
 <li>ASID ：区分不同进程的地址空间，减少TLB刷新</li>
@@ -999,7 +999,7 @@
 <li>第一层寻址：根据 satp 寄存器的 PPN 项获得根页表的物理地址，根据 VPN[2] 获得索引，获取第二层页表的物理地址。</li>
 <li>第二、三层寻址：根据上一层页表的页表项中的 PPN 获得页表的物理地址，根据 VPN[1], VPN[0] 获得索引。</li>
 </ul>
-<p><img src="/./RVOS-sv39/walk-image.png" alt="2026-05-27"></p>
+<p><img src="/2026/05/27/RVOS-sv39/walk-image.png" alt="2026-05-27"></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 yengii@qq.com </span>
